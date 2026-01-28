@@ -102,6 +102,51 @@ async function renderWork() {
 
   const video = normalizeVideo(work);
 
+  // 오른쪽 메타(있는 것만 표시)
+  const metaLines = [
+    work.type ? `<div><b>Type</b>: ${escapeHTML(work.type)}</div>` : "",
+    work.year ? `<div><b>Year</b>: ${escapeHTML(work.year)}</div>` : "",
+    work.client ? `<div><b>Client</b>: ${escapeHTML(work.client)}</div>` : "",
+  ].filter(Boolean).join("");
+
+  const credits = Array.isArray(work.credits) ? work.credits : [];
+  const creditsHTML = credits.length
+    ? `
+      <div class="workCredits">
+        <h3>Credits</h3>
+        <ul>
+          ${credits.map(c => `<li>${escapeHTML(c)}</li>`).join("")}
+        </ul>
+      </div>
+    `
+    : "";
+
+  root.innerHTML = `
+    <div class="container">
+      <div class="workLayout">
+        <!-- LEFT: VIDEO -->
+        <div class="workMain">
+          <div class="workPlayer">
+            ${videoEmbedHTML(video)}
+          </div>
+        </div>
+
+        <!-- RIGHT: INFO -->
+        <aside class="workSidebar">
+          <h1 class="workTitle">${escapeHTML(work.title || "")}</h1>
+          <div class="workMeta">${metaLines}</div>
+
+          <a class="btn" href="/portfolio/">Back</a>
+
+          ${creditsHTML}
+        </aside>
+      </div>
+    </div>
+  `;
+}
+
+  const video = normalizeVideo(work);
+
   root.innerHTML = `
     <div class="workHeader">
       <div>
