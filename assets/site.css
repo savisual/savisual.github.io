@@ -167,3 +167,15 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+.embed {
+  width: 100%;
+  max-width: 960px;
+  margin: 24px 0;
+}
+
+.embed iframe {
+  width: 100%;
+  height: 540px;   /* 일단 강제로 높이 확보 */
+  border: 0;
+  display: block;
+}
