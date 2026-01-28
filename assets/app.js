@@ -1,48 +1,13 @@
-// data 로드
 async function loadWorks() {
   const res = await fetch("/data/works.json");
   if (!res.ok) throw new Error("works.json 로드 실패");
   return await res.json();
 }
 
-// 쿼리스트링 읽기
 function qs(name) {
   return new URLSearchParams(location.search).get(name);
 }
 
-// 영상 임베드 HTML 생성
-function videoEmbedHTML(video) {
-  if (!video) return "";
-  if (video.provider === "youtube") {
-    const id = video.id;
-    return `
-      <div class="embed">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/${id}?rel=0"
-          title="YouTube video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    `;
-  }
-  if (video.provider === "vimeo") {
-    const id = video.id;
-    return `
-      <div class="embed">
-        <iframe
-          src="https://player.vimeo.com/video/${id}"
-          title="Vimeo video"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    `;
-  }
-  return "";
-}
-
-// XSS 방지
 function escapeHTML(str) {
   return String(str ?? "")
     .replaceAll("&", "&amp;")
@@ -51,7 +16,62 @@ function escapeHTML(str) {
     .replaceAll('"', "&quot;");
 }
 
-// 포트폴리오 목록 페이지
+/**
+ * works.json의 video 스키마를 모두 지원:
+ * 1) "videoId": "ABCDEFGHIJK"
+ * 2) "video": { "provider": "youtube", "id": "ABCDEFGHIJK" }
+ * 3) (옵션) "video": { "provider": "vimeo", "id": "123456" }
+ */
+function normalizeVideo(work) {
+  // videoId 우선
+  if (work.videoId && typeof work.videoId === "string") {
+    return { provider: "youtube", id: work.videoId };
+  }
+  // video 객체
+  if (work.video && typeof work.video === "object") {
+    const provider = String(work.video.provider || "").toLowerCase();
+    const id = String(work.video.id || "");
+    if ((provider === "youtube" || provider === "vimeo") && id) {
+      return { provider, id };
+    }
+  }
+  return null;
+}
+
+function videoEmbedHTML(video) {
+  if (!video) return "";
+
+  if (video.provider === "youtube") {
+    const id = video.id;
+    return `
+      <div class="embed">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    `;
+  }
+
+  if (video.provider === "vimeo") {
+    const id = video.id;
+    return `
+      <div class="embed">
+        <iframe
+          src="https://player.vimeo.com/video/${encodeURIComponent(id)}"
+          title="Vimeo video"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+    `;
+  }
+
+  return "";
+}
+
 async function renderPortfolio() {
   const works = await loadWorks();
   const grid = document.getElementById("worksGrid");
@@ -68,7 +88,6 @@ async function renderPortfolio() {
   `).join("");
 }
 
-// 작업물 상세 페이지
 async function renderWork() {
   const works = await loadWorks();
   const id = qs("id");
@@ -81,6 +100,8 @@ async function renderWork() {
     return;
   }
 
+  const video = normalizeVideo(work);
+
   root.innerHTML = `
     <div class="workHeader">
       <div>
@@ -90,7 +111,7 @@ async function renderWork() {
       <a class="btn" href="/portfolio/">← Back</a>
     </div>
 
-    ${videoEmbedHTML(work.video)}
+    ${videoEmbedHTML(video)}
 
     <div class="panel">
       <h2>Credits</h2>
@@ -101,7 +122,6 @@ async function renderWork() {
   `;
 }
 
-// DOM 로드 시 실행
 document.addEventListener("DOMContentLoaded", () => {
   renderPortfolio().catch(console.error);
   renderWork().catch(console.error);
