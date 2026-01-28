@@ -11,9 +11,14 @@
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Noto Sans KR", Arial, sans-serif;
-  background: var(--bg);
-  color: var(--fg);
+  background: radial-gradient(
+    1200px 600px at 70% 20%,
+    #1a1a1a 0%,
+    #0c0c0c 40%,
+    #000 100%
+  );
+  color: #eaeaea;
+  font-family: 'Inter', 'Pretendard', system-ui, -apple-system;
 }
 
 a {
