@@ -1,0 +1,169 @@
+:root {
+  --bg:#0b0b0b;
+  --fg:#ffffff;
+  --muted:rgba(255,255,255,.7);
+  --line:rgba(255,255,255,.14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Noto Sans KR", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 18px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  position: sticky;
+  top: 0;
+  background: rgba(11,11,11,.7);
+  backdrop-filter: blur(10px);
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.nav a {
+  padding: 8px 10px;
+  border-radius: 10px;
+}
+
+.nav a:hover {
+  background: rgba(255,255,255,.06);
+  color: #fff;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+}
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-size: cover;
+  background-position: center;
+}
+
+.meta {
+  padding: 12px 12px 14px;
+}
+
+.meta b {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.meta span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.workHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+h1 {
+  margin: 0 0 6px;
+}
+
+.muted {
+  margin: 0;
+  color: var(--muted);
+}
+
+.btn {
+  border: 1px solid var(--line);
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.03);
+}
+
+.btn:hover {
+  background: rgba(255,255,255,.08);
+}
+
+.embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  margin: 14px 0;
+}
+
+.embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.panel {
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,.03);
+}
+
+.panel h2 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.panel ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
