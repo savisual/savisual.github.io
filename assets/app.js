@@ -145,28 +145,6 @@ async function renderWork() {
   `;
 }
 
-  const video = normalizeVideo(work);
-
-  root.innerHTML = `
-    <div class="workHeader">
-      <div>
-        <h1>${escapeHTML(work.title)}</h1>
-        <p class="muted">${escapeHTML(work.type)} · ${escapeHTML(work.year)} · ${escapeHTML(work.client)}</p>
-      </div>
-      <a class="btn" href="/portfolio/">← Back</a>
-    </div>
-
-    ${videoEmbedHTML(video)}
-
-    <div class="panel">
-      <h2>Credits</h2>
-      <ul>
-        ${(work.credits || []).map(c => `<li>${escapeHTML(c)}</li>`).join("")}
-      </ul>
-    </div>
-  `;
-}
-
 document.addEventListener("DOMContentLoaded", () => {
   renderPortfolio().catch(console.error);
   renderWork().catch(console.error);
