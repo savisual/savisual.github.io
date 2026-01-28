@@ -6,14 +6,11 @@
     "year": "2026",
     "client": "SA Visual",
     "thumb": "https://img.youtube.com/vi/6sOTSN92FrU/maxresdefault.jpg"
-    "video": {
-      "provider": "youtube",
-      "id": "6sOTSN92FrU"
-    },
+   "videoId": "6sOTSN92FrU"
     "credits": [
       "Director: SA Visual",
       "Edit: SA Visual",
-      "Color: SA Visual"
+      "Artist: Tonliz"
     ]
   }
 ]
