@@ -5,12 +5,12 @@
     "type": "Full Video",
     "year": "2026",
     "client": "SA Visual",
-    "thumb": "https://img.youtube.com/vi/6sOTSN92FrU/maxresdefault.jpg"
-   "videoId": "6sOTSN92FrU"
+    "thumb": "https://img.youtube.com/vi/6sOTSN92FrU/maxresdefault.jpg",
+    "videoId": "6sOTSN92FrU",
     "credits": [
+      "Artist: Tonliz",
       "Director: SA Visual",
-      "Edit: SA Visual",
-      "Artist: Tonliz"
+      "Edit: SA Visual"
     ]
   }
 ]
