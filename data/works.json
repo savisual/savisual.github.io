@@ -1,7 +1,7 @@
 [
   {
     "id": "work-001",
-    "title": "WORK 01 – Full Video",
+    "title": "Tonliz - 마지막으로(feat.박현진) [Performance Video]",
     "type": "Full Video",
     "year": "2026",
     "client": "SA Visual",
@@ -9,6 +9,22 @@
     "videoId": "6sOTSN92FrU",
     "credits": [
       "Artist: Tonliz",
+      "Director: SA Visual",
+      "Edit: SA Visual"
+    ]
+  }
+]
+},
+  {
+    "id": "work-002",
+    "title": "SEIJI JUNE - SAINT DEVIL [Teaser Video]",
+    "type": "Teaser",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/8bVPOcHUN6k/maxresdefault.jpg",
+    "videoId": "8bVPOcHUN6k",
+    "credits": [
+      "Artist: SEIJI JUNE",
       "Director: SA Visual",
       "Edit: SA Visual"
     ]
