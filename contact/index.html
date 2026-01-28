@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SA VISUAL — Contact</title>
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="brand">SA VISUAL</div>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/portfolio/">Portfolio</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Contact</h1>
+    <p class="muted">아래 이메일로 편하게 연락주세요.</p>
+
+    <div class="card" style="padding:18px;">
+      <div style="font-size:20px; font-weight:700; letter-spacing:0.2px;">
+        safilm8206@gmail.com
+      </div>
+
+      <div style="margin-top:10px;">
+        <button id="copyBtn" class="btn">Copy Email</button>
+        <a class="btn" href="mailto:safilm8206@gmail.com" style="margin-left:8px;">Open Mail App</a>
+      </div>
+
+      <p id="copyMsg" class="muted" style="margin-top:10px; display:none;">복사됨 ✅</p>
+    </div>
+  </div>
+
+  <script>
+    const email = "safilm8206@gmail.com";
+    const btn = document.getElementById("copyBtn");
+    const msg = document.getElementById("copyMsg");
+
+    btn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        msg.style.display = "block";
+        setTimeout(() => (msg.style.display = "none"), 1200);
+      } catch (e) {
+        // 클립보드가 막힌 환경 대비: 프롬프트라도 띄움
+        window.prompt("복사해서 사용하세요:", email);
+      }
+    });
+  </script>
+</body>
+</html>
