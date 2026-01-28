@@ -207,3 +207,102 @@ h1 {
 .card:hover .thumb {
   transform: scale(1.03);
 }
+/* ===== Work detail (ambience-style split layout) ===== */
+.workLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 0.8fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.workMain {
+  min-width: 0;
+}
+
+.workSidebar {
+  min-width: 0;
+  position: sticky;
+  top: 88px; /* topbar 높이에 맞춰 고정 */
+  padding-top: 6px;
+}
+
+.workTitle {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.workMeta {
+  margin: 0 0 18px 0;
+  color: rgba(255, 255, 255, .75);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.workMeta b {
+  color: rgba(255, 255, 255, .95);
+  font-weight: 700;
+}
+
+.workCredits {
+  margin-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, .12);
+  padding-top: 16px;
+}
+
+.workCredits h3 {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+  margin: 0 0 10px 0;
+}
+
+.workCredits ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workCredits li {
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  color: rgba(255, 255, 255, .88);
+  font-size: 14px;
+}
+
+.workPlayer {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, .12);
+  background: rgba(255, 255, 255, .03);
+}
+
+/* 16:9 유지 */
+.workPlayer .embed {
+  width: 100%;
+}
+
+.workPlayer .embed iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  display: block;
+}
+
+/* Mobile: stack */
+@media (max-width: 900px) {
+  .workLayout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .workSidebar {
+    position: static;
+    top: auto;
+  }
+  .workTitle {
+    font-size: 26px;
+  }
+}
