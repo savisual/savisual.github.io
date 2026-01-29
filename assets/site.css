@@ -435,3 +435,26 @@ h1 {
 .workBack a:hover {
   background: rgba(0,0,0,.75);
 }
+.workPlayer { position: relative; }
+
+.workBack{
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+}
+
+.workBack .btn{
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.45);
+  backdrop-filter: blur(8px);
+  opacity: .9;
+}
+
+.workBack .btn:hover{
+  opacity: 1;
+}
