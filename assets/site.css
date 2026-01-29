@@ -453,28 +453,28 @@ h1 {
 .workBack .btn:hover{
   opacity: 1;
 }
-.pageBack {
-  position: fixed;
-  top: 28px;
-  left: 28px;
+
+.workPlayer {
+  position: relative;
+}
+
+/* ambience 스타일 화살표 */
+.workBackArrow {
+  position: absolute;
+  top: -36px;        /* ← 영상 카드 기준 위 */
+  left: 0;
   width: 32px;
   height: 32px;
-  z-index: 1000;
 }
 
-.pageBack::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 14px;
-  height: 14px;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: translate(-50%, -50%) rotate(45deg);
-  opacity: 0.85;
+.workBackArrow::before {
+  content: "←";
+  font-size: 24px;
+  color: #fff;
+  opacity: .8;
+  transition: opacity .2s ease;
 }
 
-.pageBack:hover::before {
+.workBackArrow:hover::before {
   opacity: 1;
 }
