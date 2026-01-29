@@ -507,3 +507,36 @@ h1 {
 .workBackArrow:hover {
   opacity: 1;
 }
+.workSingle{
+  max-width: 1120px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.workPlayer{
+  position: relative;
+  margin-top: 18px;
+}
+
+.workInfo{
+  margin-top: 36px;
+  max-width: 760px;
+}
+
+.workTitle{
+  font-size: 30px;
+  line-height: 1.25;
+  margin: 0 0 14px 0;
+}
+
+.workMeta{
+  color: rgba(255,255,255,.65);
+  font-size: 14px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.workCredits{
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 22px;
+}
