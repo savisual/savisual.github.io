@@ -126,14 +126,15 @@ async function renderWork() {
       <div class="workLayout">
       <!-- LEFT: VIDEO -->
 <div class="workMain">
-  <div class="workBack">
-    <a class="btn" href="/portfolio/">Back</a>
-  </div>
-
   <div class="workPlayer">
+    <div class="workBack">
+      <a class="btn" href="/portfolio/">Back</a>
+    </div>
+
     ${videoEmbedHTML(video)}
   </div>
 </div>
+
 
 <!-- RIGHT -->
   <aside class="workSidebar">
