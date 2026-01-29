@@ -115,16 +115,6 @@ h1 {
   color: var(--muted);
 }
 
-.btn {
-  border: 1px solid var(--line);
-  padding: 10px 12px;
-  border-radius: 12px;
-  background: rgba(255,255,255,.03);
-}
-
-.btn:hover {
-  background: rgba(255,255,255,.08);
-}
 
 .embed{
   position: relative;
@@ -386,23 +376,6 @@ h1 {
   font-size: 14px;
 }
 
-/* Back 버튼(우측에 세련되게) */
-.btn{
-  display: inline-block;
-  padding: 10px 14px;
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 999px;
-  text-decoration: none;
-  color: rgba(255,255,255,.92);
-  font-size: 13px;
-  transition: transform .15s ease, background .15s ease, border-color .15s ease;
-}
-
-.btn:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.08);
-  border-color: rgba(255,255,255,.28);
-}
 
 /* 반응형: 모바일에서는 세로로 */
 @media (max-width: 980px){
@@ -418,117 +391,51 @@ h1 {
     font-size: 30px;
   }
 }
-.workBack {
+
+/* ✅ 영상 카드 기준으로 화살표 위치 잡기 */
+.workPlayer{
+  position: relative; /* 이게 없으면 화살표 좌표가 엉뚱한 기준으로 잡힘 */
+}
+
+/* ✅ ambience처럼 "독립 화살표" */
+.workBackArrow{
   position: absolute;
-  top: 14px;
-  left: 16px;
-  z-index: 5;
-}
-
-.workBack a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  font-size: 12px;
-  text-decoration: none;
-  color: rgba(255,255,255,.9);
-  background: rgba(0,0,0,.55);
-  border: 1px solid rgba(255,255,255,.15);
-  border-radius: 999px;
-  backdrop-filter: blur(6px);
-}
-
-.workBack a:hover {
-  background: rgba(0,0,0,.75);
-}
-.workPlayer { position: relative; }
-
-.workBack{
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 10;
-}
-
-.workBack .btn{
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 13px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(0,0,0,.45);
-  backdrop-filter: blur(8px);
-  opacity: .9;
-}
-
-.workBack .btn:hover{
-  opacity: 1;
-}
-
-.workPlayer {
-  position: relative;
-}
-
-/* ambience 스타일 화살표 */
-.workBackArrow {
-  position: absolute;
-  top: -44px;        /* ← 영상 카드 기준 위 */
-  left: -4px;
-  width: 32px;
-  height: 32px;
-}
-
-.workBackArrow::before {
-  content: "←";
-  font-size: 24px;
-  color: #fff;
-  opacity: .8;
-  transition: opacity .2s ease;
-}
-
-.workBackArrow:hover::before {
-  opacity: 1;
-}
-/* BACK ARROW (ambience style) */
-.workBackArrow {
-  position: absolute;
-  top: 24px;
-  left: 24px;
+  left: 0px;        /* ← 필요하면 -10px 이런식으로 미세조정 */
+  top: -44px;       /* ← 여기 값이 “영상 카드 위”로 올리는 핵심 */
   width: 28px;
   height: 28px;
+  display: block;
   z-index: 20;
-  opacity: 0.7;
-  transition: opacity .2s ease;
+
+  opacity: .9;
+  transition: opacity .2s ease, transform .2s ease;
 }
 
-/* 화살표 모양 */
-.workBackArrow::before {
+/* 화살표 모양 그리기 */
+.workBackArrow::before{
   content: "";
-  display: block;
+  position: absolute;
+  left: 4px;
+  top: 50%;
   width: 12px;
   height: 12px;
-  border-left: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  transform: rotate(45deg);
-  position: absolute;
-  top: 8px;
-  left: 8px;
+  border-left: 2px solid rgba(255,255,255,.9);
+  border-bottom: 2px solid rgba(255,255,255,.9);
+  transform: translateY(-50%) rotate(45deg);
 }
 
-.workBackArrow:hover {
+/* hover */
+.workBackArrow:hover{
   opacity: 1;
+  transform: translateX(-2px);
 }
+
 .workSingle{
   max-width: 1120px;
   margin: 0 auto;
   position: relative;
 }
 
-.workPlayer{
-  position: relative;
-  margin-top: 18px;
-}
 
 .workInfo{
   margin-top: 36px;
