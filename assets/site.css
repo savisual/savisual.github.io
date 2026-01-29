@@ -172,12 +172,7 @@ h1 {
   }
 }
 
-.embed iframe {
-  width: 100%;
-  height: 540px;   /* 일단 강제로 높이 확보 */
-  border: 0;
-  display: block;
-}
+
 /* 카드 hover 효과 */
 .card {
   display: block;
