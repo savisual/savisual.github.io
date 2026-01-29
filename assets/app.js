@@ -121,20 +121,17 @@ async function renderWork() {
     `
     : "";
 
-  root.innerHTML = `
-    <div class="container">
-      <div class="workLayout">
+ root.innerHTML = `
+  <a class="pageBack" href="/portfolio/" aria-label="Back"></a>
+
+  <div class="container">
+    <div class="workLayout">
       <!-- LEFT: VIDEO -->
-<div class="workMain">
-  <div class="workPlayer">
-    <div class="workBack">
-      <a class="btn" href="/portfolio/">Back</a>
-    </div>
-
-    ${videoEmbedHTML(video)}
-  </div>
-</div>
-
+      <div class="workMain">
+        <div class="workPlayer">
+          ${videoEmbedHTML(video)}
+        </div>
+      </div>
 
 <!-- RIGHT -->
   <aside class="workSidebar">
