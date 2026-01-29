@@ -122,8 +122,6 @@ async function renderWork() {
     : "";
 
  root.innerHTML = `
-  <a class="pageBack" href="/portfolio/" aria-label="Back"></a>
-
   <div class="container">
     <div class="workLayout">
       <!-- LEFT: VIDEO -->
