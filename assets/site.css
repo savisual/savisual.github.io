@@ -134,10 +134,13 @@ h1 {
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,.10);
-  margin: 14px 0;
+  margin: 24px 0;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.6),
+    inset 0 0 0 1px rgba(255,255,255,.08);
 }
 
 .embed iframe {
@@ -171,11 +174,6 @@ h1 {
   .grid {
     grid-template-columns: 1fr;
   }
-}
-.embed {
-  width: 100%;
-  max-width: 960px;
-  margin: 24px 0;
 }
 
 .embed iframe {
