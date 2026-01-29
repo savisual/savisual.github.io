@@ -411,3 +411,27 @@ h1 {
     font-size: 30px;
   }
 }
+.workBack {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  z-index: 5;
+}
+
+.workBack a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  text-decoration: none;
+  color: rgba(255,255,255,.9);
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+.workBack a:hover {
+  background: rgba(0,0,0,.75);
+}
