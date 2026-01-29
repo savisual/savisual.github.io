@@ -9,10 +9,11 @@
   box-sizing: border-box;
 }
 
-body {
+body{
   background:
-    radial-gradient(1200px 700px at 20% 0%, rgba(255,255,255,.07), transparent 60%),
-    radial-gradient(900px 600px at 85% 10%, rgba(255,255,255,.05), transparent 55%),
+    radial-gradient(1200px 700px at 18% 0%, rgba(255,255,255,.08), transparent 62%),
+    radial-gradient(900px 700px at 85% 12%, rgba(255,255,255,.06), transparent 58%),
+    radial-gradient(700px 500px at 50% 100%, rgba(255,255,255,.04), transparent 60%),
     #000;
   color: #fff;
 }
@@ -125,18 +126,29 @@ h1 {
   background: rgba(255,255,255,.08);
 }
 
-.embed {
+.embed{
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
-  border-radius: 18px;
+  border-radius: 22px;
   overflow: hidden;
-  margin: 24px 0;
+  margin: 20px 0;
 
   box-shadow:
-    0 30px 80px rgba(0,0,0,.6),
+    0 50px 140px rgba(0,0,0,.70),
+    0 10px 40px rgba(0,0,0,.55),
     inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+/* 아주 얇은 상단 하이라이트 (감도 올려줌) */
+.embed::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background: radial-gradient(1200px 400px at 50% 0%, rgba(255,255,255,.10), transparent 55%);
+  opacity: .35;
 }
 
 .embed iframe {
@@ -461,8 +473,8 @@ h1 {
 /* ambience 스타일 화살표 */
 .workBackArrow {
   position: absolute;
-  top: -36px;        /* ← 영상 카드 기준 위 */
-  left: 0;
+  top: -44px;        /* ← 영상 카드 기준 위 */
+  left: -4px;
   width: 32px;
   height: 32px;
 }
@@ -539,4 +551,48 @@ h1 {
 .workCredits{
   border-top: 1px solid rgba(255,255,255,.12);
   padding-top: 22px;
+}
+.workInfo{
+  margin-top: 36px;
+  max-width: 760px;
+}
+
+.workTitle{
+  font-size: 34px;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  margin: 0 0 14px 0;
+  font-weight: 700;
+}
+
+.workMeta{
+  color: rgba(255,255,255,.62);
+  font-size: 13px;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.workMeta > div{
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.workCredits{
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 20px;
+}
+
+.workCredits h3{
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+}
+
+.workCredits li{
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-size: 13px;
+  color: rgba(255,255,255,.86);
 }
