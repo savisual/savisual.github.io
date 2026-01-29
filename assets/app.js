@@ -124,20 +124,25 @@ async function renderWork() {
   root.innerHTML = `
     <div class="container">
       <div class="workLayout">
-        <!-- LEFT: VIDEO -->
-        <div class="workMain">
-          <div class="workPlayer">
-            ${videoEmbedHTML(video)}
-          </div>
-        </div>
+      <!-- LEFT: VIDEO -->
+<div class="workMain">
+  <div class="workBack">
+    <a class="btn" href="/portfolio/">Back</a>
+  </div>
 
-        <!-- RIGHT: INFO -->
-        <aside class="workSidebar">
-          <h1 class="workTitle">${escapeHTML(work.title || "")}</h1>
-          <div class="workMeta">${metaLines}</div>
+  <div class="workPlayer">
+    ${videoEmbedHTML(video)}
+  </div>
+</div>
 
-          <a class="btn" href="/portfolio/">Back</a>
+<!-- RIGHT -->
+  <aside class="workSidebar">
+    <h1 class="workTitle">...</h1>
+    <div class="workMeta">...</div>
+    <div class="workCredits">...</div>
+  </aside>
 
+</div>
           ${creditsHTML}
         </aside>
       </div>
