@@ -10,15 +10,11 @@
 }
 
 body {
-  margin: 0;
-  background: radial-gradient(
-    1200px 600px at 70% 20%,
-    #1a1a1a 0%,
-    #0c0c0c 40%,
-    #000 100%
-  );
-  color: #eaeaea;
-  font-family: 'Inter', 'Pretendard', system-ui, -apple-system;
+  background:
+    radial-gradient(1200px 700px at 20% 0%, rgba(255,255,255,.07), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, rgba(255,255,255,.05), transparent 55%),
+    #000;
+  color: #fff;
 }
 
 a {
