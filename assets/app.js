@@ -128,9 +128,10 @@ async function renderWork() {
     <div class="workLayout">
       <!-- LEFT: VIDEO -->
       <div class="workMain">
-        <div class="workPlayer">
-          ${videoEmbedHTML(video)}
-        </div>
+       <div class="workPlayer">
+  <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
+  ${videoEmbedHTML(video)}
+</div>
       </div>
 
 <!-- RIGHT -->
