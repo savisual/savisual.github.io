@@ -122,25 +122,29 @@ async function renderWork() {
     : "";
 
 root.innerHTML = `
-  <div class="container workSingle">
-
-    <!-- LEFT: VIDEO -->
-    <div class="workPlayer">
-      <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
-      ${videoEmbedHTML(video)}
-    </div>
-
-    <!-- INFO -->
-    <div class="workInfo">
-      <h1 class="workTitle">${escapeHTML(work.title || "")}</h1>
-
-      <div class="workMeta">
-        ${metaLines}
+  <div class="container">
+    <div class="workLayout">
+      <!-- LEFT -->
+      <div class="workMain">
+        <div class="workPlayer">
+          <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
+          ${videoEmbedHTML(video)}
+        </div>
       </div>
 
-      ${creditsHTML}
+      <!-- RIGHT -->
+      <aside class="workSidebar">
+        <h1 class="workTitle">${escapeHTML(work.title || "")}</h1>
+
+        <div class="workMeta">
+          ${work.type ? `<div><b>Type</b><span>${escapeHTML(work.type)}</span></div>` : ""}
+          ${work.year ? `<div><b>Year</b><span>${escapeHTML(work.year)}</span></div>` : ""}
+          ${work.client ? `<div><b>Client</b><span>${escapeHTML(work.client)}</span></div>` : ""}
+        </div>
+      </aside>
     </div>
 
+    ${creditsHTML}
   </div>
 `;
 }
