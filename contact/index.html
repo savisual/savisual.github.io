@@ -22,15 +22,13 @@
     <div class="contactCard">
       <h1>Contact</h1>
 
-      <div class="contactRow">
-        <span class="contactLabel">Email</span>
-
-        <span class="contactValue" id="contactEmail">safilm8206@gmail.com</span>
-
-        <button class="copyBtn" type="button" onclick="copyEmail()">
-          Copy
-        </button>
-      </div>
+     <div class="contactRow">
+  <div class="contactInline">
+    <span class="contactValue" id="contactEmail">safilm8206@gmail.com</span>
+    <button class="copyBtn" type="button" onclick="copyEmail()">Copy</button>
+  </div>
+  <div class="toast" id="copyToast" aria-live="polite">Copied</div>
+</div>
     </div>
   </main>
   <!-- ✅ 여기까지 -->
