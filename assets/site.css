@@ -604,3 +604,15 @@ body::after{
   opacity: 1;
   transform: translateY(0);
 }
+/* Topbar logo */
+.brandLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandLogo img {
+  height: 22px;      /* 로고 높이 */
+  width: auto;
+  display: block;
+}
