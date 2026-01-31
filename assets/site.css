@@ -392,29 +392,22 @@ h1 {
   }
 }
 
-/* ✅ 영상 카드 기준으로 화살표 위치 잡기 */
-.workPlayer{
-  position: relative; /* 이게 없으면 화살표 좌표가 엉뚱한 기준으로 잡힘 */
-}
+.workPlayer{ position: relative; overflow: visible !important; }
 
-/* ✅ ambience처럼 "독립 화살표" */
 .workBackArrow{
   position: absolute;
-  left: 0px;        /* ← 필요하면 -10px 이런식으로 미세조정 */
-  top: -44px;       /* ← 여기 값이 “영상 카드 위”로 올리는 핵심 */
+  left: 0px;
+  top: -44px;
   width: 28px;
   height: 28px;
   display: block;
-  z-index: 20;
-
+  z-index: 50;
   opacity: .9;
-  transition: opacity .2s ease, transform .2s ease;
 }
 
-/* 화살표 모양 그리기 */
 .workBackArrow::before{
-  content: "";
-  position: absolute;
+  content:"";
+  position:absolute;
   left: 4px;
   top: 50%;
   width: 12px;
@@ -423,6 +416,7 @@ h1 {
   border-bottom: 2px solid rgba(255,255,255,.9);
   transform: translateY(-50%) rotate(45deg);
 }
+
 
 /* hover */
 .workBackArrow:hover{
