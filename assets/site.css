@@ -527,4 +527,66 @@ body::after{
     radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,.03), transparent 65%);
   mix-blend-mode: overlay;
 }
+/* === Contact (minimal / centered) === */
+.contactCenter {
+  min-height: calc(100vh - 72px); /* topbar 높이에 맞춰 조절 가능 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+.contactCard {
+  width: 100%;
+  max-width: 640px;
+  padding: 40px;
+  border-radius: 18px;
+  background: radial-gradient(
+    ellipse at top,
+    rgba(255,255,255,0.06),
+    rgba(0,0,0,0.90)
+  );
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.contactCard h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: -0.02em;
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.contactLabel {
+  font-size: 13px;
+  opacity: 0.6;
+  width: 60px;
+}
+
+.contactValue {
+  font-size: 15px;
+  letter-spacing: 0.02em;
+}
+
+.copyBtn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copyBtn:hover {
+  background: #fff;
+  color: #000;
+}
 
