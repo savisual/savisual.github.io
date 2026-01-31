@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
+  <!-- ✅ 너 원래 있던 topbar/nav는 여기 그대로 두면 됨 -->
   <div class="topbar">
     <div class="brand">SA VISUAL</div>
     <div class="nav">
@@ -16,39 +17,31 @@
     </div>
   </div>
 
-  <div class="container">
-    <h1>Contact</h1>
-    <p class="muted">아래 이메일로 편하게 연락주세요.</p>
+  <!-- ✅ 여기부터: 컨택트 화면 본문을 이걸로 통째로 교체 -->
+  <main class="contactCenter">
+    <div class="contactCard">
+      <h1>Contact</h1>
 
-    <div class="card" style="padding:18px;">
-      <div style="font-size:20px; font-weight:700; letter-spacing:0.2px;">
-        safilm8206@gmail.com
+      <div class="contactRow">
+        <span class="contactLabel">Email</span>
+
+        <span class="contactValue" id="contactEmail">safilm8206@gmail.com</span>
+
+        <button class="copyBtn" type="button" onclick="copyEmail()">
+          Copy
+        </button>
       </div>
-
-      <div style="margin-top:10px;">
-        <button id="copyBtn" class="btn">Copy Email</button>
-        <a class="btn" href="mailto:safilm8206@gmail.com" style="margin-left:8px;">Open Mail App</a>
-      </div>
-
-      <p id="copyMsg" class="muted" style="margin-top:10px; display:none;">복사됨 ✅</p>
     </div>
-  </div>
+  </main>
+  <!-- ✅ 여기까지 -->
 
   <script>
-    const email = "safilm8206@gmail.com";
-    const btn = document.getElementById("copyBtn");
-    const msg = document.getElementById("copyMsg");
-
-    btn.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(email);
-        msg.style.display = "block";
-        setTimeout(() => (msg.style.display = "none"), 1200);
-      } catch (e) {
-        // 클립보드가 막힌 환경 대비: 프롬프트라도 띄움
-        window.prompt("복사해서 사용하세요:", email);
-      }
-    });
+    function copyEmail() {
+      const email = document.getElementById("contactEmail").innerText.trim();
+      navigator.clipboard.writeText(email).then(() => {
+        alert("Email copied");
+      });
+    }
   </script>
 </body>
 </html>
