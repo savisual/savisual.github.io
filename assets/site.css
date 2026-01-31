@@ -349,3 +349,21 @@ a{ color:inherit; text-decoration:none; }
   opacity:1;
   transform:translateY(0);
 }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+}
