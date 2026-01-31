@@ -591,3 +591,16 @@ body::after{
   color: #000;
 }
 
+.toast{
+  margin-top: 10px;          /* 아래로 자연스럽게 */
+  font-size: 12px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: all 0.18s ease;
+  color: rgba(255,255,255,0.75);
+}
+
+.toast.show{
+  opacity: 1;
+  transform: translateY(0);
+}
