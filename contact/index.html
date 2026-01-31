@@ -36,12 +36,21 @@
   <!-- ✅ 여기까지 -->
 
   <script>
-    function copyEmail() {
-      const email = document.getElementById("contactEmail").innerText.trim();
-      navigator.clipboard.writeText(email).then(() => {
-        alert("Email copied");
-      });
-    }
+  function copyEmail() {
+    const emailEl = document.getElementById("contactEmail");
+    const toast = document.getElementById("copyToast");
+    const email = (emailEl?.innerText || "").trim();
+    if (!email) return;
+
+    navigator.clipboard.writeText(email).then(() => {
+      toast.classList.add("show");
+      window.clearTimeout(window.__toastTimer);
+      window.__toastTimer = window.setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1200);
+    });
+  }
+
   </script>
 </body>
 </html>
