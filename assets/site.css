@@ -611,7 +611,7 @@ body::after{
 }
 
 .brandLogo img {
-  height: 42px;       /* ← 핵심: 여기 */
+  height: 48px;       /* ← 핵심: 여기 */
   width: auto;
   display: block;
 }
