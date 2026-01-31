@@ -41,6 +41,7 @@ function normalizeVideo(work) {
 function videoEmbedHTML(video) {
   if (!video) return "";
 
+
   if (video.provider === "youtube") {
     const id = video.id;
     return `
@@ -54,6 +55,24 @@ function videoEmbedHTML(video) {
       </div>
     `;
   }
+
+  function photoGalleryHTML(images, title = "") {
+  if (!Array.isArray(images) || images.length === 0) return "";
+
+  const items = images
+    .map((src) => `
+      <a class="photoItem" href="${escapeAttr(src)}" target="_blank" rel="noopener">
+        <img src="${escapeAttr(src)}" alt="${escapeAttr(title)}" loading="lazy" />
+      </a>
+    `)
+    .join("");
+
+  return `
+    <div class="photoGallery">
+      ${items}
+    </div>
+  `;
+}
 
   if (video.provider === "vimeo") {
     const id = video.id;
@@ -79,7 +98,7 @@ async function renderPortfolio() {
 
   grid.innerHTML = works.map(w => `
     <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
-      <div class="thumb" style="background-image:url('${escapeHTML(w.thumb)}')"></div>
+     <div class="thumb" style="background-image:url('${w.thumb || (Array.isArray(w.images) && w.images.length ? w.images[0] : "")}')"></div>
       <div class="meta">
         <b>${escapeHTML(w.title)}</b>
         <span>${escapeHTML(w.type)} · ${escapeHTML(w.year)}</span>
@@ -128,7 +147,7 @@ root.innerHTML = `
       <div class="workMain">
         <div class="workPlayer">
           <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
-          ${videoEmbedHTML(video)}
+          ${(work.images && work.images.length) ? photoGalleryHTML(work.images, work.title || "") : videoEmbedHTML(video)}
         </div>
       </div>
 
