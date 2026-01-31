@@ -608,11 +608,10 @@ body::after{
 .brandLogo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
 }
 
 .brandLogo img {
-  height: 22px;      /* 로고 높이 */
+  height: 42px;       /* ← 핵심: 여기 */
   width: auto;
   display: block;
 }
