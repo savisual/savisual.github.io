@@ -459,11 +459,11 @@ h1 {
 }
 
 .workTitle{
-  font-size: 34px;
-  line-height: 1.18;
-  letter-spacing: -0.015em;
-  margin: 0 0 14px 0;
-  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin: 2px 0 20px;
+  font-weight: 600;
 }
 
 .workMeta{
@@ -474,8 +474,21 @@ h1 {
 }
 
 .workMeta > div{
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  display:flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  font-size: 13px;
+}
+
+.workMeta b{
+  opacity: .5;
+  font-weight: 500;
+}
+
+.workMeta span{
+  opacity: .85;
 }
 
 .workCredits{
@@ -492,8 +505,26 @@ h1 {
 }
 
 .workCredits li{
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  display:flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
   font-size: 13px;
-  color: rgba(255,255,255,.86);
 }
+
+.workCredits li span:first-child{
+  opacity: .5;
+}
+
+body::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,.04), transparent 60%),
+    radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,.03), transparent 65%);
+  mix-blend-mode: overlay;
+}
+
