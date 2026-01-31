@@ -541,6 +541,7 @@ body::after{
   max-width: 640px;
   padding: 40px;
   border-radius: 18px;
+  overflow: visible;
   background: radial-gradient(
     ellipse at top,
     rgba(255,255,255,0.06),
