@@ -88,10 +88,12 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
   background: rgba(255,255,255,.03);
   transform: translateY(0);
-  transition: transform 0.18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.card:hover { transform: translateY(-4px); }
+.card:hover {
+  transform: translateY(-4px);
+}
 
 .thumb {
   width: 100%;
@@ -101,23 +103,15 @@ a { color: inherit; text-decoration: none; }
   transition: transform 0.25s ease;
 }
 
-.card:hover .thumb { transform: scale(1.03); }
-
-.thumbVideo{ aspect-ratio: 16 / 10; }
-.thumbPhoto{ aspect-ratio: 4 / 5; }
-
-.badgePhoto{
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  font-size: 11px;
-  letter-spacing: .12em;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(0,0,0,.45);
-  border: 1px solid rgba(255,255,255,.16);
-  backdrop-filter: blur(6px);
+.card:hover .thumb {
+  transform: scale(1.03);
 }
+
+/* ✅ 영상은 16:9로 고정 */
+.thumbVideo{ aspect-ratio: 16 / 9; }
+
+/* ✅ 포토는 4:5 */
+.thumbPhoto{ aspect-ratio: 4 / 5; }
 
 .meta { padding: 12px 12px 14px; }
 .meta b { display: block; margin-bottom: 6px; }
@@ -159,15 +153,21 @@ a { color: inherit; text-decoration: none; }
   line-height: 1.6;
 }
 
+/* ✅ Type/Year/Client도 "Type: ..." 형태로 보이도록 */
 .workMeta > div{
   padding: 7px 0;
   border-bottom: 1px solid rgba(255,255,255,.10);
+  display: flex;
+  gap: 10px;
 }
 
 .workMeta b{
   opacity: .55;
   font-weight: 600;
-  margin-right: 10px;
+}
+
+.workMeta span{
+  opacity: .9;
 }
 
 .workCredits{
@@ -193,7 +193,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 14px;
 }
 
-/* ===== Work player (video/photo container) ===== */
+/* ===== Work player ===== */
 .workPlayer{
   position: relative;
   border-radius: 22px;
@@ -202,7 +202,7 @@ a { color: inherit; text-decoration: none; }
   background: rgba(255,255,255,.03);
 }
 
-/* Back Arrow (ambience-like, outside top-left of card) */
+/* Back Arrow */
 .workBackArrow{
   position: absolute;
   left: 0px;
@@ -212,6 +212,7 @@ a { color: inherit; text-decoration: none; }
   display: block;
   z-index: 50;
   opacity: .9;
+  transition: transform .15s ease, opacity .15s ease;
 }
 
 .workBackArrow::before{
@@ -256,6 +257,11 @@ a { color: inherit; text-decoration: none; }
   padding: 14px;
 }
 
+@media (max-width: 900px){
+  .photoGrid{ grid-template-columns: 1fr; }
+}
+
+/* ✅ 포토 상세 호버 모션 복구 */
 .photoItem{
   border: 1px solid rgba(255,255,255,.10);
   border-radius: 16px;
@@ -263,6 +269,8 @@ a { color: inherit; text-decoration: none; }
   background: rgba(255,255,255,.03);
   cursor: pointer;
   padding: 0;
+  transform: translateY(0);
+  transition: transform .18s ease, box-shadow .18s ease;
 }
 
 .photoItem img{
@@ -270,10 +278,16 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   display: block;
   object-fit: cover;
+  transform: scale(1);
+  transition: transform .25s ease;
 }
 
-@media (max-width: 900px){
-  .photoGrid{ grid-template-columns: 1fr; }
+.photoItem:hover{
+  transform: translateY(-4px);
+}
+
+.photoItem:hover img{
+  transform: scale(1.03);
 }
 
 /* ===== Lightbox ===== */
