@@ -200,10 +200,10 @@ async function renderWork() {
   const client = String(work.client || "");
 
   const metaLines = [
-    type ? `<div><b>Type</b><span>${escapeHTML(type)}</span></div>` : "",
-    year ? `<div><b>Year</b><span>${escapeHTML(year)}</span></div>` : "",
-    client ? `<div><b>Client</b><span>${escapeHTML(client)}</span></div>` : "",
-  ].filter(Boolean).join("");
+  type ? `<div><b>Type:</b><span>${escapeHTML(type)}</span></div>` : "",
+  year ? `<div><b>Year:</b><span>${escapeHTML(year)}</span></div>` : "",
+  client ? `<div><b>Client:</b><span>${escapeHTML(client)}</span></div>` : ""
+].filter(Boolean).join("");
 
   const creditsArr = Array.isArray(work.credits) ? work.credits : [];
   const creditsHTML = creditsArr.length ? `
