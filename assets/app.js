@@ -229,8 +229,40 @@ async function renderWork() {
 
   let leftHTML = "";
 
+   // ====== 핵심: Photo면 갤러리 / Video면 임베드 ======
+  const isPhoto = (String(work.type || "").toLowerCase() === "photo") || Array.isArray(work.images);
+
+  let leftHTML = "";
+
+  // 포토 소스 배열 확정
+  const photoSources = (isPhoto ? (Array.isArray(work.images) ? work.images : []) : [])
+    .map(x => String(x || "").trim())
+    .filter(Boolean);
+
   if (isPhoto) {
-    leftHTML = buildPhotoLeftHTML(work);
+    leftHTML = `
+      <div class="workPlayer">
+        <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
+
+        <div class="photoGrid">
+          ${photoSources.map((src, i) => `
+            <button class="photoItem" type="button" data-idx="${i}" aria-label="Open image ${i + 1}">
+              <img src="${escapeHTML(src)}" alt="${escapeHTML(title)} ${i + 1}" loading="lazy" />
+            </button>
+          `).join("")}
+        </div>
+
+        <div class="lightbox" id="lightbox" aria-hidden="true">
+          <button class="lightboxClose" type="button" aria-label="Close"></button>
+
+          <button class="lightboxNav prev" type="button" aria-label="Previous"></button>
+          <img class="lightboxImg" alt="" />
+          <button class="lightboxNav next" type="button" aria-label="Next"></button>
+
+          <div class="lightboxCount" id="lightboxCount"></div>
+        </div>
+      </div>
+    `;
   } else {
     const video = normalizeVideo(work);
     leftHTML = `
@@ -239,6 +271,91 @@ async function renderWork() {
         ${videoEmbedHTML(video)}
       </div>
     `;
+  }
+
+  root.innerHTML = `
+    <div class="container">
+      <div class="workLayout">
+        <div class="workMain">
+          ${leftHTML}
+        </div>
+
+        <aside class="workSidebar">
+          <h1 class="workTitle">${escapeHTML(title)}</h1>
+          <div class="workMeta">${metaLines}</div>
+          ${creditsHTML}
+        </aside>
+      </div>
+    </div>
+  `;
+
+  // ===== Photo 라이트박스 네비게이션 =====
+  if (isPhoto) {
+    const lb = document.getElementById("lightbox");
+    const lbImg = lb ? lb.querySelector(".lightboxImg") : null;
+    const btnClose = lb ? lb.querySelector(".lightboxClose") : null;
+    const btnPrev = lb ? lb.querySelector(".lightboxNav.prev") : null;
+    const btnNext = lb ? lb.querySelector(".lightboxNav.next") : null;
+    const lbCount = document.getElementById("lightboxCount");
+
+    let current = 0;
+
+    const render = () => {
+      if (!lbImg) return;
+      const src = photoSources[current];
+      lbImg.src = src;
+      if (lbCount) lbCount.textContent = `${current + 1} / ${photoSources.length}`;
+    };
+
+    const open = (idx) => {
+      if (!lb) return;
+      current = Math.max(0, Math.min(photoSources.length - 1, idx));
+      lb.setAttribute("aria-hidden", "false");
+      lb.classList.add("show");
+      render();
+    };
+
+    const close = () => {
+      if (!lb || !lbImg) return;
+      lb.classList.remove("show");
+      lb.setAttribute("aria-hidden", "true");
+      lbImg.src = "";
+    };
+
+    const prev = () => {
+      if (photoSources.length <= 1) return;
+      current = (current - 1 + photoSources.length) % photoSources.length;
+      render();
+    };
+
+    const next = () => {
+      if (photoSources.length <= 1) return;
+      current = (current + 1) % photoSources.length;
+      render();
+    };
+
+    root.querySelectorAll(".photoItem").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.getAttribute("data-idx"));
+        if (!Number.isNaN(idx)) open(idx);
+      });
+    });
+
+    if (btnClose) btnClose.addEventListener("click", close);
+    if (btnPrev) btnPrev.addEventListener("click", prev);
+    if (btnNext) btnNext.addEventListener("click", next);
+
+    if (lb) {
+      lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+    }
+
+    // 키보드: 좌/우/ESC
+    document.addEventListener("keydown", (e) => {
+      if (!lb || lb.getAttribute("aria-hidden") === "true") return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    });
   }
 
   root.innerHTML = `
