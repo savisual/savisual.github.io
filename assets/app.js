@@ -17,14 +17,14 @@ function escapeHTML(str) {
 }
 
 function escapeAttr(str) {
-  return escapeHTML(str).replaceAll("'", "&#39;");
+  return String(str ?? "").replaceAll('"', "&quot;");
 }
 
 /**
- * works.json video 스키마 지원:
+ * video 스키마 지원:
  * 1) "videoId": "ABCDEFGHIJK"
  * 2) "video": { "provider": "youtube", "id": "ABCDEFGHIJK" }
- * 3) "video": { "provider": "vimeo", "id": "123456" }
+ * 3) (옵션) "video": { "provider": "vimeo", "id": "123456" }
  */
 function normalizeVideo(work) {
   if (work.videoId && typeof work.videoId === "string") {
@@ -74,9 +74,11 @@ function videoEmbedHTML(video) {
   return "";
 }
 
-/* =========================
-   PORTFOLIO (GRID)
-   ========================= */
+function isPhotoWork(work) {
+  // type이 "Photo"이거나 images 배열이 있으면 Photo로 처리
+  return String(work.type || "").toLowerCase() === "photo" || Array.isArray(work.images);
+}
+
 async function renderPortfolio() {
   const works = await loadWorks();
   const grid = document.getElementById("worksGrid");
@@ -89,16 +91,19 @@ async function renderPortfolio() {
       const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
       const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
 
-      const isPhoto = String(type).toLowerCase() === "photo" || Array.isArray(w.images);
+      const isPhoto = isPhotoWork(w);
 
-      // thumb는 상대경로든 절대URL이든 그대로 사용
-      const safeBg = thumb ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"` : "";
+      // ✅ 여기서 "영상/포토 썸네일 비율"을 클래스 분리
+      const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
+
+      // background-image로 통일(상대경로/절대URL 모두 OK)
+      const thumbStyle = thumb
+        ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"`
+        : "";
 
       return `
-        <a class="card ${isPhoto ? "card--photo" : "card--video"}" href="/work/?id=${encodeURIComponent(w.id)}">
-          <div class="thumb ${isPhoto ? "thumb--photo" : "thumb--video"}" ${safeBg}>
-            ${isPhoto ? `<span class="badgePhoto">PHOTO</span>` : ``}
-          </div>
+        <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
+          <div class="${thumbClass}" ${thumbStyle}></div>
           <div class="meta">
             <b>${escapeHTML(title)}</b>
             <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
@@ -109,9 +114,6 @@ async function renderPortfolio() {
     .join("");
 }
 
-/* =========================
-   WORK DETAIL (VIDEO / PHOTO)
-   ========================= */
 async function renderWork() {
   const works = await loadWorks();
   const id = qs("id");
@@ -129,56 +131,51 @@ async function renderWork() {
   const year = String(work.year || "");
   const client = String(work.client || "");
 
-  const isPhoto = String(type).toLowerCase() === "photo" || Array.isArray(work.images);
-
-  // 오른쪽 메타: "Type : Photo" 형태로 보이도록 (띄어쓰기 포함)
+  // ✅ 좌/우 정렬(띄어쓰기 문제 해결): 라벨/값을 분리해서 span으로 넣음
   const metaLines = [
     type ? `<div><b>Type</b><span>${escapeHTML(type)}</span></div>` : "",
     year ? `<div><b>Year</b><span>${escapeHTML(year)}</span></div>` : "",
-    client ? `<div><b>Client</b><span>${escapeHTML(client)}</span></div>` : "",
-  ]
-    .filter(Boolean)
-    .join("");
+    client ? `<div><b>Client</b><span>${escapeHTML(client)}</span></div>` : ""
+  ].filter(Boolean).join("");
 
   const creditsArr = Array.isArray(work.credits) ? work.credits : [];
-  const creditsHTML = creditsArr.length
-    ? `
-      <div class="workCredits">
-        <h3>Credits</h3>
-        <ul>
-          ${creditsArr.map((c) => `<li>${escapeHTML(String(c))}</li>`).join("")}
-        </ul>
-      </div>
-    `
-    : "";
+  const creditsHTML = creditsArr.length ? `
+    <div class="workCredits">
+      <h3>Credits</h3>
+      <ul>
+        ${creditsArr.map(c => `<li>${escapeHTML(String(c))}</li>`).join("")}
+      </ul>
+    </div>
+  ` : "";
+
+  const photo = isPhotoWork(work);
 
   let leftHTML = "";
 
-  if (isPhoto) {
+  if (photo) {
     const imgs = Array.isArray(work.images) ? work.images : (work.thumb ? [work.thumb] : []);
-    const safeImgs = imgs.map((x) => String(x || "").trim()).filter(Boolean);
+    const safeImgs = imgs.map(x => String(x || "").trim()).filter(Boolean);
 
+    // ✅ 포토 상세: 라이트박스 + 좌우 네비(버튼)
     leftHTML = `
-      <div class="workPlayer workPlayer--photo">
+      <div class="workPlayer">
         <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
 
-        <div class="photoGrid" id="photoGrid">
-          ${safeImgs
-            .map(
-              (src, i) => `
-              <button class="photoItem" type="button" data-idx="${i}" data-src="${escapeAttr(src)}" aria-label="Open image ${i + 1}">
-                <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
-              </button>
-            `
-            )
-            .join("")}
+        <div class="photoGrid">
+          ${safeImgs.map((src, i) => `
+            <button class="photoItem" type="button" data-index="${i}" data-src="${escapeAttr(src)}" aria-label="Open image ${i + 1}">
+              <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
+            </button>
+          `).join("")}
         </div>
 
         <div class="lightbox" id="lightbox" aria-hidden="true">
-          <button class="lbClose" type="button" aria-label="Close"></button>
-          <button class="lbPrev" type="button" aria-label="Previous"></button>
-          <button class="lbNext" type="button" aria-label="Next"></button>
-          <img class="lbImg" alt="" />
+          <button class="lightboxClose" type="button" aria-label="Close"></button>
+
+          <button class="lightboxNav prev" type="button" aria-label="Previous"></button>
+          <button class="lightboxNav next" type="button" aria-label="Next"></button>
+
+          <img class="lightboxImg" alt="" />
         </div>
       </div>
     `;
@@ -208,23 +205,25 @@ async function renderWork() {
     </div>
   `;
 
-  // ===== Photo 라이트박스 + 좌우 네비 =====
-  if (isPhoto) {
-    const imgs = Array.isArray(work.images) ? work.images : [];
-    let idx = 0;
-
+  // ✅ 포토 라이트박스 동작
+  if (photo) {
+    const items = Array.from(root.querySelectorAll(".photoItem"));
     const lb = document.getElementById("lightbox");
-    const lbImg = lb ? lb.querySelector(".lbImg") : null;
-    const btnClose = lb ? lb.querySelector(".lbClose") : null;
-    const btnPrev = lb ? lb.querySelector(".lbPrev") : null;
-    const btnNext = lb ? lb.querySelector(".lbNext") : null;
+    const lbImg = lb ? lb.querySelector(".lightboxImg") : null;
+    const closeBtn = lb ? lb.querySelector(".lightboxClose") : null;
+    const prevBtn = lb ? lb.querySelector(".lightboxNav.prev") : null;
+    const nextBtn = lb ? lb.querySelector(".lightboxNav.next") : null;
 
-    const open = (i) => {
+    let current = 0;
+
+    const open = (index) => {
       if (!lb || !lbImg) return;
-      idx = (i + imgs.length) % imgs.length;
-      lbImg.src = imgs[idx];
-      lb.classList.add("show");
+      current = index;
+      const src = items[current]?.getAttribute("data-src");
+      if (!src) return;
+      lbImg.src = src;
       lb.setAttribute("aria-hidden", "false");
+      lb.classList.add("show");
     };
 
     const close = () => {
@@ -234,28 +233,36 @@ async function renderWork() {
       lbImg.src = "";
     };
 
-    const prev = () => open(idx - 1);
-    const next = () => open(idx + 1);
+    const prev = () => {
+      if (!items.length) return;
+      open((current - 1 + items.length) % items.length);
+    };
 
-    root.querySelectorAll(".photoItem").forEach((btn) => {
+    const next = () => {
+      if (!items.length) return;
+      open((current + 1) % items.length);
+    };
+
+    items.forEach((btn) => {
       btn.addEventListener("click", () => {
-        const i = Number(btn.getAttribute("data-idx") || "0");
-        open(i);
+        const idx = Number(btn.getAttribute("data-index"));
+        if (!Number.isNaN(idx)) open(idx);
       });
     });
 
-    if (btnClose) btnClose.addEventListener("click", close);
-    if (btnPrev) btnPrev.addEventListener("click", prev);
-    if (btnNext) btnNext.addEventListener("click", next);
+    if (closeBtn) closeBtn.addEventListener("click", close);
+    if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
+    if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); next(); });
 
     if (lb) {
       lb.addEventListener("click", (e) => {
+        // 배경 클릭 시 닫기
         if (e.target === lb) close();
       });
     }
 
     document.addEventListener("keydown", (e) => {
-      if (!lb || !lb.classList.contains("show")) return;
+      if (!lb || lb.getAttribute("aria-hidden") === "true") return;
       if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
@@ -263,62 +270,7 @@ async function renderWork() {
   }
 }
 
-/* =========================
-   CONTACT (Centered card 유지)
-   ========================= */
-function copyText(text) {
-  return navigator.clipboard.writeText(text);
-}
-
-async function renderContact() {
-  const root = document.getElementById("contactRoot");
-  if (!root) return;
-
-  // 네가 쓰던 이메일로 유지 (원하면 여기만 바꾸면 됨)
-  const email = "safilm8206@gmail.com";
-
-  root.innerHTML = `
-    <div class="contactCenter">
-      <div class="contactCard">
-        <h1>Contact</h1>
-
-        <div class="contactRow">
-          <div class="contactLabel">Email</div>
-          <div class="contactValue" id="emailValue">${escapeHTML(email)}</div>
-          <button class="copyBtn" id="copyBtn" type="button">Copy</button>
-        </div>
-
-        <div class="toast" id="toast">Copied</div>
-      </div>
-    </div>
-  `;
-
-  const btn = document.getElementById("copyBtn");
-  const toast = document.getElementById("toast");
-
-  if (btn) {
-    btn.addEventListener("click", async () => {
-      try {
-        await copyText(email);
-        if (!toast) return;
-
-        toast.classList.add("show");
-        clearTimeout(window.__toastTimer);
-        window.__toastTimer = setTimeout(() => {
-          toast.classList.remove("show");
-        }, 1200);
-      } catch (e) {
-        console.error(e);
-      }
-    });
-  }
-}
-
-/* =========================
-   BOOT
-   ========================= */
 document.addEventListener("DOMContentLoaded", () => {
   renderPortfolio().catch(console.error);
   renderWork().catch(console.error);
-  renderContact().catch(console.error);
 });
