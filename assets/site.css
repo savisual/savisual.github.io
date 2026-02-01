@@ -485,3 +485,34 @@ a{ color:inherit; text-decoration:none; }
 
 .lightboxClose::before{ transform: translate(-50%, -50%) rotate(45deg); }
 .lightboxClose::after{ transform: translate(-50%, -50%) rotate(-45deg); }
+/* ===== Portfolio: Photo thumb style split ===== */
+.thumbVideo{
+  aspect-ratio: 16 / 10; /* 기존 느낌 */
+}
+
+.thumbPhoto{
+  aspect-ratio: 4 / 5;   /* 포토 느낌(인스타 포트레이트) */
+  filter: contrast(1.02) saturate(1.02);
+}
+
+.cardPhoto .meta b{
+  letter-spacing: -0.01em;
+}
+
+.badgePhoto{
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(6px);
+}
+
+/* thumb가 absolute 요소(배지) 쓰려면 relative 필요 */
+.thumb{
+  position: relative;
+}
