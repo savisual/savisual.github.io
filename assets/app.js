@@ -94,7 +94,8 @@ async function renderPortfolio() {
       const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
       const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
 
-      const isPhoto = (String(w.type || "").toLowerCase() === "photo") || Array.isArray(w.images);
+      const isPhoto =
+        String(w.type || "").toLowerCase() === "photo" || Array.isArray(w.images);
 
       const cardClass = isPhoto ? "card cardPhoto" : "card cardVideo";
       const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
@@ -105,9 +106,7 @@ async function renderPortfolio() {
 
       return `
         <a class="${cardClass}" href="/work/?id=${encodeURIComponent(w.id)}">
-          <div class="${thumbClass}" ${thumbStyle}>
-            ${isPhoto ? `<div class="badgePhoto">PHOTO</div>` : ``}
-          </div>
+          <div class="${thumbClass}" ${thumbStyle}></div>
           <div class="meta">
             <b>${escapeHTML(title)}</b>
             <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
@@ -139,14 +138,12 @@ async function renderWork() {
   const year = String(work.year || "");
   const client = String(work.client || "");
 
-  // ✅ 여기서 "Type: ___" 띄어쓰기/콜론 포맷 통일
+  // ✅ "Type: ___" 포맷 통일
   const metaLines = [
     type ? `<div><b>Type</b><span>: ${escapeHTML(type)}</span></div>` : "",
     year ? `<div><b>Year</b><span>: ${escapeHTML(year)}</span></div>` : "",
-    client ? `<div><b>Client</b><span>: ${escapeHTML(client)}</span></div>` : "",
-  ]
-    .filter(Boolean)
-    .join("");
+    client ? `<div><b>Client</b><span>: ${escapeHTML(client)}</span></div>` : ""
+  ].filter(Boolean).join("");
 
   const creditsArr = Array.isArray(work.credits) ? work.credits : [];
   const creditsHTML = creditsArr.length
@@ -163,7 +160,7 @@ async function renderWork() {
   const isPhoto =
     String(work.type || "").toLowerCase() === "photo" || Array.isArray(work.images);
 
-  // 왼쪽 영역 HTML
+  // 왼쪽 영역
   let leftHTML = "";
 
   if (isPhoto) {
@@ -176,15 +173,11 @@ async function renderWork() {
         <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
 
         <div class="photoGrid">
-          ${photoSources
-            .map(
-              (src, i) => `
-              <button class="photoItem" type="button" data-idx="${i}" aria-label="Open image ${i + 1}">
-                <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
-              </button>
-            `
-            )
-            .join("")}
+          ${photoSources.map((src, i) => `
+            <button class="photoItem" type="button" data-idx="${i}" aria-label="Open image ${i + 1}">
+              <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
+            </button>
+          `).join("")}
         </div>
 
         <div class="lightbox" id="lightbox" aria-hidden="true">
