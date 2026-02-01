@@ -90,28 +90,36 @@ async function renderPortfolio() {
   const grid = document.getElementById("worksGrid");
   if (!grid) return;
 
-  grid.innerHTML = works
-    .map((w) => {
-      const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
-      const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
-      const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
-      const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
+  async function renderPortfolio() {
+  const works = await loadWorks();
+  const grid = document.getElementById("worksGrid");
+  if (!grid) return;
 
-      const thumbStyle = thumb
-        ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"`
-        : "";
+  grid.innerHTML = works.map(w => {
+    const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
+    const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
+    const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
+    const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
 
-      return `
-        <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
-          <div class="thumb" ${thumbStyle}></div>
-          <div class="meta">
-            <b>${escapeHTML(title)}</b>
-            <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
-          </div>
-        </a>
-      `;
-    })
-    .join("");
+    // Photo 판별: type이 Photo 이거나 images가 있으면 Photo로 취급
+    const isPhoto = (String(w.type || "").toLowerCase() === "photo") || Array.isArray(w.images);
+
+    const thumbStyle = thumb ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"` : "";
+    const cardClass = isPhoto ? "card cardPhoto" : "card cardVideo";
+    const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
+
+    return `
+      <a class="${cardClass}" href="/work/?id=${encodeURIComponent(w.id)}">
+        <div class="${thumbClass}" ${thumbStyle}>
+          ${isPhoto ? `<div class="badgePhoto">PHOTO</div>` : ``}
+        </div>
+        <div class="meta">
+          <b>${escapeHTML(title)}</b>
+          <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
+        </div>
+      </a>
+    `;
+  }).join("");
 }
 
 // =====================
