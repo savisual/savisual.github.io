@@ -1,6 +1,8 @@
 // =====================
-// Utils
+//  SA VISUAL - app.js
+//  Portfolio + Work detail (Video/Photo)
 // =====================
+
 async function loadWorks() {
   const res = await fetch("/data/works.json");
   if (!res.ok) throw new Error("works.json 로드 실패");
@@ -20,19 +22,14 @@ function escapeHTML(str) {
 }
 
 function escapeAttr(str) {
-  return String(str ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+  return escapeHTML(str).replaceAll("'", "&#39;");
 }
 
 /**
- * works.json video 스키마 지원:
- * 1) "videoId": "ABCDEFGHIJK"
- * 2) "video": { "provider": "youtube", "id": "ABCDEFGHIJK" }
- * 3) "video": { "provider": "vimeo", "id": "123456" }
+ * Video 스키마 지원:
+ * 1) videoId: "ABCDEFGHIJK"
+ * 2) video: { provider: "youtube", id: "ABCDEFGHIJK" }
+ * 3) video: { provider: "vimeo", id: "123456" }
  */
 function normalizeVideo(work) {
   if (work.videoId && typeof work.videoId === "string") {
@@ -83,117 +80,52 @@ function videoEmbedHTML(video) {
 }
 
 // =====================
-// Portfolio Page
+// Portfolio page
 // =====================
 async function renderPortfolio() {
   const works = await loadWorks();
   const grid = document.getElementById("worksGrid");
   if (!grid) return;
 
-  async function renderPortfolio() {
-  const works = await loadWorks();
-  const grid = document.getElementById("worksGrid");
-  if (!grid) return;
+  grid.innerHTML = works
+    .map((w) => {
+      const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
+      const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
+      const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
+      const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
 
-  grid.innerHTML = works.map(w => {
-    const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
-    const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
-    const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
-    const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
+      const isPhoto = (String(w.type || "").toLowerCase() === "photo") || Array.isArray(w.images);
 
-    // Photo 판별: type이 Photo 이거나 images가 있으면 Photo로 취급
-    const isPhoto = (String(w.type || "").toLowerCase() === "photo") || Array.isArray(w.images);
+      const cardClass = isPhoto ? "card cardPhoto" : "card cardVideo";
+      const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
 
-    const thumbStyle = thumb ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"` : "";
-    const cardClass = isPhoto ? "card cardPhoto" : "card cardVideo";
-    const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
+      const thumbStyle = thumb
+        ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"`
+        : "";
 
-    return `
-      <a class="${cardClass}" href="/work/?id=${encodeURIComponent(w.id)}">
-        <div class="${thumbClass}" ${thumbStyle}>
-          ${isPhoto ? `<div class="badgePhoto">PHOTO</div>` : ``}
-        </div>
-        <div class="meta">
-          <b>${escapeHTML(title)}</b>
-          <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
-        </div>
-      </a>
-    `;
-  }).join("");
+      return `
+        <a class="${cardClass}" href="/work/?id=${encodeURIComponent(w.id)}">
+          <div class="${thumbClass}" ${thumbStyle}>
+            ${isPhoto ? `<div class="badgePhoto">PHOTO</div>` : ``}
+          </div>
+          <div class="meta">
+            <b>${escapeHTML(title)}</b>
+            <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
+          </div>
+        </a>
+      `;
+    })
+    .join("");
 }
 
 // =====================
-// Work Detail Page
+// Work detail page (Video / Photo)
 // =====================
-function buildPhotoLeftHTML(work) {
-  const title = String(work.title || "");
-  const imgs = Array.isArray(work.images)
-    ? work.images
-    : (work.thumb ? [work.thumb] : []);
-
-  const safeImgs = imgs
-    .map((x) => String(x || "").trim())
-    .filter(Boolean);
-
-  return `
-    <div class="workPlayer">
-      <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
-
-      <div class="photoGrid">
-        ${safeImgs.map((src, i) => `
-          <button class="photoItem" type="button" data-src="${escapeAttr(src)}" aria-label="Open image ${i + 1}">
-            <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
-          </button>
-        `).join("")}
-      </div>
-
-      <div class="lightbox" id="lightbox" aria-hidden="true">
-        <button class="lightboxClose" type="button" aria-label="Close"></button>
-        <img class="lightboxImg" alt="" />
-      </div>
-    </div>
-  `;
-}
-
-function bindLightbox(root) {
-  const lb = document.getElementById("lightbox");
-  if (!lb) return;
-
-  const lbImg = lb.querySelector(".lightboxImg");
-  const closeBtn = lb.querySelector(".lightboxClose");
-
-  const open = (src) => {
-    if (!lbImg) return;
-    lbImg.src = src;
-    lb.setAttribute("aria-hidden", "false");
-    lb.classList.add("show");
-  };
-
-  const close = () => {
-    if (!lbImg) return;
-    lb.classList.remove("show");
-    lb.setAttribute("aria-hidden", "true");
-    lbImg.src = "";
-  };
-
-  root.querySelectorAll(".photoItem").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const src = btn.getAttribute("data-src");
-      if (src) open(src);
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener("click", close);
-  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
-
-  // ESC 닫기(여러 번 들어가도 문제 없게: 매번 새로 등록)
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
-}
-
 async function renderWork() {
   const works = await loadWorks();
   const id = qs("id");
   const work = works.find((w) => w.id === id);
+
   const root = document.getElementById("workRoot");
   if (!root) return;
 
@@ -207,58 +139,59 @@ async function renderWork() {
   const year = String(work.year || "");
   const client = String(work.client || "");
 
+  // ✅ 여기서 "Type: ___" 띄어쓰기/콜론 포맷 통일
   const metaLines = [
-  type ? `<div><b>Type: </b><span>${escapeHTML(type)}</span></div>` : "",
-  year ? `<div><b>Year: </b><span>${escapeHTML(year)}</span></div>` : "",
-  client ? `<div><b>Client: </b><span>${escapeHTML(client)}</span></div>` : ""
-].filter(Boolean).join("");
+    type ? `<div><b>Type</b><span>: ${escapeHTML(type)}</span></div>` : "",
+    year ? `<div><b>Year</b><span>: ${escapeHTML(year)}</span></div>` : "",
+    client ? `<div><b>Client</b><span>: ${escapeHTML(client)}</span></div>` : "",
+  ]
+    .filter(Boolean)
+    .join("");
 
   const creditsArr = Array.isArray(work.credits) ? work.credits : [];
-  const creditsHTML = creditsArr.length ? `
-    <div class="workCredits">
-      <h3>Credits</h3>
-      <ul>
-        ${creditsArr.map((c) => `<li>${escapeHTML(String(c))}</li>`).join("")}
-      </ul>
-    </div>
-  ` : "";
+  const creditsHTML = creditsArr.length
+    ? `
+      <div class="workCredits">
+        <h3>Credits</h3>
+        <ul>
+          ${creditsArr.map((c) => `<li>${escapeHTML(String(c))}</li>`).join("")}
+        </ul>
+      </div>
+    `
+    : "";
 
   const isPhoto =
-    String(work.type || "").toLowerCase() === "photo" ||
-    Array.isArray(work.images);
+    String(work.type || "").toLowerCase() === "photo" || Array.isArray(work.images);
 
+  // 왼쪽 영역 HTML
   let leftHTML = "";
-
-   // ====== 핵심: Photo면 갤러리 / Video면 임베드 ======
-  const isPhoto = (String(work.type || "").toLowerCase() === "photo") || Array.isArray(work.images);
-
-  let leftHTML = "";
-
-  // 포토 소스 배열 확정
-  const photoSources = (isPhoto ? (Array.isArray(work.images) ? work.images : []) : [])
-    .map(x => String(x || "").trim())
-    .filter(Boolean);
 
   if (isPhoto) {
+    const photoSources = (Array.isArray(work.images) ? work.images : [])
+      .map((x) => String(x || "").trim())
+      .filter(Boolean);
+
     leftHTML = `
       <div class="workPlayer">
         <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
 
         <div class="photoGrid">
-          ${photoSources.map((src, i) => `
-            <button class="photoItem" type="button" data-idx="${i}" aria-label="Open image ${i + 1}">
-              <img src="${escapeHTML(src)}" alt="${escapeHTML(title)} ${i + 1}" loading="lazy" />
-            </button>
-          `).join("")}
+          ${photoSources
+            .map(
+              (src, i) => `
+              <button class="photoItem" type="button" data-idx="${i}" aria-label="Open image ${i + 1}">
+                <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
+              </button>
+            `
+            )
+            .join("")}
         </div>
 
         <div class="lightbox" id="lightbox" aria-hidden="true">
           <button class="lightboxClose" type="button" aria-label="Close"></button>
-
           <button class="lightboxNav prev" type="button" aria-label="Previous"></button>
           <img class="lightboxImg" alt="" />
           <button class="lightboxNav next" type="button" aria-label="Next"></button>
-
           <div class="lightboxCount" id="lightboxCount"></div>
         </div>
       </div>
@@ -289,8 +222,12 @@ async function renderWork() {
     </div>
   `;
 
-  // ===== Photo 라이트박스 네비게이션 =====
+  // Photo 라이트박스 이벤트
   if (isPhoto) {
+    const photoSources = (Array.isArray(work.images) ? work.images : [])
+      .map((x) => String(x || "").trim())
+      .filter(Boolean);
+
     const lb = document.getElementById("lightbox");
     const lbImg = lb ? lb.querySelector(".lightboxImg") : null;
     const btnClose = lb ? lb.querySelector(".lightboxClose") : null;
@@ -302,8 +239,7 @@ async function renderWork() {
 
     const render = () => {
       if (!lbImg) return;
-      const src = photoSources[current];
-      lbImg.src = src;
+      lbImg.src = photoSources[current];
       if (lbCount) lbCount.textContent = `${current + 1} / ${photoSources.length}`;
     };
 
@@ -334,7 +270,7 @@ async function renderWork() {
       render();
     };
 
-    root.querySelectorAll(".photoItem").forEach(btn => {
+    root.querySelectorAll(".photoItem").forEach((btn) => {
       btn.addEventListener("click", () => {
         const idx = Number(btn.getAttribute("data-idx"));
         if (!Number.isNaN(idx)) open(idx);
@@ -346,36 +282,17 @@ async function renderWork() {
     if (btnNext) btnNext.addEventListener("click", next);
 
     if (lb) {
-      lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+      lb.addEventListener("click", (e) => {
+        if (e.target === lb) close();
+      });
     }
 
-    // 키보드: 좌/우/ESC
     document.addEventListener("keydown", (e) => {
       if (!lb || lb.getAttribute("aria-hidden") === "true") return;
       if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     });
-  }
-
-  root.innerHTML = `
-    <div class="container">
-      <div class="workLayout">
-        <div class="workMain">
-          ${leftHTML}
-        </div>
-
-        <aside class="workSidebar">
-          <h1 class="workTitle">${escapeHTML(title)}</h1>
-          <div class="workMeta">${metaLines}</div>
-          ${creditsHTML}
-        </aside>
-      </div>
-    </div>
-  `;
-
-  if (isPhoto) {
-    bindLightbox(root);
   }
 }
 
