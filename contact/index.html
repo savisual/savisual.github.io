@@ -3,15 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SA VISUAL — Contact</title>
+  <title>SA VISUAL - Contact</title>
   <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-  <!-- ✅ 너 원래 있던 topbar/nav는 여기 그대로 두면 됨 -->
   <div class="topbar">
-   <a class="brand brandLogo" href="/">
-  <img src="/assets/logo_white.png" alt="SA Visual" />
-</a>
+    <a class="brandLogo" href="/"><img src="/assets/logo_white.png" alt="SA Visual" /></a>
     <div class="nav">
       <a href="/">Home</a>
       <a href="/portfolio/">Portfolio</a>
@@ -19,38 +16,8 @@
     </div>
   </div>
 
-  <!-- ✅ 여기부터: 컨택트 화면 본문을 이걸로 통째로 교체 -->
-  <main class="contactCenter">
-    <div class="contactCard">
-      <h1>Contact</h1>
+  <div id="contactRoot"></div>
 
-     <div class="contactRow">
-  <div class="contactInline">
-    <span class="contactValue" id="contactEmail">safilm8206@gmail.com</span>
-    <button class="copyBtn" type="button" onclick="copyEmail()">Copy</button>
-  </div>
-  <div class="toast" id="copyToast" aria-live="polite">Copied</div>
-</div>
-    </div>
-  </main>
-  <!-- ✅ 여기까지 -->
-
-  <script>
-  function copyEmail() {
-    const emailEl = document.getElementById("contactEmail");
-    const toast = document.getElementById("copyToast");
-    const email = (emailEl?.innerText || "").trim();
-    if (!email) return;
-
-    navigator.clipboard.writeText(email).then(() => {
-      toast.classList.add("show");
-      window.clearTimeout(window.__toastTimer);
-      window.__toastTimer = window.setTimeout(() => {
-        toast.classList.remove("show");
-      }, 1200);
-    });
-  }
-
-  </script>
+  <script src="/assets/app.js?v=999"></script>
 </body>
 </html>
