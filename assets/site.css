@@ -516,3 +516,125 @@ a{ color:inherit; text-decoration:none; }
 .thumb{
   position: relative;
 }
+/* ===== Photo grid in detail ===== */
+.photoGrid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  padding: 14px;
+}
+
+.photoItem{
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  overflow: hidden;
+  background: rgba(255,255,255,.03);
+  cursor: pointer;
+  padding: 0;
+}
+
+.photoItem img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* 모바일에서 1열 */
+@media (max-width: 900px){
+  .photoGrid{ grid-template-columns: 1fr; }
+}
+
+/* ===== Lightbox ===== */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.78);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lightbox.show{
+  display: flex;
+}
+
+.lightboxImg{
+  max-width: min(92vw, 1100px);
+  max-height: 86vh;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #000;
+}
+
+.lightboxClose{
+  position: absolute;
+  top: 26px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 999px;
+  background: rgba(0,0,0,.35);
+  cursor: pointer;
+}
+
+.lightboxClose::before,
+.lightboxClose::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.9);
+  transform-origin: center;
+}
+
+.lightboxClose::before{ transform: translate(-50%,-50%) rotate(45deg); }
+.lightboxClose::after{ transform: translate(-50%,-50%) rotate(-45deg); }
+
+/* 좌/우 네비 버튼 */
+.lightboxNav{
+  position: absolute;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  opacity: .85;
+}
+
+.lightboxNav:hover{ opacity: 1; }
+
+.lightboxNav.prev{ left: 18px; }
+.lightboxNav.next{ right: 18px; }
+
+.lightboxNav::before{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-left: 2px solid rgba(255,255,255,.9);
+  border-bottom: 2px solid rgba(255,255,255,.9);
+  transform: translate(-50%,-50%) rotate(45deg);
+}
+
+.lightboxNav.next::before{
+  transform: translate(-50%,-50%) rotate(-135deg);
+}
+
+.lightboxCount{
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255,255,255,.75);
+  letter-spacing: .06em;
+}
