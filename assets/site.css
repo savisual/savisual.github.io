@@ -448,3 +448,208 @@ body::after{
   opacity: 1;
   transform: translateY(0);
 }
+/* =========================
+   Portfolio: Video / Photo thumb ratio split
+   ========================= */
+
+/* 공통 thumb 기본 */
+.thumb{
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  transform: translateZ(0);
+}
+
+/* ✅ 영상 썸네일: 16:9 */
+.thumbVideo{
+  aspect-ratio: 16 / 9;
+}
+
+/* ✅ 포토 썸네일: 4:5 */
+.thumbPhoto{
+  aspect-ratio: 4 / 5;
+}
+
+/* 카드 hover 유지(영상/포토 둘 다) */
+.card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  transform: translateY(0);
+  transition: transform 0.18s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
+}
+.card .thumb{
+  transition: transform 0.25s ease;
+}
+.card:hover .thumb{
+  transform: scale(1.03);
+}
+
+/* =========================
+   Work detail: Back arrow (outside card, NOT clipped)
+   ========================= */
+.workMain{
+  /* 화살표가 카드 위에 떠도 레이아웃이 안 겹치게 공간 확보 */
+  padding-top: 44px;
+}
+
+.workPlayer{
+  position: relative;
+  overflow: visible; /* ✅ 이게 없으면 화살표가 잘려요 */
+}
+
+/* 기존에 쓰던 ambience 화살표 위치 그대로 */
+.workBackArrow{
+  position: absolute;
+  left: 0px;
+  top: -44px;
+  width: 28px;
+  height: 28px;
+  display: block;
+  z-index: 50;
+  opacity: .9;
+  transform: translateX(0);
+  transition: opacity .15s ease, transform .15s ease;
+}
+.workBackArrow::before{
+  content:"";
+  position:absolute;
+  left: 4px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid rgba(255,255,255,.9);
+  border-bottom: 2px solid rgba(255,255,255,.9);
+  transform: translateY(-50%) rotate(45deg);
+}
+.workBackArrow:hover{
+  opacity: 1;
+  transform: translateX(-2px);
+}
+
+/* =========================
+   Photo detail: grid + hover motion + lightbox + nav
+   ========================= */
+
+.photoGrid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+@media (max-width: 900px){
+  .photoGrid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px){
+  .photoGrid{ grid-template-columns: 1fr; }
+}
+
+/* ✅ 포토 상세 썸네일 hover 모션(없어졌던 거 복구) */
+.photoItem{
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform .18s ease;
+}
+.photoItem:hover{
+  transform: translateY(-3px);
+}
+.photoItem img{
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1);
+  transition: transform .25s ease;
+}
+.photoItem:hover img{
+  transform: scale(1.03);
+}
+
+/* Lightbox */
+.lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.82);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.lightbox.show{
+  display: flex;
+}
+.lightboxImg{
+  max-width: min(92vw, 1200px);
+  max-height: 84vh;
+  border-radius: 18px;
+  box-shadow: 0 40px 120px rgba(0,0,0,.65);
+}
+
+/* close 버튼 */
+.lightboxClose{
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: .9;
+}
+.lightboxClose::before,
+.lightboxClose::after{
+  content:"";
+  position:absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 2px;
+  background: rgba(255,255,255,.9);
+  transform-origin: center;
+}
+.lightboxClose::before{ transform: translate(-50%,-50%) rotate(45deg); }
+.lightboxClose::after{ transform: translate(-50%,-50%) rotate(-45deg); }
+
+/* 좌우 네비 버튼 */
+.lightboxNav{
+  position: absolute;
+  top: 50%;
+  width: 52px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transform: translateY(-50%);
+  opacity: .9;
+}
+.lightboxNav:hover{ opacity: 1; }
+.lightboxNav.prev{ left: 22px; }
+.lightboxNav.next{ right: 22px; }
+
+.lightboxNav::before{
+  content:"";
+  position:absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  border-left: 2px solid rgba(255,255,255,.92);
+  border-bottom: 2px solid rgba(255,255,255,.92);
+  transform: translateY(-50%) rotate(45deg);
+}
+.lightboxNav.next::before{
+  right: 18px;
+  transform: translateY(-50%) rotate(-135deg);
+}
+.lightboxNav.prev::before{
+  left: 18px;
+  transform: translateY(-50%) rotate(45deg);
+}
