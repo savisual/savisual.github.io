@@ -7,7 +7,11 @@
     "client": "SA Visual",
     "thumb": "https://img.youtube.com/vi/6sOTSN92FrU/maxresdefault.jpg",
     "videoId": "6sOTSN92FrU",
-    "credits": ["Artist: Tonliz", "Director: SA Visual", "Edit: SA Visual"]
+    "credits": [
+      "Artist: Tonliz",
+      "Director: SA Visual",
+      "Edit: SA Visual"
+    ]
   },
   {
     "id": "work-002",
@@ -17,7 +21,11 @@
     "client": "SA Visual",
     "thumb": "https://img.youtube.com/vi/8bVPOcHUN6k/hqdefault.jpg",
     "videoId": "8bVPOcHUN6k",
-    "credits": ["Artist: SEIJI JUNE", "Director: SA Visual", "Edit: SA Visual"]
+    "credits": [
+      "Artist: SEIJI JUNE",
+      "Director: SA Visual",
+      "Edit: SA Visual"
+    ]
   },
   {
     "id": "photo-001",
@@ -33,6 +41,9 @@
       "/assets/images/na-photo-04.webp",
       "/assets/images/na-photo-05.webp"
     ],
-    "credits": ["Artist: N.A", "Photo: SA Visual"]
+    "credits": [
+      "Artist: N.A",
+      "Photo: SA Visual"
+    ]
   }
 ]
