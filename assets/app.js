@@ -46,7 +46,7 @@
     }
 
     grid.innerHTML = filteredWorks.map(work => `
-      <a href="/work/?id=${work.id}" class="work-card">
+      <a href="/work/?id=${work.id}" class="work-card${work.type === 'Photo' ? ' photo-card' : ''}">
         <img src="${work.thumb}" alt="${work.title}" />
         <div class="work-overlay">
           <div class="work-title">${work.title}</div>
