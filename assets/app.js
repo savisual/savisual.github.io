@@ -28,6 +28,7 @@
     
     if (path.includes('/photo')) {
       category = 'Photo';
+      grid.classList.add('photo-grid');
     } else if (path.includes('/video')) {
       category = 'Video';
     }
