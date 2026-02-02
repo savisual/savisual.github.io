@@ -1,94 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SA VISUAL</title>
-  <meta name="description" content="SA Visual – Visual production for artists & brands." />
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
-      color: #ffffff;
-      position: relative;
-    }
-    .logo-top {
-      position: absolute;
-      top: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 500px;
-      max-width: 80vw;
-      z-index: 10;
-    }
-    .logo-top img {
-      width: 100%;
-      height: auto;
-      opacity: 0.9;
-    }
-    .wrap {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 40px 20px;
-    }
-    h1 {
-      font-size: 48px;
-      letter-spacing: 2px;
-      margin-bottom: 10px;
-    }
-    p {
-      opacity: 0.8;
-      margin-bottom: 40px;
-    }
-    a {
-      color: #fff;
-      text-decoration: none;
-      border: 1px solid #fff;
-      padding: 12px 28px;
-      margin: 0 6px;
-      display: inline-block;
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      background: #fff;
-      color: #000;
-    }
-    footer {
-      margin-top: 60px;
-      font-size: 12px;
-      opacity: 0.4;
-    }
-    @media (max-width: 768px) {
-      .logo-top {
-        top: 30px;
-        width: 300px;
-      }
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SA VISUAL - Portfolio</title>
+  <link rel="stylesheet" href="/assets/site.css" />
 </head>
 <body>
-  <div class="logo-top">
-    <img src="/assets/logo_white.png" alt="SA Visual Logo" />
+  <div class="topbar">
+    <a class="brandLogo" href="/"><img src="/assets/logo_white.png" alt="SA Visual" /></a>
+    <div class="nav">
+      <a href="/">Home</a>
+      <a href="/portfolio/">Portfolio</a>
+      <a href="/contact/">Contact</a>
+    </div>
   </div>
 
-  <div class="wrap">
-    <h1>SA VISUAL</h1>
-    <p>Visual production for artists & brands</p>
+  <div class="container">
+    <h1>Portfolio</h1>
+    
+    <div class="category-selector">
+      <a href="/portfolio/video/" class="category-card">
+        <img src="https://img.youtube.com/vi/6sOTSN92FrU/maxresdefault.jpg" alt="Video" />
+        <div class="category-title">Video</div>
+      </a>
+      
+      <a href="/portfolio/photo/" class="category-card">
+        <img src="/assets/images/na-photo-01.webp" alt="Photo" />
+        <div class="category-title">Photo</div>
+      </a>
 
-    <div>
-      <a href="/contact/">Contact</a>
-      <a href="/portfolio/">Portfolio</a>
+      <a href="/portfolio/shorts/" class="category-card">
+        <img src="https://img.youtube.com/vi/8bVPOcHUN6k/hqdefault.jpg" alt="Shorts" />
+        <div class="category-title">Shorts</div>
+      </a>
+
+      <a href="/portfolio/design/" class="category-card">
+        <img src="/assets/images/design-thumb.jpg" alt="Design" />
+        <div class="category-title">Design</div>
+      </a>
     </div>
-
-  <footer>
-  © SA Visual. All rights reserved.
-</footer>
-
   </div>
 </body>
 </html>
