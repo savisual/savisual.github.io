@@ -151,6 +151,11 @@ h1 {
   margin-top: 40px;
 }
 
+/* Photo grid - narrower columns for vertical photos */
+.grid.photo-grid {
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
 .work-card {
   position: relative;
   aspect-ratio: 16 / 9;
