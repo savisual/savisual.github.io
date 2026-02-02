@@ -146,18 +146,22 @@ h1 {
 /* ===== Works Grid ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 30px;
   margin-top: 40px;
 }
 
 .work-card {
   position: relative;
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   cursor: pointer;
   border-radius: 6px;
   background: #1a1a1a;
+}
+
+.work-card.photo-card {
+  aspect-ratio: 9 / 16;
 }
 
 .work-card img {
