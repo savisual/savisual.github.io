@@ -154,8 +154,7 @@
     root.innerHTML = `
       <div class="contact-container">
         <div class="contact-intro">
-          <h1>Get In Touch</h1>
-          <p>Let's create something amazing together. Reach out for collaborations, inquiries, or just to say hello.</p>
+          <h1>Contact</h1>
         </div>
 
         <div class="contact-methods">
