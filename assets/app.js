@@ -20,12 +20,6 @@ function escapeAttr(str) {
   return String(str ?? "").replaceAll('"', "&quot;");
 }
 
-/**
- * video 스키마 지원:
- * 1) "videoId": "ABCDEFGHIJK"
- * 2) "video": { "provider": "youtube", "id": "ABCDEFGHIJK" }
- * 3) (옵션) "video": { "provider": "vimeo", "id": "123456" }
- */
 function normalizeVideo(work) {
   if (work.videoId && typeof work.videoId === "string") {
     return { provider: "youtube", id: work.videoId };
@@ -75,51 +69,53 @@ function videoEmbedHTML(video) {
 }
 
 function isPhotoWork(work) {
-  // type이 "Photo"이거나 images 배열이 있으면 Photo로 처리
   return String(work.type || "").toLowerCase() === "photo" || Array.isArray(work.images);
 }
 
+/* =========================
+   PORTFOLIO
+   ========================= */
 async function renderPortfolio() {
-  const works = await loadWorks();
   const grid = document.getElementById("worksGrid");
-  if (!grid) return;
+  if (!grid) return; // 포트폴리오 페이지가 아니면 종료
 
-  grid.innerHTML = works
-    .map((w) => {
-      const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
-      const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
-      const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
-      const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
+  const works = await loadWorks();
 
-      const isPhoto = isPhotoWork(w);
+  grid.innerHTML = works.map((w) => {
+    const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
+    const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
+    const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
+    const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
 
-      // ✅ 여기서 "영상/포토 썸네일 비율"을 클래스 분리
-      const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
+    const isPhoto = isPhotoWork(w);
 
-      // background-image로 통일(상대경로/절대URL 모두 OK)
-      const thumbStyle = thumb
-        ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"`
-        : "";
+    // ✅ 여기서 비율 분리 클래스가 "실제로" 들어감
+    const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
 
-      return `
-        <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
-          <div class="${thumbClass}" ${thumbStyle}></div>
-          <div class="meta">
-            <b>${escapeHTML(title)}</b>
-            <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
-          </div>
-        </a>
-      `;
-    })
-    .join("");
+    const thumbStyle = thumb ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"` : "";
+
+    return `
+      <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
+        <div class="${thumbClass}" ${thumbStyle}></div>
+        <div class="meta">
+          <b>${escapeHTML(title)}</b>
+          <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
+        </div>
+      </a>
+    `;
+  }).join("");
 }
 
+/* =========================
+   WORK DETAIL
+   ========================= */
 async function renderWork() {
+  const root = document.getElementById("workRoot");
+  if (!root) return; // 상세 페이지가 아니면 종료
+
   const works = await loadWorks();
   const id = qs("id");
   const work = works.find((w) => w.id === id);
-  const root = document.getElementById("workRoot");
-  if (!root) return;
 
   if (!work) {
     root.innerHTML = `<p>작업물을 찾을 수 없습니다. <a href="/portfolio/">포트폴리오로 돌아가기</a></p>`;
@@ -131,7 +127,7 @@ async function renderWork() {
   const year = String(work.year || "");
   const client = String(work.client || "");
 
-  // ✅ 좌/우 정렬(띄어쓰기 문제 해결): 라벨/값을 분리해서 span으로 넣음
+  // ✅ 메타 라벨/값 좌우 정렬 (TypeFull Video 같은 문제 해결)
   const metaLines = [
     type ? `<div><b>Type</b><span>${escapeHTML(type)}</span></div>` : "",
     year ? `<div><b>Year</b><span>${escapeHTML(year)}</span></div>` : "",
@@ -141,7 +137,7 @@ async function renderWork() {
   const creditsArr = Array.isArray(work.credits) ? work.credits : [];
   const creditsHTML = creditsArr.length ? `
     <div class="workCredits">
-      <h3>Credits</h3>
+      <h3>CREDIT</h3>
       <ul>
         ${creditsArr.map(c => `<li>${escapeHTML(String(c))}</li>`).join("")}
       </ul>
@@ -156,7 +152,6 @@ async function renderWork() {
     const imgs = Array.isArray(work.images) ? work.images : (work.thumb ? [work.thumb] : []);
     const safeImgs = imgs.map(x => String(x || "").trim()).filter(Boolean);
 
-    // ✅ 포토 상세: 라이트박스 + 좌우 네비(버튼)
     leftHTML = `
       <div class="workPlayer">
         <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
@@ -171,16 +166,15 @@ async function renderWork() {
 
         <div class="lightbox" id="lightbox" aria-hidden="true">
           <button class="lightboxClose" type="button" aria-label="Close"></button>
-
           <button class="lightboxNav prev" type="button" aria-label="Previous"></button>
           <button class="lightboxNav next" type="button" aria-label="Next"></button>
-
           <img class="lightboxImg" alt="" />
         </div>
       </div>
     `;
   } else {
     const video = normalizeVideo(work);
+
     leftHTML = `
       <div class="workPlayer">
         <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
@@ -205,7 +199,7 @@ async function renderWork() {
     </div>
   `;
 
-  // ✅ 포토 라이트박스 동작
+  // ✅ 포토 라이트박스 + 좌우
   if (photo) {
     const items = Array.from(root.querySelectorAll(".photoItem"));
     const lb = document.getElementById("lightbox");
@@ -256,7 +250,6 @@ async function renderWork() {
 
     if (lb) {
       lb.addEventListener("click", (e) => {
-        // 배경 클릭 시 닫기
         if (e.target === lb) close();
       });
     }
@@ -270,7 +263,57 @@ async function renderWork() {
   }
 }
 
+/* =========================
+   CONTACT (사라지는 문제 방지 + Copy 토스트)
+   - Contact 페이지에 아래 요소가 있으면 자동 동작:
+     1) 버튼 .copyBtn
+     2) 복사할 텍스트: .contactValue 또는 [data-copy-value]
+     3) 토스트: .toast
+   ========================= */
+function bindContactCopy() {
+  const btn = document.querySelector(".copyBtn");
+  if (!btn) return; // Contact 페이지가 아니면 종료
+
+  const valueEl =
+    document.querySelector("[data-copy-value]") ||
+    document.querySelector(".contactValue");
+
+  const toast = document.querySelector(".toast");
+
+  if (!valueEl) return;
+
+  const getText = () => {
+    const v = valueEl.getAttribute("data-copy-value");
+    return (v && v.trim()) ? v.trim() : (valueEl.textContent || "").trim();
+  };
+
+  btn.addEventListener("click", async () => {
+    const text = getText();
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (e) {
+      // clipboard 실패 시 fallback
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+
+    // alert 없이 1.2초 "Copied" 표시 (toast가 있을 때만)
+    if (toast) {
+      toast.textContent = "Copied";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1200);
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderPortfolio().catch(console.error);
   renderWork().catch(console.error);
+  bindContactCopy();
 });
