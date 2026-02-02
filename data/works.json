@@ -30,6 +30,21 @@
     ]
   },
   {
+    "id": "shorts-001",
+    "title": "REDA & Youngcode - Bad Newse",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/shorts-thumb-01.jpg",
+    "instagramUrl": "https://www.instagram.com/reel/DQbXHCyjrDM/",
+    "credits": [
+      "Artist: REDA & Youngcode",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
     "id": "photo-001",
     "title": "N.A Profile",
     "type": "Photo",
@@ -45,7 +60,7 @@
     ],
     "credits": [
       "Artist: N.A",
-      "Photographer: haramsess",
+      "Photographer: SA Visual",
       "Executive: SA Visual"
     ]
   }
