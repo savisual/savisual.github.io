@@ -1,319 +1,207 @@
-async function loadWorks() {
-  const res = await fetch("/data/works.json");
-  if (!res.ok) throw new Error("works.json 로드 실패");
-  return await res.json();
-}
+// ===== SA Visual - Main JavaScript =====
 
-function qs(name) {
-  return new URLSearchParams(location.search).get(name);
-}
+(function() {
+  'use strict';
 
-function escapeHTML(str) {
-  return String(str ?? "")
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
+  // ===== Load Works Data =====
+  let worksData = [];
 
-function escapeAttr(str) {
-  return String(str ?? "").replaceAll('"', "&quot;");
-}
-
-function normalizeVideo(work) {
-  if (work.videoId && typeof work.videoId === "string") {
-    return { provider: "youtube", id: work.videoId };
-  }
-  if (work.video && typeof work.video === "object") {
-    const provider = String(work.video.provider || "").toLowerCase();
-    const id = String(work.video.id || "");
-    if ((provider === "youtube" || provider === "vimeo") && id) {
-      return { provider, id };
+  async function loadWorksData() {
+    try {
+      const response = await fetch('/data/works.json');
+      worksData = await response.json();
+      return worksData;
+    } catch (error) {
+      console.error('Failed to load works data:', error);
+      return [];
     }
   }
-  return null;
-}
 
-function videoEmbedHTML(video) {
-  if (!video) return "";
+  // ===== Portfolio Grid (Photo/Video) =====
+  async function initPortfolioGrid() {
+    const grid = document.getElementById('worksGrid');
+    if (!grid) return;
 
-  if (video.provider === "youtube") {
-    const id = video.id;
-    return `
-      <div class="embed">
-        <iframe
-          src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?rel=0"
-          title="YouTube video"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    `;
-  }
+    // Get category from URL path
+    const path = window.location.pathname;
+    let category = null;
+    
+    if (path.includes('/photo')) {
+      category = 'Photo';
+    } else if (path.includes('/video')) {
+      category = 'Video';
+    }
 
-  if (video.provider === "vimeo") {
-    const id = video.id;
-    return `
-      <div class="embed">
-        <iframe
-          src="https://player.vimeo.com/video/${encodeURIComponent(id)}"
-          title="Vimeo video"
-          allow="autoplay; fullscreen; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-    `;
-  }
+    const works = await loadWorksData();
+    
+    // Filter by category if specified
+    const filteredWorks = category 
+      ? works.filter(work => work.type === category || 
+          (category === 'Video' && (work.type === 'Full Video' || work.type === 'Teaser')))
+      : works;
 
-  return "";
-}
+    if (filteredWorks.length === 0) {
+      grid.innerHTML = '<p style="opacity:0.5;text-align:center;padding:60px 0;">No works found.</p>';
+      return;
+    }
 
-function isPhotoWork(work) {
-  return String(work.type || "").toLowerCase() === "photo" || Array.isArray(work.images);
-}
-
-/* =========================
-   PORTFOLIO
-   ========================= */
-async function renderPortfolio() {
-  const grid = document.getElementById("worksGrid");
-  if (!grid) return; // 포트폴리오 페이지가 아니면 종료
-
-  const works = await loadWorks();
-
-  grid.innerHTML = works.map((w) => {
-    const thumb = (w.thumb && String(w.thumb).trim()) ? String(w.thumb).trim() : "";
-    const type = (w.type && String(w.type).trim()) ? String(w.type).trim() : "Work";
-    const year = (w.year && String(w.year).trim()) ? String(w.year).trim() : "";
-    const title = (w.title && String(w.title).trim()) ? String(w.title).trim() : "";
-
-    const isPhoto = isPhotoWork(w);
-
-    // ✅ 여기서 비율 분리 클래스가 "실제로" 들어감
-    const thumbClass = isPhoto ? "thumb thumbPhoto" : "thumb thumbVideo";
-
-    const thumbStyle = thumb ? `style="background-image:url('${thumb.replace(/'/g, "\\'")}')"` : "";
-
-    return `
-      <a class="card" href="/work/?id=${encodeURIComponent(w.id)}">
-        <div class="${thumbClass}" ${thumbStyle}></div>
-        <div class="meta">
-          <b>${escapeHTML(title)}</b>
-          <span>${escapeHTML(type)}${year ? " · " + escapeHTML(year) : ""}</span>
+    grid.innerHTML = filteredWorks.map(work => `
+      <a href="/work/?id=${work.id}" class="work-card">
+        <img src="${work.thumb}" alt="${work.title}" />
+        <div class="work-overlay">
+          <div class="work-title">${work.title}</div>
+          <div class="work-type">${work.type}</div>
         </div>
       </a>
-    `;
-  }).join("");
-}
-
-/* =========================
-   WORK DETAIL
-   ========================= */
-async function renderWork() {
-  const root = document.getElementById("workRoot");
-  if (!root) return; // 상세 페이지가 아니면 종료
-
-  const works = await loadWorks();
-  const id = qs("id");
-  const work = works.find((w) => w.id === id);
-
-  if (!work) {
-    root.innerHTML = `<p>작업물을 찾을 수 없습니다. <a href="/portfolio/">포트폴리오로 돌아가기</a></p>`;
-    return;
+    `).join('');
   }
 
-  const title = String(work.title || "");
-  const type = String(work.type || "");
-  const year = String(work.year || "");
-  const client = String(work.client || "");
+  // ===== Work Detail Page =====
+  async function initWorkDetail() {
+    const root = document.getElementById('workRoot');
+    if (!root) return;
 
-  // ✅ 메타 라벨/값 좌우 정렬 (TypeFull Video 같은 문제 해결)
-  const metaLines = [
-    type ? `<div><b>Type</b><span>${escapeHTML(type)}</span></div>` : "",
-    year ? `<div><b>Year</b><span>${escapeHTML(year)}</span></div>` : "",
-    client ? `<div><b>Client</b><span>${escapeHTML(client)}</span></div>` : ""
-  ].filter(Boolean).join("");
+    const params = new URLSearchParams(window.location.search);
+    const workId = params.get('id');
 
-  const creditsArr = Array.isArray(work.credits) ? work.credits : [];
-  const creditsHTML = creditsArr.length ? `
-    <div class="workCredits">
-      <h3>CREDIT</h3>
-      <ul>
-        ${creditsArr.map(c => `<li>${escapeHTML(String(c))}</li>`).join("")}
-      </ul>
-    </div>
-  ` : "";
+    if (!workId) {
+      root.innerHTML = '<div class="container"><p>Work not found.</p></div>';
+      return;
+    }
 
-  const photo = isPhotoWork(work);
+    const works = await loadWorksData();
+    const work = works.find(w => w.id === workId);
 
-  let leftHTML = "";
+    if (!work) {
+      root.innerHTML = '<div class="container"><p>Work not found.</p></div>';
+      return;
+    }
 
-  if (photo) {
-    const imgs = Array.isArray(work.images) ? work.images : (work.thumb ? [work.thumb] : []);
-    const safeImgs = imgs.map(x => String(x || "").trim()).filter(Boolean);
+    // Find next and previous works
+    const currentIndex = works.findIndex(w => w.id === workId);
+    const nextWork = works[(currentIndex + 1) % works.length];
+    const prevWork = works[(currentIndex - 1 + works.length) % works.length];
 
-    leftHTML = `
-      <div class="workPlayer">
-        <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
+    // Render work detail
+    let mediaHTML = '';
+    
+    if (work.videoId) {
+      // Video work
+      mediaHTML = `
+        <div class="work-media">
+          <div class="work-video">
+            <iframe 
+              src="https://www.youtube.com/embed/${work.videoId}" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      `;
+    } else if (work.images) {
+      // Photo work
+      mediaHTML = `
+        <div class="work-media">
+          <div class="work-photos">
+            ${work.images.map(img => `<img src="${img}" alt="${work.title}" />`).join('')}
+          </div>
+        </div>
+      `;
+    }
 
-        <div class="photoGrid">
-          ${safeImgs.map((src, i) => `
-            <button class="photoItem" type="button" data-index="${i}" data-src="${escapeAttr(src)}" aria-label="Open image ${i + 1}">
-              <img src="${escapeAttr(src)}" alt="${escapeAttr(title)} ${i + 1}" loading="lazy" />
-            </button>
-          `).join("")}
+    root.innerHTML = `
+      <div class="work-detail">
+        <div class="work-header">
+          <h1>${work.title}</h1>
+          <div class="work-meta">
+            <span>${work.type}</span>
+            <span>${work.year}</span>
+            <span>${work.client}</span>
+          </div>
         </div>
 
-        <div class="lightbox" id="lightbox" aria-hidden="true">
-          <button class="lightboxClose" type="button" aria-label="Close"></button>
-          <button class="lightboxNav prev" type="button" aria-label="Previous"></button>
-          <button class="lightboxNav next" type="button" aria-label="Next"></button>
-          <img class="lightboxImg" alt="" />
+        ${mediaHTML}
+
+        <div class="work-credits">
+          <h2>Credits</h2>
+          <div class="credits-list">
+            ${work.credits.map(credit => `<div class="credit-item">${credit}</div>`).join('')}
+          </div>
+        </div>
+
+        <div class="work-nav">
+          <a href="/work/?id=${prevWork.id}" class="nav-project">
+            <img src="${prevWork.thumb}" alt="${prevWork.title}" />
+            <div class="nav-label">◄ Previous Project</div>
+            <div class="nav-title">${prevWork.title}</div>
+          </a>
+          <a href="/work/?id=${nextWork.id}" class="nav-project">
+            <img src="${nextWork.thumb}" alt="${nextWork.title}" />
+            <div class="nav-label">Next Project ►</div>
+            <div class="nav-title">${nextWork.title}</div>
+          </a>
         </div>
       </div>
     `;
+  }
+
+  // ===== Contact Page =====
+  function initContactPage() {
+    const root = document.getElementById('contactRoot');
+    if (!root) return;
+
+    root.innerHTML = `
+      <div class="contact-container">
+        <div class="contact-intro">
+          <h1>Get In Touch</h1>
+          <p>Let's create something amazing together. Reach out for collaborations, inquiries, or just to say hello.</p>
+        </div>
+
+        <div class="contact-methods">
+          <div class="contact-item">
+            <div class="contact-label">Email</div>
+            <div class="contact-value">
+              <a href="mailto:contact@savisual.com">contact@savisual.com</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">
+              <a href="https://www.instagram.com/sa.visual__/" target="_blank" rel="noopener">@sa.visual__</a>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-label">Location</div>
+            <div class="contact-value">Seoul, South Korea</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ===== Initialize on DOM Load =====
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
   } else {
-    const video = normalizeVideo(work);
-
-    leftHTML = `
-      <div class="workPlayer">
-        <a class="workBackArrow" href="/portfolio/" aria-label="Back"></a>
-        ${videoEmbedHTML(video)}
-      </div>
-    `;
+    init();
   }
 
-  root.innerHTML = `
-    <div class="container">
-      <div class="workLayout">
-        <div class="workMain">
-          ${leftHTML}
-        </div>
-
-        <aside class="workSidebar">
-          <h1 class="workTitle">${escapeHTML(title)}</h1>
-          <div class="workMeta">${metaLines}</div>
-          ${creditsHTML}
-        </aside>
-      </div>
-    </div>
-  `;
-
-  // ✅ 포토 라이트박스 + 좌우
-  if (photo) {
-    const items = Array.from(root.querySelectorAll(".photoItem"));
-    const lb = document.getElementById("lightbox");
-    const lbImg = lb ? lb.querySelector(".lightboxImg") : null;
-    const closeBtn = lb ? lb.querySelector(".lightboxClose") : null;
-    const prevBtn = lb ? lb.querySelector(".lightboxNav.prev") : null;
-    const nextBtn = lb ? lb.querySelector(".lightboxNav.next") : null;
-
-    let current = 0;
-
-    const open = (index) => {
-      if (!lb || !lbImg) return;
-      current = index;
-      const src = items[current]?.getAttribute("data-src");
-      if (!src) return;
-      lbImg.src = src;
-      lb.setAttribute("aria-hidden", "false");
-      lb.classList.add("show");
-    };
-
-    const close = () => {
-      if (!lb || !lbImg) return;
-      lb.classList.remove("show");
-      lb.setAttribute("aria-hidden", "true");
-      lbImg.src = "";
-    };
-
-    const prev = () => {
-      if (!items.length) return;
-      open((current - 1 + items.length) % items.length);
-    };
-
-    const next = () => {
-      if (!items.length) return;
-      open((current + 1) % items.length);
-    };
-
-    items.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const idx = Number(btn.getAttribute("data-index"));
-        if (!Number.isNaN(idx)) open(idx);
-      });
-    });
-
-    if (closeBtn) closeBtn.addEventListener("click", close);
-    if (prevBtn) prevBtn.addEventListener("click", (e) => { e.stopPropagation(); prev(); });
-    if (nextBtn) nextBtn.addEventListener("click", (e) => { e.stopPropagation(); next(); });
-
-    if (lb) {
-      lb.addEventListener("click", (e) => {
-        if (e.target === lb) close();
-      });
+  function init() {
+    // Check which page we're on and initialize accordingly
+    if (document.getElementById('worksGrid')) {
+      initPortfolioGrid();
     }
-
-    document.addEventListener("keydown", (e) => {
-      if (!lb || lb.getAttribute("aria-hidden") === "true") return;
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    });
+    
+    if (document.getElementById('workRoot')) {
+      initWorkDetail();
+    }
+    
+    if (document.getElementById('contactRoot')) {
+      initContactPage();
+    }
   }
-}
 
-/* =========================
-   CONTACT (사라지는 문제 방지 + Copy 토스트)
-   - Contact 페이지에 아래 요소가 있으면 자동 동작:
-     1) 버튼 .copyBtn
-     2) 복사할 텍스트: .contactValue 또는 [data-copy-value]
-     3) 토스트: .toast
-   ========================= */
-function bindContactCopy() {
-  const btn = document.querySelector(".copyBtn");
-  if (!btn) return; // Contact 페이지가 아니면 종료
-
-  const valueEl =
-    document.querySelector("[data-copy-value]") ||
-    document.querySelector(".contactValue");
-
-  const toast = document.querySelector(".toast");
-
-  if (!valueEl) return;
-
-  const getText = () => {
-    const v = valueEl.getAttribute("data-copy-value");
-    return (v && v.trim()) ? v.trim() : (valueEl.textContent || "").trim();
-  };
-
-  btn.addEventListener("click", async () => {
-    const text = getText();
-    try {
-      await navigator.clipboard.writeText(text);
-    } catch (e) {
-      // clipboard 실패 시 fallback
-      const ta = document.createElement("textarea");
-      ta.value = text;
-      ta.style.position = "fixed";
-      ta.style.left = "-9999px";
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand("copy");
-      document.body.removeChild(ta);
-    }
-
-    // alert 없이 1.2초 "Copied" 표시 (toast가 있을 때만)
-    if (toast) {
-      toast.textContent = "Copied";
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1200);
-    }
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderPortfolio().catch(console.error);
-  renderWork().catch(console.error);
-  bindContactCopy();
-});
+})();
