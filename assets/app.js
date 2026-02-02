@@ -99,7 +99,7 @@
     let mediaHTML = '';
     
     if (work.videoId) {
-      // Video work
+      // YouTube video work
       mediaHTML = `
         <div class="work-media">
           <div class="work-video">
@@ -108,6 +108,22 @@
               frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
               allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      `;
+    } else if (work.instagramUrl) {
+      // Instagram Reel/Post
+      const embedUrl = work.instagramUrl.replace('/reel/', '/p/').replace(/\/$/, '') + '/embed/';
+      mediaHTML = `
+        <div class="work-media">
+          <div class="instagram-embed">
+            <iframe 
+              src="${embedUrl}" 
+              frameborder="0" 
+              scrolling="no"
+              allowtransparency="true"
+              allow="encrypted-media">
             </iframe>
           </div>
         </div>
