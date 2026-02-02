@@ -386,6 +386,7 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .contact-item:hover {
@@ -414,6 +415,53 @@ h1 {
 
 .contact-value a:hover {
   opacity: 0.6;
+}
+
+/* Copy Button */
+.copy-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 8px 16px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.copy-btn:active {
+  transform: translateY(0);
+}
+
+/* Copy Notification */
+.copy-notification {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%) translateX(20px);
+  background: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.copy-notification.show {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
 }
 
 /* ===== Responsive ===== */
@@ -489,6 +537,16 @@ h1 {
   
   .contact-value {
     font-size: 18px;
+  }
+  
+  .copy-btn {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+  
+  .copy-notification {
+    right: 20px;
+    font-size: 11px;
   }
 }
 
