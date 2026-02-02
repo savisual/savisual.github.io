@@ -31,14 +31,26 @@
       grid.classList.add('photo-grid');
     } else if (path.includes('/video')) {
       category = 'Video';
+    } else if (path.includes('/shorts')) {
+      category = 'Shorts';
+      grid.classList.add('photo-grid'); // Shorts use vertical layout
+    } else if (path.includes('/design')) {
+      category = 'Design';
     }
 
     const works = await loadWorksData();
     
     // Filter by category if specified
     const filteredWorks = category 
-      ? works.filter(work => work.type === category || 
-          (category === 'Video' && (work.type === 'Full Video' || work.type === 'Teaser')))
+      ? works.filter(work => {
+          if (category === 'Video') {
+            return work.type === 'Full Video' || work.type === 'Teaser';
+          } else if (category === 'Shorts') {
+            return work.type === 'Shorts';
+          } else {
+            return work.type === category;
+          }
+        })
       : works;
 
     if (filteredWorks.length === 0) {
@@ -47,7 +59,7 @@
     }
 
     grid.innerHTML = filteredWorks.map(work => `
-      <a href="/work/?id=${work.id}" class="work-card${work.type === 'Photo' ? ' photo-card' : ''}">
+      <a href="/work/?id=${work.id}" class="work-card${(work.type === 'Photo' || work.type === 'Shorts' || work.type === 'Design') ? ' photo-card' : ''}">
         <img src="${work.thumb}" alt="${work.title}" />
         <div class="work-overlay">
           <div class="work-title">${work.title}</div>
