@@ -161,9 +161,11 @@
         <div class="contact-methods">
           <div class="contact-item">
             <div class="contact-label">Email</div>
-            <div class="contact-value">
-              <a href="mailto:contact@savisual.com">contact@savisual.com</a>
+            <div class="contact-value" style="display: flex; align-items: center; gap: 15px;">
+              <a href="mailto:contact@savisual.com" id="emailLink">contact@savisual.com</a>
+              <button id="copyEmailBtn" class="copy-btn">Copy</button>
             </div>
+            <div id="copyNotification" class="copy-notification">Copied!</div>
           </div>
 
           <div class="contact-item">
@@ -180,6 +182,30 @@
         </div>
       </div>
     `;
+
+    // Copy email functionality
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const notification = document.getElementById('copyNotification');
+    
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const email = 'contact@savisual.com';
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(email).then(function() {
+          // Show notification
+          notification.classList.add('show');
+          
+          // Hide notification after 2 seconds
+          setTimeout(function() {
+            notification.classList.remove('show');
+          }, 2000);
+        }).catch(function(err) {
+          console.error('Failed to copy:', err);
+        });
+      });
+    }
   }
 
   // ===== Initialize on DOM Load =====
