@@ -1,739 +1,509 @@
-:root {
-  --bg:#000;
-  --fg:#fff;
-  --muted:rgba(255,255,255,.7);
-  --line:rgba(255,255,255,.14);
-}
-
-* { box-sizing: border-box; }
-a { color: inherit; text-decoration: none; }
-
-body{
-  margin:0;
-  background:
-    radial-gradient(1200px 700px at 18% 0%, rgba(255,255,255,.08), transparent 62%),
-    radial-gradient(900px 700px at 85% 12%, rgba(255,255,255,.06), transparent 58%),
-    radial-gradient(700px 500px at 50% 100%, rgba(255,255,255,.04), transparent 60%),
-    #000;
-  color:#fff;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body::after{
-  content:"";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,.04), transparent 60%),
-    radial-gradient(900px 500px at 80% 30%, rgba(255,255,255,.03), transparent 65%);
-  mix-bl (mix-blend-mode: overlay);
-  mix-blend-mode: overlay;
-}
-
-/* ===== Layout ===== */
-.container{
-  max-width: 1320px;
-  margin: 0 auto;
-  padding: 36px 28px;
-}
-
-.topbar{
-  display:flex;
-  justify-content: space-between;
-  align-items:center;
-  padding: 18px 18px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  position: sticky;
-  top: 0;
-  background: rgba(11,11,11,.7);
-  backdrop-filter: blur(10px);
-  z-index: 100;
-}
-
-.brandLogo{
-  display:inline-flex;
-  align-items:center;
-}
-.brandLogo img{
-  height: 48px;
-  width: auto;
-  display:block;
-}
-
-.nav{
-  display:flex;
-  gap: 14px;
-  color: var(--muted);
-  font-size: 14px;
-}
-.nav a{
-  padding: 8px 10px;
-  border-radius: 10px;
-}
-.nav a:hover{
-  background: rgba(255,255,255,.06);
-  color:#fff;
-}
-
-/* ===== Portfolio Grid ===== */
-.grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 18px;
-}
-
-@media (max-width: 900px){
-  .grid{ grid-template-columns: 1fr; }
-}
-
-.card{
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  overflow:hidden;
-  background: rgba(255,255,255,.03);
-  display:block;
-  transform: translateY(0);
-  transition: transform .18s ease;
-}
-.card:hover{ transform: translateY(-4px); }
-
-.thumb{
-  width:100%;
-  background-size: cover;
-  background-position: center;
-  transition: transform .25s ease;
-  position: relative;
-}
-.card:hover .thumb{ transform: scale(1.03); }
-
-/* ✅ 여기서 비율 분리 */
-.thumb--video{ aspect-ratio: 16 / 9; } /* 영상 썸네일 */
-.thumb--photo{ aspect-ratio: 4 / 5; }  /* 포토 썸네일 */
-
-.badgePhoto{
-  position:absolute;
-  left: 12px;
-  top: 12px;
-  font-size: 11px;
-  letter-spacing: .14em;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(255,255,255,.18);
-  color:#fff;
-  backdrop-filter: blur(8px);
-}
-
-.meta{
-  padding: 12px 12px 14px;
-}
-.meta b{
-  display:block;
-  margin-bottom: 6px;
-}
-.meta span{
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* ===== Embed (Video) ===== */
-.embed{
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 22px;
-  overflow: hidden;
+/* ===== Reset & Base ===== */
+* {
   margin: 0;
-
-  box-shadow:
-    0 50px 140px rgba(0,0,0,.70),
-    0 10px 40px rgba(0,0,0,.55),
-    inset 0 0 0 1px rgba(255,255,255,.08);
-}
-.embed::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background: radial-gradient(1200px 400px at 50% 0%, rgba(255,255,255,.10), transparent 55%);
-  opacity: .35;
-}
-.embed iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ===== Work Detail (Ambience split) ===== */
-.workLayout{
-  display:grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.9fr);
-  gap: 44px;
-  align-items:start;
-}
-
-@media (max-width: 980px){
-  .workLayout{ grid-template-columns: 1fr; gap: 24px; }
-  .workSidebar{ position: static; top:auto; }
-  .workTitle{ font-size: 30px; }
-}
-
-.workMain{ min-width:0; }
-
-.workPlayer{
-  border-radius: 22px;
-  overflow: visible;
-  position: relative;
-}
-
-.workSidebar{
-  min-width:0;
-  position: sticky;
-  top: 88px;
-  padding-top: 6px;
-}
-
-.workTitle{
-  margin: 0 0 12px 0;
-  font-size: 42px;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  font-weight: 800;
-}
-
-.workMeta{
-  margin: 12px 0 18px 0;
-  color: rgba(255,255,255,.72);
-  font-size: 14px;
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background: #0a0a0a;
+  color: #ffffff;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-/* ✅ "Type : Photo" 형태로 보이도록 */
-.workMeta > div{
-  display:flex;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,.10);
-}
-.workMeta b{
-  opacity: .55;
-  font-weight: 600;
-}
-.workMeta span{
-  opacity: .95;
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.workCredits{
-  margin-top: 22px;
-  padding-top: 14px;
-  border-top: 1px solid rgba(255,255,255,.10);
-}
-.workCredits h3{
-  margin: 0 0 12px 0;
-  font-size: 12px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-}
-.workCredits ul{
-  list-style:none;
-  margin:0;
-  padding:0;
-}
-.workCredits li{
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,.05);
-  font-size: 13px;
-  color: rgba(255,255,255,.86);
-}
-
-/* ===== Back Arrow (ambience-like) ===== */
-.workBackArrow{
-  position:absolute;
-  left: 0px;
-  top: -44px;
-  width: 28px;
-  height: 28px;
-  display:block;
-  z-index: 50;
-  opacity: .9;
-  transition: transform .15s ease, opacity .15s ease;
-}
-.workBackArrow::before{
-  content:"";
-  position:absolute;
-  left: 4px;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-left: 2px solid rgba(255,255,255,.9);
-  border-bottom: 2px solid rgba(255,255,255,.9);
-  transform: translateY(-50%) rotate(45deg);
-}
-.workBackArrow:hover{
-  opacity: 1;
-  transform: translateX(-2px);
-}
-
-/* ===== Photo Detail Grid + Hover ===== */
-.photoGrid{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 14px;
-}
-
-@media (max-width: 980px){
-  .photoGrid{ grid-template-columns: 1fr; }
-}
-
-.photoItem{
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 18px;
-  overflow:hidden;
-  background: rgba(255,255,255,.03);
-  padding:0;
-  cursor:pointer;
-  transform: translateY(0);
-  transition: transform .18s ease;
-}
-.photoItem:hover{
-  transform: translateY(-4px);
-}
-.photoItem img{
-  width:100%;
-  height:auto;
-  display:block;
-  transition: transform .25s ease;
-}
-.photoItem:hover img{
-  transform: scale(1.03);
-}
-
-/* ===== Lightbox + 좌우 네비 ===== */
-.lightbox{
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.78);
-  backdrop-filter: blur(10px);
-  display: none;
-  align-items:center;
-  justify-content:center;
-  z-index: 9999;
-}
-.lightbox.show{ display:flex; }
-
-.lbImg{
-  max-width: min(1100px, 92vw);
-  max-height: 82vh;
-  border-radius: 18px;
-  box-shadow: 0 30px 90px rgba(0,0,0,.6);
-}
-
-.lbClose, .lbPrev, .lbNext{
-  position: fixed;
-  top: 50%;
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.08);
-  color:#fff;
-  cursor:pointer;
-  transform: translateY(-50%);
-  backdrop-filter: blur(8px);
-}
-.lbClose{
-  top: 32px;
-  right: 32px;
-  transform:none;
-}
-.lbClose::before{
-  content:"×";
-  font-size: 28px;
-  line-height: 48px;
-}
-.lbPrev{ left: 24px; }
-.lbNext{ right: 24px; }
-.lbPrev::before, .lbNext::before{
-  content:"";
-  position:absolute;
-  top:50%;
-  left:50%;
-  width: 12px;
-  height: 12px;
-  border-left: 2px solid rgba(255,255,255,.9);
-  border-bottom: 2px solid rgba(255,255,255,.9);
-}
-.lbPrev::before{
-  transform: translate(-50%,-50%) rotate(45deg);
-}
-.lbNext::before{
-  transform: translate(-50%,-50%) rotate(-135deg);
-}
-
-/* ===== Contact (centered card) ===== */
-.contactCenter{
-  min-height: calc(100vh - 72px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding: 48px 20px;
-}
-
-.contactCard{
-  width:100%;
-  max-width: 640px;
-  padding: 40px;
-  border-radius: 18px;
-  overflow: visible;
-  background: radial-gradient(ellipse at top, rgba(255,255,255,0.06), rgba(0,0,0,0.90));
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.contactCard h1{
-  margin:0;
-  font-size: 34px;
-  letter-spacing: -0.02em;
-}
-
-.contactRow{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-  margin-top: 22px;
-}
-
-.contactLabel{
-  font-size: 13px;
-  opacity: .6;
-  width: 60px;
-}
-
-.contactValue{
-  font-size: 15px;
-  letter-spacing: .02em;
-}
-
-.copyBtn{
-  margin-left:auto;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,.20);
-  color:#fff;
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  cursor:pointer;
-  transition: all .2s ease;
-}
-.copyBtn:hover{
-  background:#fff;
-  color:#000;
-}
-
-.toast{
-  margin-top: 10px;
-  font-size: 12px;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: all .18s ease;
-  color: rgba(255,255,255,.75);
-}
-.toast.show{
-  opacity: 1;
-  transform: translateY(0);
-}
-/* =========================
-   Portfolio: Video / Photo thumb ratio split
-   ========================= */
-
-/* 공통 thumb 기본 */
-.thumb{
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  transform: translateZ(0);
-}
-
-/* ✅ 영상 썸네일: 16:9 */
-.thumbVideo{
-  aspect-ratio: 16 / 9;
-}
-
-/* ✅ 포토 썸네일: 4:5 */
-.thumbPhoto{
-  aspect-ratio: 4 / 5;
-}
-
-/* 카드 hover 유지(영상/포토 둘 다) */
-.card{
-  display:block;
-  text-decoration:none;
-  color:inherit;
-  transform: translateY(0);
-  transition: transform 0.18s ease;
-}
-.card:hover{
-  transform: translateY(-4px);
-}
-.card .thumb{
-  transition: transform 0.25s ease;
-}
-.card:hover .thumb{
-  transform: scale(1.03);
-}
-
-/* =========================
-   Work detail: Back arrow (outside card, NOT clipped)
-   ========================= */
-.workMain{
-  /* 화살표가 카드 위에 떠도 레이아웃이 안 겹치게 공간 확보 */
-  padding-top: 44px;
-}
-
-.workPlayer{
-  position: relative;
-  overflow: visible; /* ✅ 이게 없으면 화살표가 잘려요 */
-}
-
-/* 기존에 쓰던 ambience 화살표 위치 그대로 */
-.workBackArrow{
-  position: absolute;
-  left: 0px;
-  top: -44px;
-  width: 28px;
-  height: 28px;
+img {
+  max-width: 100%;
   display: block;
-  z-index: 50;
-  opacity: .9;
-  transform: translateX(0);
-  transition: opacity .15s ease, transform .15s ease;
-}
-.workBackArrow::before{
-  content:"";
-  position:absolute;
-  left: 4px;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-left: 2px solid rgba(255,255,255,.9);
-  border-bottom: 2px solid rgba(255,255,255,.9);
-  transform: translateY(-50%) rotate(45deg);
-}
-.workBackArrow:hover{
-  opacity: 1;
-  transform: translateX(-2px);
 }
 
-/* =========================
-   Photo detail: grid + hover motion + lightbox + nav
-   ========================= */
-
-.photoGrid{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-@media (max-width: 900px){
-  .photoGrid{ grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 520px){
-  .photoGrid{ grid-template-columns: 1fr; }
-}
-
-/* ✅ 포토 상세 썸네일 hover 모션(없어졌던 거 복구) */
-.photoItem{
-  appearance: none;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 16px;
-  overflow: hidden;
-  transform: translateY(0);
-  transition: transform .18s ease;
-}
-.photoItem:hover{
-  transform: translateY(-3px);
-}
-.photoItem img{
-  width: 100%;
-  height: auto;
-  display: block;
-  transform: scale(1);
-  transition: transform .25s ease;
-}
-.photoItem:hover img{
-  transform: scale(1.03);
-}
-
-/* Lightbox */
-.lightbox{
+/* ===== Topbar Navigation ===== */
+.topbar {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.82);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-.lightbox.show{
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
-}
-.lightboxImg{
-  max-width: min(92vw, 1200px);
-  max-height: 84vh;
-  border-radius: 18px;
-  box-shadow: 0 40px 120px rgba(0,0,0,.65);
-}
-
-/* close 버튼 */
-.lightboxClose{
-  position: absolute;
-  top: 26px;
-  right: 26px;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  opacity: .9;
-}
-.lightboxClose::before,
-.lightboxClose::after{
-  content:"";
-  position:absolute;
-  left: 50%;
-  top: 50%;
-  width: 18px;
-  height: 2px;
-  background: rgba(255,255,255,.9);
-  transform-origin: center;
-}
-.lightboxClose::before{ transform: translate(-50%,-50%) rotate(45deg); }
-.lightboxClose::after{ transform: translate(-50%,-50%) rotate(-45deg); }
-
-/* 좌우 네비 버튼 */
-.lightboxNav{
-  position: absolute;
-  top: 50%;
-  width: 52px;
-  height: 52px;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-  transform: translateY(-50%);
-  opacity: .9;
-}
-.lightboxNav:hover{ opacity: 1; }
-.lightboxNav.prev{ left: 22px; }
-.lightboxNav.next{ right: 22px; }
-
-.lightboxNav::before{
-  content:"";
-  position:absolute;
-  top: 50%;
-  width: 14px;
-  height: 14px;
-  border-left: 2px solid rgba(255,255,255,.92);
-  border-bottom: 2px solid rgba(255,255,255,.92);
-  transform: translateY(-50%) rotate(45deg);
-}
-.lightboxNav.next::before{
-  right: 18px;
-  transform: translateY(-50%) rotate(-135deg);
-}
-.lightboxNav.prev::before{
-  left: 18px;
-  transform: translateY(-50%) rotate(45deg);
-}
-
-/* ===== 썸네일 비율 최종 강제 (영상 16:9 / 포토 4:5) ===== */
-.thumb{
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-}
-
-/* 영상 */
-.thumbVideo{ aspect-ratio: 16 / 9; }
-
-/* 포토 */
-.thumbPhoto{ aspect-ratio: 4 / 5; }
-
-/* 포토 배지 제거: 아예 안 씀 (CSS에서 만들지 않음) */
-
-/* ===== 포토 상세 썸네일 hover 모션 복구 ===== */
-.photoItem{
-  appearance: none;
-  border: 0;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
-  border-radius: 16px;
-  overflow: hidden;
-  transform: translateY(0);
-  transition: transform .18s ease;
-}
-.photoItem:hover{ transform: translateY(-3px); }
-
-.photoItem img{
-  width: 100%;
-  height: auto;
-  display: block;
-  transform: scale(1);
-  transition: transform .25s ease;
-}
-.photoItem:hover img{ transform: scale(1.03); }
-
-/* ===== Back 화살표 잘림 방지 ===== */
-.workMain{ padding-top: 44px; }
-.workPlayer{ position: relative; overflow: visible; }
-
-.workBackArrow{
-  position: absolute;
-  left: 0px;
-  top: -44px;
-  width: 28px;
-  height: 28px;
-  display: block;
-  z-index: 50;
-  opacity: .9;
-  transform: translateX(0);
-  transition: opacity .15s ease, transform .15s ease;
-}
-.workBackArrow::before{
-  content:"";
-  position:absolute;
-  left: 4px;
-  top: 50%;
-  width: 12px;
-  height: 12px;
-  border-left: 2px solid rgba(255,255,255,.9);
-  border-bottom: 2px solid rgba(255,255,255,.9);
-  transform: translateY(-50%) rotate(45deg);
-}
-.workBackArrow:hover{
-  opacity: 1;
-  transform: translateX(-2px);
-}
-
-/* ===== 메타 라벨/값 좌우 정렬 (TypeFull Video 문제 해결) ===== */
-.workMeta > div{
-  display:flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(10, 10, 10, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brandLogo img {
+  height: 40px;
+  transition: opacity 0.3s ease;
+}
+
+.brandLogo:hover img {
+  opacity: 0.7;
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+}
+
+.nav a {
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 120px 40px 60px;
+}
+
+/* ===== Page Title ===== */
+h1 {
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* ===== Category Selection ===== */
+.category-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.category-card {
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover {
+  transform: scale(1.02);
+}
+
+.category-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.8) 100%);
+  z-index: 1;
+}
+
+.category-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover img {
+  transform: scale(1.1);
+}
+
+.category-title {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 2;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ===== Works Grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.work-card {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 6px;
+  background: #1a1a1a;
+}
+
+.work-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.work-card:hover img {
+  transform: scale(1.08);
+  opacity: 0.4;
+}
+
+.work-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 30px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.work-card:hover .work-overlay {
+  opacity: 1;
+}
+
+.work-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.work-type {
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+/* ===== Work Detail Page ===== */
+.work-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 40px 60px;
+}
+
+.work-header {
+  margin-bottom: 40px;
+}
+
+.work-header h1 {
+  font-size: 42px;
+  font-weight: 300;
+  margin-bottom: 10px;
+}
+
+.work-meta {
+  display: flex;
+  gap: 30px;
+  font-size: 14px;
+  opacity: 0.6;
+  letter-spacing: 1px;
+}
+
+.work-media {
+  width: 100%;
+  margin-bottom: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+}
+
+.work-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+.work-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.work-photos {
+  display: grid;
   gap: 20px;
 }
-.workMeta > div b{
-  opacity: .55;
-  font-weight: 500;
+
+.work-photos img {
+  width: 100%;
+  border-radius: 6px;
 }
-.workMeta > div span{
-  opacity: .9;
+
+.work-credits {
+  margin: 60px 0;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.work-credits h2 {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.credits-list {
+  display: grid;
+  gap: 12px;
+}
+
+.credit-item {
+  font-size: 15px;
+  opacity: 0.8;
+  line-height: 1.8;
+}
+
+/* ===== Work Navigation ===== */
+.work-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 80px;
+}
+
+.nav-project {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.nav-project:hover {
+  transform: translateY(-5px);
+}
+
+.nav-project img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.nav-project:hover img {
+  transform: scale(1.1);
+}
+
+.nav-project::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+  z-index: 1;
+}
+
+.nav-label {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+  font-size: 11px;
+  letter-spacing: 2px;
+  opacity: 0.6;
+  text-transform: uppercase;
+}
+
+.nav-title {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 2;
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+/* ===== Contact Page ===== */
+.contact-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 40px 60px;
+}
+
+.contact-intro {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.contact-intro h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.contact-intro p {
+  font-size: 18px;
+  opacity: 0.7;
+  line-height: 1.8;
+}
+
+.contact-methods {
+  display: grid;
+  gap: 30px;
+  margin-top: 60px;
+}
+
+.contact-item {
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.contact-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  opacity: 0.5;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.contact-value {
+  font-size: 24px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.contact-value a {
+  transition: opacity 0.3s ease;
+}
+
+.contact-value a:hover {
+  opacity: 0.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .topbar {
+    padding: 15px 20px;
+  }
+  
+  .brandLogo img {
+    height: 32px;
+  }
+  
+  .nav {
+    gap: 15px;
+  }
+  
+  .nav a {
+    font-size: 12px;
+  }
+  
+  .container {
+    padding: 100px 20px 40px;
+  }
+  
+  h1 {
+    font-size: 32px;
+  }
+  
+  .category-selector {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .category-card {
+    height: 300px;
+  }
+  
+  .category-title {
+    font-size: 28px;
+    bottom: 30px;
+    left: 30px;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .work-detail {
+    padding: 100px 20px 40px;
+  }
+  
+  .work-header h1 {
+    font-size: 28px;
+  }
+  
+  .work-nav {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .nav-project {
+    height: 250px;
+  }
+  
+  .contact-container {
+    padding: 100px 20px 40px;
+  }
+  
+  .contact-intro h1 {
+    font-size: 32px;
+  }
+  
+  .contact-value {
+    font-size: 18px;
+  }
+}
+
+/* ===== Loading Animation ===== */
+.loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  letter-spacing: 2px;
+  opacity: 0.5;
+}
+
+/* ===== Smooth Scroll ===== */
+html {
+  scroll-behavior: smooth;
 }
