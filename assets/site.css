@@ -263,6 +263,30 @@ h1 {
   height: 100%;
 }
 
+/* Instagram Embed */
+.instagram-embed {
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+.instagram-embed iframe {
+  width: 100%;
+  min-height: 800px;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+}
+
+@media (max-width: 768px) {
+  .instagram-embed {
+    max-width: 100%;
+  }
+  
+  .instagram-embed iframe {
+    min-height: 700px;
+  }
+}
+
 .work-photos {
   display: grid;
   gap: 20px;
