@@ -653,3 +653,87 @@ body::after{
   left: 18px;
   transform: translateY(-50%) rotate(45deg);
 }
+
+/* ===== 썸네일 비율 최종 강제 (영상 16:9 / 포토 4:5) ===== */
+.thumb{
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+/* 영상 */
+.thumbVideo{ aspect-ratio: 16 / 9; }
+
+/* 포토 */
+.thumbPhoto{ aspect-ratio: 4 / 5; }
+
+/* 포토 배지 제거: 아예 안 씀 (CSS에서 만들지 않음) */
+
+/* ===== 포토 상세 썸네일 hover 모션 복구 ===== */
+.photoItem{
+  appearance: none;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  transform: translateY(0);
+  transition: transform .18s ease;
+}
+.photoItem:hover{ transform: translateY(-3px); }
+
+.photoItem img{
+  width: 100%;
+  height: auto;
+  display: block;
+  transform: scale(1);
+  transition: transform .25s ease;
+}
+.photoItem:hover img{ transform: scale(1.03); }
+
+/* ===== Back 화살표 잘림 방지 ===== */
+.workMain{ padding-top: 44px; }
+.workPlayer{ position: relative; overflow: visible; }
+
+.workBackArrow{
+  position: absolute;
+  left: 0px;
+  top: -44px;
+  width: 28px;
+  height: 28px;
+  display: block;
+  z-index: 50;
+  opacity: .9;
+  transform: translateX(0);
+  transition: opacity .15s ease, transform .15s ease;
+}
+.workBackArrow::before{
+  content:"";
+  position:absolute;
+  left: 4px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-left: 2px solid rgba(255,255,255,.9);
+  border-bottom: 2px solid rgba(255,255,255,.9);
+  transform: translateY(-50%) rotate(45deg);
+}
+.workBackArrow:hover{
+  opacity: 1;
+  transform: translateX(-2px);
+}
+
+/* ===== 메타 라벨/값 좌우 정렬 (TypeFull Video 문제 해결) ===== */
+.workMeta > div{
+  display:flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.workMeta > div b{
+  opacity: .55;
+  font-weight: 500;
+}
+.workMeta > div span{
+  opacity: .9;
+}
