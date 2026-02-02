@@ -101,11 +101,18 @@
         </div>
       `;
     } else if (work.images) {
-      // Photo work
+      // Photo work - thumbnail gallery
       mediaHTML = `
         <div class="work-media">
-          <div class="work-photos">
-            ${work.images.map(img => `<img src="${img}" alt="${work.title}" />`).join('')}
+          <div class="photo-gallery">
+            ${work.images.map((img, index) => `
+              <img 
+                src="${img}" 
+                alt="${work.title}" 
+                class="gallery-thumb" 
+                onclick="openLightbox(${index})"
+              />
+            `).join('')}
           </div>
         </div>
       `;
@@ -144,7 +151,57 @@
           </a>
         </div>
       </div>
+
+      ${work.images ? `
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+          <span class="lightbox-close">&times;</span>
+          <span class="lightbox-prev" onclick="event.stopPropagation(); changeLightboxImage(-1)">&#10094;</span>
+          <span class="lightbox-next" onclick="event.stopPropagation(); changeLightboxImage(1)">&#10095;</span>
+          <img id="lightbox-img" src="" alt="${work.title}" onclick="event.stopPropagation()">
+          <div class="lightbox-counter"><span id="lightbox-current">1</span> / ${work.images.length}</div>
+        </div>
+      ` : ''}
     `;
+
+    // Lightbox functionality for photo works
+    if (work.images) {
+      let currentImageIndex = 0;
+      const images = work.images;
+
+      window.openLightbox = function(index) {
+        currentImageIndex = index;
+        updateLightboxImage();
+        document.getElementById('lightbox').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      };
+
+      window.closeLightbox = function() {
+        document.getElementById('lightbox').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      };
+
+      window.changeLightboxImage = function(direction) {
+        currentImageIndex += direction;
+        if (currentImageIndex < 0) currentImageIndex = images.length - 1;
+        if (currentImageIndex >= images.length) currentImageIndex = 0;
+        updateLightboxImage();
+      };
+
+      function updateLightboxImage() {
+        document.getElementById('lightbox-img').src = images[currentImageIndex];
+        document.getElementById('lightbox-current').textContent = currentImageIndex + 1;
+      }
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        const lightbox = document.getElementById('lightbox');
+        if (lightbox && lightbox.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') changeLightboxImage(-1);
+          if (e.key === 'ArrowRight') changeLightboxImage(1);
+          if (e.key === 'Escape') closeLightbox();
+        }
+      });
+    }
   }
 
   // ===== Contact Page =====
