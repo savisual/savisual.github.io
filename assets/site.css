@@ -21,6 +21,8 @@ a {
 img {
   max-width: 100%;
   display: block;
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 /* ===== Topbar Navigation ===== */
@@ -179,6 +181,11 @@ h1 {
   height: 100%;
   object-fit: cover;
   transition: transform 0.5s ease, opacity 0.3s ease;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 .work-card:hover img {
@@ -315,6 +322,9 @@ h1 {
   border-radius: 6px;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.3s ease;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
 .gallery-thumb:hover {
