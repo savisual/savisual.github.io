@@ -89,11 +89,11 @@
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
-    "thumb": "/assets/images/Youngcodeconcept-photo-01.webp",
+    "thumb": "/assets/images/Youngcodeconcept-photo-01.png",
     "images": [
-      "/assets/images/Youngcodeconcept-photo-01.webp",
-      "/assets/images/Youngcodeconcept-photo-02.webp",
-      "/assets/images/Youngcodeconcept-photo-03.webp"
+      "/assets/images/Youngcodeconcept-photo-01.png",
+      "/assets/images/Youngcodeconcept-photo-02.png",
+      "/assets/images/Youngcodeconcept-photo-03.png"
     ],
     "credits": [
       "Artist: Youngcode",
