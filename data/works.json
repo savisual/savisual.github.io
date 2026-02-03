@@ -251,5 +251,23 @@
       "Photographer: haramsess",
       "Executive: SA Visual"
     ]
+  },
+   {
+    "id": "design-002",
+    "title": "Escaping Neverland - Design",
+    "type": "Design",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/enl-artwork-01.jpg",
+    "images": [
+      "/assets/images/enl-artwork-01.jpg"
+
+    ],
+    "credits": [
+      "Artist: Escaping Neverland",
+      "Graphic Design: haramsess",
+      "Art Direction: haramsess",
+      "Executive: haramsess"
+    ]
   }
 ]
