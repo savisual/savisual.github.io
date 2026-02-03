@@ -151,5 +151,53 @@
       "Photographer: SA Visual",
       "Executive: SA Visual"
     ]
+  },
+  {
+    "id": "photo-006",
+    "title": "Tonliz - Profile",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Tonlizprofile-photo-01.webp",
+    "images": [
+      "/assets/images/Tonlizprofile-photo-01.webp"
+    ],
+    "credits": [
+      "Artist: Tonliz",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "photo-007",
+    "title": "Sua - Concept photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/sua-photo-01.jpg",
+    "images": [
+      "/assets/images/sua-photo-01.jpg"
+    ],
+    "credits": [
+      "Artist: Sua",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+{
+    "id": "photo-008",
+    "title": "Bada - Concept photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/bada-photo-01.jpg",
+    "images": [
+      "/assets/images/bada-photo-01.jpg"
+    ],
+    "credits": [
+      "Artist: Bada",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
   }
 ]
