@@ -60,7 +60,7 @@
     ],
     "credits": [
       "Artist: N.A",
-      "Photographer: SA Visual",
+      "Photographer: haramsess",
       "Executive: SA Visual"
     ]
   },
@@ -97,7 +97,7 @@
     ],
     "credits": [
       "Artist: Youngcode",
-      "Photographer: SA Visual",
+      "Photographer: haramsess",
       "Executive: SA Visual"
     ]
   },
@@ -113,6 +113,41 @@
     ],
     "credits": [
       "Artist: zekie",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-004",
+    "title": "In Bloom",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/flower2-photo-01.jpg",
+    "images": [
+      "/assets/images/flower2-photo-01.jpg"
+    ],
+    "credits": [
+      "Artist: haramsess",
+      "Photographer: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "photo-004",
+    "title": "In Bloom2",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/flower1-photo-01.jpg",
+    "images": [
+      "/assets/images/flower1-photo-01.jpg"
+      "/assets/images/flower1-photo-02.jpg",
+      "/assets/images/flower1-photo-03.jpg",
+      "/assets/images/flower1-photo-04.jpg"
+    ],
+    "credits": [
+      "Artist: haramsess",
       "Photographer: SA Visual",
       "Executive: SA Visual"
     ]
