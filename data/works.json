@@ -421,5 +421,23 @@
       "Art Direction: SA Visual",
       "Executive: SA Visual"
     ]
+  },
+   {
+    "id": "design-008",
+    "title": "김현회 - 무의미 (feat.123,Youngcode,LAVEEN) l Artwork",
+    "type": "Design",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/hoi-artwork-01.png",
+    "images": [
+      "/assets/images/hoi-artwork-01.png"
+
+    ],
+    "credits": [
+      "Artist: 김현회",
+      "Graphic Design: SA Visual",
+      "Art Direction: SA Visual",
+      "Executive: SA Visual"
+    ]
   }
 ]
