@@ -269,5 +269,156 @@
       "Art Direction: haramsess",
       "Executive: haramsess"
     ]
-  }
-]
+  },
+ {
+    "id": "photo-012",
+    "title": "Escaping Neverland - Stage Photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/stage-photo-01.jpg",
+    "images": [
+      "/assets/images/stage-photo-01.jpg",
+      "/assets/images/stage-photo-02.jpg",
+      "/assets/images/stage-photo-03.jpg",
+      "/assets/images/stage-photo-04.jpg",
+      "/assets/images/stage-photo-05.jpg"
+
+    ],
+    "credits": [
+      "Artist: Escaping Neverland",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-013",
+    "title": "Youngcode - Profile",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Youngcodeprofile-photo-01.png",
+    "images": [
+      "/assets/images/Youngcodeprofile-photo-01.png",
+      "/assets/images/Youngcodeprofile-photo-02.png"
+
+    ],
+    "credits": [
+      "Artist: Youngcode",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "photo-014",
+    "title": "별은 [단독 콘서트 '낭만의 LETTER'] - Stage Photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/byeoleun-stagephoto-01.jpg",
+    "images": [
+      "/assets/images/byeoleun-stagephoto-01.jpg",
+      "/assets/images/byeoleun-stagephoto-02.jpg",
+      "/assets/images/byeoleun-stagephoto-03.jpg",
+      "/assets/images/byeoleun-stagephoto-04.jpg",
+      "/assets/images/byeoleun-stagephoto-05.jpg"
+
+    ],
+    "credits": [
+      "Artist: 별은",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "design-003",
+    "title": "Youngcode - Geinie Magazine",
+    "type": "Design",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Youngcodemagazine-design-01.png",
+    "images": [
+      "/assets/images/Youngcodemagazine-design-01.png",
+      "/assets/images/Youngcodemagazine-design-02.png"
+
+    ],
+    "credits": [
+      "Artist: Youngcode",
+      "Graphic Design: haramsess",
+      "Art Direction: haramsess",
+      "Executive: haramsess"
+    ]
+  },
+    {
+    "id": "design-004",
+    "title": "Tonliz - 멀어지는 거야 (feat.Hollow Young) l Artwork",
+    "type": "Design",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Tonlizslipaway-artwork-01.jpg",
+    "images": [
+      "/assets/images/Tonlizslipaway-artwork-01.jpg"
+
+    ],
+    "credits": [
+      "Artist: Tonliz",
+      "Graphic Design: haramsess",
+      "Art Direction: haramsess",
+      "Executive: haramsess"
+    ]
+  },
+    {
+    "id": "design-005",
+    "title": "Tonliz - 마지막으로 (feat.박현진) l Artwork",
+    "type": "Design",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/onelasttime-artwork-01.PNG",
+    "images": [
+      "/assets/images/onelasttime-artwork-01.PNG"
+
+    ],
+    "credits": [
+      "Artist: Tonliz",
+      "Graphic Design: SA Visual",
+      "Art Direction: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "design-006",
+    "title": "LIPNINE - Album Artwork",
+    "type": "Design",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/f&f-artwork-01.png",
+    "images": [
+      "/assets/images/f&f-artwork-01.png",
+      "/assets/images/f&f-artwork-02.png"
+
+    ],
+    "credits": [
+      "Artist: LIPNINE",
+      "Graphic Design: SA Visual",
+      "Art Direction: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "design-007",
+    "title": "INCENSE - INCENSE l Artwork",
+    "type": "Design",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/INCENSE-artwork-01.png",
+    "images": [
+      "/assets/images/INCENSE-artwork-01.png"
+
+    ],
+    "credits": [
+      "Artist: INCENSE",
+      "Graphic Design: SA Visual",
+      "Art Direction: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
