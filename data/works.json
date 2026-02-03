@@ -100,5 +100,21 @@
       "Photographer: SA Visual",
       "Executive: SA Visual"
     ]
-  }
+  },
 ]
+ {
+    "id": "photo-003",
+    "title": "zekie - Concept photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/zekie-photo-01.jpg",
+    "images": [
+      "/assets/images/zekie-photo-01.jpg",
+    ],
+    "credits": [
+      "Artist: zekie",
+      "Photographer: SA Visual",
+      "Executive: SA Visual"
+    ]
+  }
