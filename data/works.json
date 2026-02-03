@@ -133,15 +133,15 @@
       "Executive: SA Visual"
     ]
   },
-    {
-    "id": "photo-004",
+  {
+    "id": "photo-005",
     "title": "In Bloom2",
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
     "thumb": "/assets/images/flower1-photo-01.jpg",
     "images": [
-      "/assets/images/flower1-photo-01.jpg"
+      "/assets/images/flower1-photo-01.jpg",
       "/assets/images/flower1-photo-02.jpg",
       "/assets/images/flower1-photo-03.jpg",
       "/assets/images/flower1-photo-04.jpg"
