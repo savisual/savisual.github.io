@@ -306,7 +306,7 @@ h1 {
 
 .gallery-thumb {
   width: 100%;
-  height: 350px;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
   border-radius: 6px;
   cursor: pointer;
@@ -316,6 +316,8 @@ h1 {
 .gallery-thumb:hover {
   transform: scale(1.05);
   opacity: 0.8;
+}
+
 }
 
 .work-credits {
