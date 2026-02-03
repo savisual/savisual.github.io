@@ -85,7 +85,7 @@
   },
   {
     "id": "photo-002",
-    "title": "Youngcode - Concept photo",
+    "title": "Youngcode - Concept Photo",
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
@@ -103,7 +103,7 @@
   },
   {
     "id": "photo-003",
-    "title": "zekie - Concept photo",
+    "title": "zekie - Concept Photo",
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
@@ -170,7 +170,7 @@
   },
    {
     "id": "photo-007",
-    "title": "Sua - Concept photo",
+    "title": "Sua - Concept Photo",
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
@@ -186,7 +186,7 @@
   },
 {
     "id": "photo-008",
-    "title": "Bada - Concept photo",
+    "title": "Bada - Concept Photo",
     "type": "Photo",
     "year": "2025",
     "client": "SA Visual",
@@ -196,6 +196,58 @@
     ],
     "credits": [
       "Artist: Bada",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "photo-009",
+    "title": "Tonliz - Concept Photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Tonliztexture-photo-01.jpg",
+    "images": [
+      "/assets/images/Tonliztexture-photo-01.jpg"
+    ],
+    "credits": [
+      "Artist: Tonliz",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+ {
+    "id": "photo-010",
+    "title": Ari - Concept Photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Ari-photo-01.jpg",
+    "images": [
+      "/assets/images/Ari-photo-01.jpg",
+      "/assets/images/Ari-photo-02.jpg",
+      "/assets/images/Ari-photo-03.jpg"
+    ],
+    "credits": [
+      "Artist: Ari",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "photo-011",
+    "title": "Demian - Concept Photo",
+    "type": "Photo",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "/assets/images/Demian-photo-01.jpg",
+    "images": [
+      "/assets/images/Demian-photo-01.jpg",
+      "/assets/images/Demian2-photo-01.jpg"
+
+    ],
+    "credits": [
+      "Artist: Ari",
       "Photographer: haramsess",
       "Executive: SA Visual"
     ]
