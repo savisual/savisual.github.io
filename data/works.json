@@ -29,21 +29,21 @@
       "Executive: SA Visual"
     ]
   },
- {
-  "id": "work-001",
-  "title": "Tonliz - 마지막으로 (feat.박현진)",
-  "type": "Shorts"
-  "year": "2026",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/ch3_WEed6aw/maxresdefault.jpg",
-  "videoId": "ch3_WEed6aw",
-  "credits": [
-    "Artist: Tonliz",
-    "Director: SA Visual",
-    "Edit: SA Visual",
-    "Executive: SA Visual"
-  ]
-},
+  {
+    "id": "shorts-001",
+    "title": "Tonliz - 마지막으로 (feat.박현진)",
+    "type": "Shorts",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/ch3_WEed6aw/maxresdefault.jpg",
+    "videoId": "ch3_WEed6aw",
+    "credits": [
+      "Artist: Tonliz",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
   {
     "id": "photo-001",
     "title": "N.A Profile",
@@ -64,5 +64,4 @@
       "Executive: SA Visual"
     ]
   }
-
-  
+]
