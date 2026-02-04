@@ -247,7 +247,7 @@
           <div class="contact-item">
             <div class="contact-label">Email</div>
             <div class="contact-value" style="display: flex; align-items: center; gap: 15px;">
-              <a href="mailto:contact@savisual.com" id="emailLink">contact@savisual.com</a>
+              <a href="mailto:safilm8206@gmail.com" id="emailLink">safilm8206@gmail.com</a>
               <button id="copyEmailBtn" class="copy-btn">Copy</button>
             </div>
             <div id="copyNotification" class="copy-notification">Copied!</div>
@@ -275,7 +275,7 @@
     if (copyBtn) {
       copyBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        const email = 'contact@savisual.com';
+        const email = 'safilm8206@gmail.com';
         
         // Copy to clipboard
         navigator.clipboard.writeText(email).then(function() {
