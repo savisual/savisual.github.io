@@ -439,5 +439,65 @@
       "Art Direction: SA Visual",
       "Executive: SA Visual"
     ]
-  }
+  },
+  {
+  "id": "work-003",
+  "title": "Youngcode - WAKE UP! (INTERLUDE) [Visual Art Film]",
+  "type": "Full Video",
+  "year": "2025",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/D76l-7FI1k4/maxresdefault.jpg",
+  "videoId": "D76l-7FI1k4",
+  "credits": [
+    "Artist: Youngcode",
+    "Director: SA Visual",
+    "Edit: SA Visual",
+    "Executive: SA Visual"
+  ]
+},
+{
+  "id": "work-004",
+  "title": "하이(Hi) - 일기장 (Acoustic ver.) [Live Clip]",
+  "type": "Full Video",
+  "year": "2025",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/d4fQGoyGt68/maxresdefault.jpg",
+  "videoId": "d4fQGoyGt68",
+  "credits": [
+    "Artist: 하이(Hi)",
+    "Director: SA Visual",
+    "Edit: SA Visual",
+    "Executive: SA Visual"
+  ]
+},
+  {
+  "id": "work-005",
+  "title": "INCENSE - INCENSE [Visualizer]",
+  "type": "Full Video",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/FbxYKzJyp-s/maxresdefault.jpg",
+  "videoId": "FbxYKzJyp-s",
+  "credits": [
+    "Artist: INCENSE",
+    "Director: SA Visual",
+    "Edit: SA Visual",
+    "Executive: SA Visual"
+  ]
+},
+  {
+  "id": "work-006",
+  "title": "NNING - YOU VS ME [Live Clip]",
+  "type": "Full Video",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/ZVTdR3FShIU/maxresdefault.jpg",
+  "videoId": "ZVTdR3FShIU",
+  "credits": [
+    "Artist: NNING",
+    "Director: RASCAF",
+    "Edit: RASCAF",
+    "Executive: SA Visual"
+  ]
+}
 ]
