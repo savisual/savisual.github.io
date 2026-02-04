@@ -35,24 +35,29 @@
   // ===== Scroll Fade-in Animation =====
   function initScrollAnimation() {
     const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      threshold: 0.15,
+      rootMargin: '0px 0px -100px 0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry, index) {
+      entries.forEach(function(entry) {
         if (entry.isIntersecting) {
+          const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100;
           setTimeout(function() {
-            entry.target.classList.add('fade-in');
-          }, index * 50); // Stagger animation
+            entry.target.classList.add('fade-in-animate');
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }, delay);
           observer.unobserve(entry.target);
         }
       });
     }, observerOptions);
     
-    // Observe all cards and elements
+    // Set initial state and observe
     const elements = document.querySelectorAll('.work-card, .category-card, .contact-item, .gallery-thumb');
     elements.forEach(function(el) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(50px)';
       observer.observe(el);
     });
   }
