@@ -32,23 +32,26 @@
     }
   }
 
-  // ===== Scroll Fade-in Animation =====
+  // ===== Scroll Fade-in/out Animation =====
   function initScrollAnimation() {
     const observerOptions = {
-      threshold: 0.15,
-      rootMargin: '0px 0px -100px 0px'
+      threshold: 0.2,
+      rootMargin: '-50px 0px -50px 0px'
     };
     
     const observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
-          const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 100;
+          // Fade in when entering viewport
+          const delay = Array.from(entry.target.parentElement.children).indexOf(entry.target) * 80;
           setTimeout(function() {
-            entry.target.classList.add('fade-in-animate');
             entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.style.transform = 'translateY(0) scale(1)';
           }, delay);
-          observer.unobserve(entry.target);
+        } else {
+          // Fade out when leaving viewport
+          entry.target.style.opacity = '0';
+          entry.target.style.transform = 'translateY(30px) scale(0.95)';
         }
       });
     }, observerOptions);
@@ -56,8 +59,9 @@
     // Set initial state and observe
     const elements = document.querySelectorAll('.work-card, .category-card, .contact-item, .gallery-thumb');
     elements.forEach(function(el) {
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
       el.style.opacity = '0';
-      el.style.transform = 'translateY(50px)';
+      el.style.transform = 'translateY(30px) scale(0.95)';
       observer.observe(el);
     });
   }
