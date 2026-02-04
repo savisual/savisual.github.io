@@ -3,6 +3,60 @@
 (function() {
   'use strict';
 
+  // ===== Back Button =====
+  function initBackButton() {
+    const path = window.location.pathname;
+    
+    // Show back button on: work detail, portfolio category pages, contact
+    const showBackButton = path.includes('/work/') || 
+                          path.includes('/portfolio/video') ||
+                          path.includes('/portfolio/photo') ||
+                          path.includes('/portfolio/shorts') ||
+                          path.includes('/portfolio/design') ||
+                          path.includes('/contact/');
+    
+    if (showBackButton) {
+      const backBtn = document.createElement('div');
+      backBtn.className = 'back-button';
+      backBtn.innerHTML = `
+        <svg viewBox="0 0 24 24">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      `;
+      
+      backBtn.addEventListener('click', function() {
+        window.history.back();
+      });
+      
+      document.body.appendChild(backBtn);
+    }
+  }
+
+  // ===== Scroll Fade-in Animation =====
+  function initScrollAnimation() {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry, index) {
+        if (entry.isIntersecting) {
+          setTimeout(function() {
+            entry.target.classList.add('fade-in');
+          }, index * 50); // Stagger animation
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all cards and elements
+    const elements = document.querySelectorAll('.work-card, .category-card, .contact-item, .gallery-thumb');
+    elements.forEach(function(el) {
+      observer.observe(el);
+    });
+  }
+
   // ===== Load Works Data =====
   let worksData = [];
 
@@ -301,17 +355,29 @@
   }
 
   function init() {
+    // Initialize back button
+    initBackButton();
+    
     // Check which page we're on and initialize accordingly
     if (document.getElementById('worksGrid')) {
       initPortfolioGrid();
+      // Add delay for scroll animation after grid is loaded
+      setTimeout(initScrollAnimation, 100);
     }
     
     if (document.getElementById('workRoot')) {
       initWorkDetail();
+      setTimeout(initScrollAnimation, 100);
     }
     
     if (document.getElementById('contactRoot')) {
       initContactPage();
+      setTimeout(initScrollAnimation, 100);
+    }
+    
+    // Initialize scroll animation for portfolio main page
+    if (window.location.pathname === '/portfolio/' || window.location.pathname === '/portfolio/index.html') {
+      setTimeout(initScrollAnimation, 100);
     }
   }
 
