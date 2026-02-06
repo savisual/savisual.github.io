@@ -562,14 +562,14 @@
   },
     {
     "id": "shorts-006",
-    "title": "RAS - On the Low [Part 2]",
+    "title": "Trolly - face2face",
     "type": "Shorts",
     "year": "2025",
     "client": "SA Visual",
-    "thumb": "https://img.youtube.com/vi/ajhvEeZ2RYA/maxresdefault.jpg",
-    "videoId": "ajhvEeZ2RYA",
+    "thumb": "https://img.youtube.com/vi/ltZhvyYntfM/maxresdefault.jpg",
+    "videoId": "ltZhvyYntfM",
     "credits": [
-      "Artist: RAS",
+      "Artist: Trolly",
       "Director: SA Visual",
       "Edit: SA Visual",
       "Executive: SA Visual"
@@ -652,6 +652,118 @@
       "Director: SA Visual",
       "Edit: SA Visual",
       "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  },
+     {
+    "id": "shorts-012",
+    "title": "Hi(하이) - 일기장 Acoustic ver.",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/51NqgXD3p8c/maxresdefault.jpg",
+    "videoId": "51NqgXD3p8c",
+    "credits": [
+      "Artist: Hi(하이)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: RASCAF",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "shorts-013",
+    "title": "Hi(하이) - 일기장 Acoustic ver. [Part 2]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/uJXy032S1AQ/maxresdefault.jpg",
+    "videoId": "uJXy032S1AQ",
+    "credits": [
+      "Artist: Hi(하이)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: RASCAF",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "shorts-014",
+    "title": "Hi(하이) - 일기장 Acoustic ver. [Part 3]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/Ee37sRWqSU8/maxresdefault.jpg",
+    "videoId": "Ee37sRWqSU8",
+    "credits": [
+      "Artist: Hi(하이)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: RASCAF",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "shorts-015",
+    "title": "REDA & Youngcode - BAD NEWS (COVER) Rock ver.",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/fRq0TwUBn4Q/maxresdefault.jpg",
+    "videoId": "fRq0TwUBn4Q",
+    "credits": [
+      "Performance: REDA & Youngcode",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "shorts-016",
+    "title": "REDA & Movin - RICH MAN (COVER) Rock ver.",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/1fNtNvqXBkQ/maxresdefault.jpg",
+    "videoId": "1fNtNvqXBkQ",
+    "credits": [
+      "Performance: REDA & Movin",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "shorts-017",
+    "title": "aftrdry - Fracture; 균열, (갈라진) 금",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/TtLPwj0gklw/maxresdefault.jpg",
+    "videoId": "TtLPwj0gklw",
+    "credits": [
+      "Performance: aftrdry",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "shorts-018",
+    "title": "aftrdry - Fracture; 균열, (갈라진) 금 [BTS_Making Film]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/q3NKGWCsbj0/maxresdefault.jpg",
+    "videoId": "q3NKGWCsbj0",
+    "credits": [
+      "Performance: aftrdry",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: SA Visual",
       "Executive: SA Visual"
     ]
   }
