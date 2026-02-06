@@ -499,5 +499,160 @@
     "Edit: RASCAF",
     "Executive: SA Visual"
   ]
-}
+},
+    {
+    "id": "shorts-002",
+    "title": "RAS - 2Nite",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/b7RBrWS6Oto/maxresdefault.jpg",
+    "videoId": "b7RBrWS6Oto",
+    "credits": [
+      "Artist: RAS",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "shorts-003",
+    "title": "RAS - 2Nite [Part 2]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/JZBnKejox_E/maxresdefault.jpg",
+    "videoId": "JZBnKejox_E",
+    "credits": [
+      "Artist: RAS",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "shorts-004",
+    "title": "RAS - On the Low",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/eAaJvj9qcRI/maxresdefault.jpg",
+    "videoId": "eAaJvj9qcRI",
+    "credits": [
+      "Artist: RAS",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "shorts-005",
+    "title": "RAS - On the Low [Part 2]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/ajhvEeZ2RYA/maxresdefault.jpg",
+    "videoId": "ajhvEeZ2RYA",
+    "credits": [
+      "Artist: RAS",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "shorts-006",
+    "title": "RAS - On the Low [Part 2]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/ajhvEeZ2RYA/maxresdefault.jpg",
+    "videoId": "ajhvEeZ2RYA",
+    "credits": [
+      "Artist: RAS",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "shorts-007",
+    "title": "OTWO(오투) - 같이 누웠던 모텔",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/Kc9DKQUiHVo/maxresdefault.jpg",
+    "videoId": "Kc9DKQUiHVo",
+    "credits": [
+      "Artist: OTWO(오투)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "shorts-008",
+    "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 2]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/mKOoOe46BwQ/maxresdefault.jpg",
+    "videoId": "mKOoOe46BwQ",
+    "credits": [
+      "Artist: OTWO(오투)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  },
+    {
+    "id": "shorts-009",
+    "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 3]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/phAtWsJb5cg/maxresdefault.jpg",
+    "videoId": "phAtWsJb5cg",
+    "credits": [
+      "Artist: OTWO(오투)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  },
+   {
+    "id": "shorts-010",
+    "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 4]",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/O5-JFYy9c80/maxresdefault.jpg",
+    "videoId": "O5-JFYy9c80",
+    "credits": [
+      "Artist: OTWO(오투)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  },
+     {
+    "id": "shorts-011",
+    "title": "OTWO(오투) - Cigarette",
+    "type": "Shorts",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/n6tjDfMWRsw/maxresdefault.jpg",
+    "videoId": "n6tjDfMWRsw",
+    "credits": [
+      "Artist: OTWO(오투)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Film: GUN",
+      "Executive: SA Visual"
+    ]
+  }
 ]
