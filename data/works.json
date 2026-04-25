@@ -766,5 +766,19 @@
       "Film: SA Visual",
       "Executive: SA Visual"
     ]
-  }
-]
+  },
+{
+  "id": "work-007",
+  "title": "SEIJI JUNE - LOVE IN THE BACKSEAT (Feat.Youngcode) [Performance Video]",
+  "type": "Teaser",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/OD7nBnY22cQ/maxresdefault.jpg",
+  "videoId": "OD7nBnY22cQ",
+  "credits": [
+    "Artist: SEIJI JUNE",
+    "Director: SA Visual",
+    "Edit: SA Visual",
+    "Executive: SA Visual"
+  ]
+}
