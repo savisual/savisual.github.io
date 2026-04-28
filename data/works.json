@@ -891,5 +891,20 @@
       "Edit: SA Visual",
       "Executive: SA Visual"
     ]
-  }
-]
+  },
+{
+  "id": "design-009",
+  "title": "EXTREME 2026 | 경찰과 도둑 : 익스트림을 털어라!",
+  "type": "Design",
+  "year": "2026",
+  "client": "EXTREME",
+  "thumb": "/assets/images/extreme-poster-01.jpg",
+  "images": [
+    "/assets/images/extreme-poster-01.jpg"
+  ],
+  "credits": [
+    "Brand: EXTREME",
+    "Graphic Design: SA Visual",
+    "Art Direction: SA Visual",
+    "Executive: SA Visual"
+  ]
