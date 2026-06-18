@@ -188,7 +188,7 @@ function build(){
   N=WORKS.length;
   document.getElementById('total').textContent=String(N).padStart(2,'0');
   step=360/N;
-  radius=Math.min(760, Math.max(320, (98)/Math.tan(Math.PI/N) + 120)); // keep cards apart
+  radius=Math.min(549, Math.max(320, (98)/Math.tan(Math.PI/N) + 120)); // cap radius so focused-card size matches across categories (549 = Photo N=14)
   WORKS.forEach((w,i)=>{
     const it=document.createElement('div');
     it.className='item';
