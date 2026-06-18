@@ -181,14 +181,13 @@ async function load(){
 
 /* build carousel */
 const carousel=document.getElementById('carousel');
-let N=0,step=0,radius=520;
+let N=0;
+const ANGLE=51.4, RADIUS=324, VISIBLE=3.0; // fixed coverflow: identical card size & spacing regardless of count
 function thumbOf(w){ return w.videoId ? 'https://img.youtube.com/vi/'+w.videoId+'/maxresdefault.jpg' : w.thumb; }
 function build(){
   carousel.innerHTML='';
   N=WORKS.length;
   document.getElementById('total').textContent=String(N).padStart(2,'0');
-  step=360/N;
-  radius=Math.min(549, Math.max(320, (98)/Math.tan(Math.PI/N) + 120)); // cap radius so focused-card size matches across categories (549 = Photo N=14)
   WORKS.forEach((w,i)=>{
     const it=document.createElement('div');
     it.className='item';
@@ -201,28 +200,27 @@ function build(){
   });
 }
 
-/* rotation state */
+/* rotation state — measured in CARD UNITS, not degrees */
 let cur=0,target=0;
-const auto=-0.04; // slow auto spin (deg per frame)
-function angleOf(i){ // normalized angle of item i relative to front
-  let a=(cur + i*step)%360; if(a>180)a-=360; if(a<-180)a+=360; return a;
-}
-function snapTo(i){ target = -i*step; }
+const auto=-0.0008; // slow auto drift (cards per frame)
+function offsetOf(i){ let d=i-cur; d=((d%N)+N)%N; if(d>N/2)d-=N; return d; } // shortest signed distance (loops infinitely)
+function angleOf(i){ return offsetOf(i)*ANGLE; }
+function snapTo(i){ let d=i-cur; d=((d%N)+N)%N; if(d>N/2)d-=N; target=cur+d; }
 function frame(){
-  target += auto;
-  cur += (target-cur)*0.08;
+  target+=auto;
+  cur+=(target-cur)*0.08;
   const items=carousel.children;
   let frontI=0,frontMin=999;
   for(let i=0;i<items.length;i++){
-    const a=cur + i*step;
-    items[i].style.transform='rotateY('+a+'deg) translateZ('+radius+'px)';
+    const d=offsetOf(i), ad=Math.abs(d), a=d*ANGLE;
+    items[i].style.transform='rotateY('+a+'deg) translateZ('+RADIUS+'px)';
     let na=a%360; if(na>180)na-=360; if(na<-180)na+=360;
-    const fade=(Math.cos(na*Math.PI/180)+1)/2;   // 0(back)..1(front), wider visibility
-    const op=Math.pow(fade,1.3);
+    let op=Math.pow((Math.cos(na*Math.PI/180)+1)/2,1.3);
+    if(ad>VISIBLE) op*=Math.max(0,1-(ad-VISIBLE)/0.7); // hide cards beyond the visible fan
     items[i].style.opacity=op.toFixed(3);
-    items[i].style.pointerEvents = Math.abs(na)<70 ? 'auto':'none';
+    items[i].style.pointerEvents=(ad<=VISIBLE && Math.abs(na)<70)?'auto':'none';
     items[i].style.zIndex=Math.round(op*100);
-    if(Math.abs(na)<frontMin){frontMin=Math.abs(na);frontI=i;}
+    if(ad<frontMin){frontMin=ad;frontI=i;}
   }
   document.getElementById('curIdx').textContent=String(frontI+1).padStart(2,'0');
   requestAnimationFrame(frame);
@@ -230,15 +228,15 @@ function frame(){
 requestAnimationFrame(frame);
 
 /* arrows */
-document.getElementById('next').addEventListener('click',()=>{target-=step;});
-document.getElementById('prev').addEventListener('click',()=>{target+=step;});
-addEventListener('keydown',e=>{if(e.key==='ArrowRight')target-=step;if(e.key==='ArrowLeft')target+=step;if(e.key==='Escape')closeWork();});
+document.getElementById('next').addEventListener('click',()=>{target+=1;});
+document.getElementById('prev').addEventListener('click',()=>{target-=1;});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')target+=1;if(e.key==='ArrowLeft')target-=1;if(e.key==='Escape')closeWork();});
 
 /* drag */
 let dragging=false,lastX=0;
 addEventListener('mousedown',e=>{dragging=true;lastX=e.clientX;});
 addEventListener('mouseup',()=>dragging=false);
-addEventListener('mousemove',e=>{if(dragging){target+=(e.clientX-lastX)*0.25;lastX=e.clientX;}});
+addEventListener('mousemove',e=>{if(dragging){target-=(e.clientX-lastX)*0.007;lastX=e.clientX;}});
 
 /* detail overlay */
 const overlay=document.getElementById('overlay'),ovWrap=document.getElementById('ovWrap');
