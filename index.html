@@ -43,8 +43,8 @@
   .headline .ln{display:block;overflow:hidden;}
   .headline .ln > span{display:inline-block;transform:translateY(110%);}
   .headline em{font-style:italic;font-weight:400;color:var(--silver);}
-  .cta-row{margin-top:48px;opacity:0;transform:translateY(14px);}
-  .term-btn{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:18px 34px;position:relative;overflow:hidden;display:inline-block;transition:color .4s;}
+  .cta-row{margin-top:48px;display:flex;flex-direction:column;align-items:flex-start;gap:14px;opacity:0;transform:translateY(14px);}
+  .term-btn{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--fg);text-decoration:none;border:1px solid var(--line);padding:18px 34px;position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:flex-start;width:230px;transition:color .4s;}
   .term-btn span{position:relative;z-index:2;}
   .term-btn::before{content:'';position:absolute;inset:0;background:var(--fg);transform:translateY(101%);transition:transform .45s cubic-bezier(.76,0,.24,1);z-index:1;}
   .term-btn:hover{color:var(--bg);}
@@ -73,13 +73,8 @@
   <div class="cur-ring"></div>
 
   <div class="topbar">
-    <div class="brand"><span class="sq"></span> SA VISUAL <span class="ver">/ V.1.0</span></div>
-    <div class="nav">
-      <a href="/portfolio/video/">VIDEO</a>
-      <a href="/portfolio/shorts/">SHORTS</a>
-      <a href="/portfolio/photo/">PHOTO</a>
-      <a href="/portfolio/design/">DESIGN</a>
-    </div>
+    <div class="brand"><span class="sq"></span> SA VISUAL</div>
+    
     <div class="status">SEOUL · <b>KR</b></div>
   </div>
 
@@ -92,6 +87,7 @@
       </h1>
       <div class="cta-row" id="cta">
         <a href="/portfolio/" class="term-btn"><span>View Portfolio</span></a>
+        <a href="/contact/" class="term-btn"><span>Contact</span></a>
       </div>
     </div>
     <div class="hero-right">
@@ -110,7 +106,7 @@ const LOGO_B64="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAAAAADuvY
 const cd=document.querySelector('.cur-dot'),cr=document.querySelector('.cur-ring');
 let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
 addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
-(function r(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(r);})();
+(function r(){rx+=(mx-rx)*.30;ry+=(my-ry)*.30;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(r);})();
 document.querySelectorAll('a').forEach(a=>{a.addEventListener('mouseenter',()=>cr.classList.add('hov'));a.addEventListener('mouseleave',()=>cr.classList.remove('hov'));});
 
 /* particles from logo image, 3D spin */

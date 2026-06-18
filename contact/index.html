@@ -48,7 +48,7 @@
 
   /* left: halftone logo */
   .ticket-left{position:relative;background:#0a0a0c;border-right:1px dashed rgba(240,240,241,0.16);aspect-ratio:1/1;}
-  #halftone{width:100%;height:100%;display:block;}
+  #logoImg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:76%;height:76%;object-fit:contain;}
   .left-tag{position:absolute;top:24px;left:24px;font-family:var(--mono);font-size:13px;line-height:1.5;letter-spacing:2px;
     color:rgba(240,240,241,0.5);text-transform:uppercase;pointer-events:none;}
   .left-foot{position:absolute;bottom:22px;left:24px;right:24px;font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--dimmer);}
@@ -98,7 +98,7 @@
 
   <div class="ticket" id="ticket">
     <div class="ticket-left">
-      <canvas id="halftone"></canvas>
+      <img id="logoImg" alt="SA VISUAL" />
       <div class="left-tag">SA<br>VISUAL</div>
       <div class="left-foot">VISUAL PRODUCTION · SEOUL</div>
     </div>
@@ -131,56 +131,11 @@ const LOGO_B64="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAAAAADuvY
 const cd=document.querySelector('.cur-dot'),cr=document.querySelector('.cur-ring');
 let mx=innerWidth/2,my=innerHeight/2,rx=mx,ry=my;
 addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx+'px';cd.style.top=my+'px';});
-(function r(){rx+=(mx-rx)*.18;ry+=(my-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(r);})();
+(function r(){rx+=(mx-rx)*.30;ry+=(my-ry)*.30;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(r);})();
 document.querySelectorAll('a,button').forEach(a=>{a.addEventListener('mouseenter',()=>cr.classList.add('hov'));a.addEventListener('mouseleave',()=>cr.classList.remove('hov'));});
 
-/* halftone logo */
-const cvs=document.getElementById('halftone'),ctx=cvs.getContext('2d');
-const logo=new Image();
-let logoReady=false,logoData=null,LS=300;
-logo.onload=function(){
-  const off=document.createElement('canvas');off.width=LS;off.height=LS;
-  const o=off.getContext('2d');o.drawImage(logo,0,0,LS,LS);
-  logoData=o.getImageData(0,0,LS,LS).data;logoReady=true;drawHalftone();
-};
-logo.src=LOGO_B64;
-
-function drawHalftone(){
-  if(!logoReady)return;
-  const DPR=Math.min(devicePixelRatio||1,2);
-  const rect=cvs.getBoundingClientRect();
-  cvs.width=rect.width*DPR;cvs.height=rect.height*DPR;
-  const W=cvs.width,H=cvs.height;
-  ctx.clearRect(0,0,W,H);
-  const cell=7*DPR;
-  // logo drawn centered with padding inside the square
-  const pad=0.16; // 16% padding
-  const drawSize=Math.min(W,H)*(1-pad*2);
-  const ox=(W-drawSize)/2, oy=(H-drawSize)/2;
-  for(let y=0;y<H;y+=cell){
-    for(let x=0;x<W;x+=cell){
-      // map canvas px -> logo px
-      const lx=Math.floor((x-ox)/drawSize*LS);
-      const ly=Math.floor((y-oy)/drawSize*LS);
-      let b=0;
-      if(lx>=0&&lx<LS&&ly>=0&&ly<LS){
-        const i=(ly*LS+lx)*4;
-        b=(logoData[i]+logoData[i+1]+logoData[i+2])/3/255;
-      }
-      // base faint grid dot + logo dot
-      const base=0.10;
-      const v=Math.max(base, b);
-      const r=v*cell*0.5;
-      if(r>0.35){
-        ctx.beginPath();
-        ctx.fillStyle = b>0.25 ? 'rgba(240,240,241,'+(0.55+b*0.45)+')' : 'rgba(240,240,241,0.10)';
-        ctx.arc(x+cell/2,y+cell/2,r,0,Math.PI*2);
-        ctx.fill();
-      }
-    }
-  }
-}
-addEventListener('resize',drawHalftone);
+/* logo image */
+document.getElementById('logoImg').src=LOGO_B64;
 
 /* divider fill */
 function fillDivider(){
