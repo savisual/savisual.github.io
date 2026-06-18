@@ -77,10 +77,18 @@
 
   @media(max-width:820px){
     .topbar{padding:22px;}.cur-dot,.cur-ring{display:none;}
-    .ticket{grid-template-columns:1fr;max-width:420px;}
-    .ticket-left{border-right:none;border-bottom:1px dashed rgba(240,240,241,0.16);}
-    .ticket-right{padding:30px 26px;}
-    .row{font-size:12px;}.row .k{width:88px;}
+    /* top-align so the card never clips under the fixed topbar */
+    body{align-items:flex-start;padding:84px 18px 44px;}
+    .ticket{grid-template-columns:1fr;max-width:440px;}
+    /* logo panel becomes a compact banner instead of a full-width square */
+    .ticket-left{border-right:none;border-bottom:1px dashed rgba(240,240,241,0.16);aspect-ratio:auto;height:188px;}
+    #logoImg{width:auto;height:58%;}
+    .left-tag{top:18px;left:18px;font-size:11px;}
+    .left-foot{bottom:14px;left:18px;right:18px;font-size:9px;}
+    .ticket-right{padding:26px 22px;}
+    .row{font-size:12px;padding:9px 0;}.row .k{width:82px;}
+    .ticket-foot{padding-top:20px;}
+    .ticket-foot .big{font-size:19px;}
     .corner{display:none;}
   }
 </style>
