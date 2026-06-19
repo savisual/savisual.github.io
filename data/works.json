@@ -168,7 +168,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "photo-007",
     "title": "Sua - Concept Photo",
     "type": "Photo",
@@ -184,7 +184,7 @@
       "Executive: SA Visual"
     ]
   },
-{
+  {
     "id": "photo-008",
     "title": "Bada - Concept Photo",
     "type": "Photo",
@@ -200,7 +200,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "photo-009",
     "title": "Tonliz - Concept Photo",
     "type": "Photo",
@@ -216,7 +216,7 @@
       "Executive: SA Visual"
     ]
   },
- {
+  {
     "id": "photo-010",
     "title": "Ari - Concept Photo",
     "type": "Photo",
@@ -234,7 +234,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "photo-011",
     "title": "Demian - Concept Photo",
     "type": "Photo",
@@ -244,7 +244,6 @@
     "images": [
       "/assets/images/Demian-photo-01.jpg",
       "/assets/images/Demian2-photo-01.jpg"
-
     ],
     "credits": [
       "Artist: Demian",
@@ -252,7 +251,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "design-002",
     "title": "Escaping Neverland - Design",
     "type": "Design",
@@ -261,7 +260,6 @@
     "thumb": "/assets/images/enl-artwork-01.jpg",
     "images": [
       "/assets/images/enl-artwork-01.jpg"
-
     ],
     "credits": [
       "Artist: Escaping Neverland",
@@ -270,7 +268,7 @@
       "Executive: haramsess"
     ]
   },
- {
+  {
     "id": "photo-012",
     "title": "Escaping Neverland - Stage Photo",
     "type": "Photo",
@@ -283,7 +281,6 @@
       "/assets/images/stage-photo-03.jpg",
       "/assets/images/stage-photo-04.jpg",
       "/assets/images/stage-photo-05.jpg"
-
     ],
     "credits": [
       "Artist: Escaping Neverland",
@@ -301,7 +298,6 @@
     "images": [
       "/assets/images/Youngcodeprofile-photo-01.png",
       "/assets/images/Youngcodeprofile-photo-02.png"
-
     ],
     "credits": [
       "Artist: Youngcode",
@@ -309,7 +305,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "photo-014",
     "title": "별은 [단독 콘서트 '낭만의 LETTER'] - Stage Photo",
     "type": "Photo",
@@ -322,7 +318,6 @@
       "/assets/images/byeoleun-stagephoto-03.jpg",
       "/assets/images/byeoleun-stagephoto-04.jpg",
       "/assets/images/byeoleun-stagephoto-05.jpg"
-
     ],
     "credits": [
       "Artist: 별은",
@@ -330,7 +325,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "design-003",
     "title": "Youngcode - Geinie Magazine",
     "type": "Design",
@@ -340,7 +335,6 @@
     "images": [
       "/assets/images/Youngcodemagazine-design-01.png",
       "/assets/images/Youngcodemagazine-design-02.png"
-
     ],
     "credits": [
       "Artist: Youngcode",
@@ -349,7 +343,7 @@
       "Executive: haramsess"
     ]
   },
-    {
+  {
     "id": "design-004",
     "title": "Tonliz - 멀어지는 거야 (feat.Hollow Young) l Artwork",
     "type": "Design",
@@ -358,7 +352,6 @@
     "thumb": "/assets/images/Tonlizslipaway-artwork-01.jpg",
     "images": [
       "/assets/images/Tonlizslipaway-artwork-01.jpg"
-
     ],
     "credits": [
       "Artist: Tonliz",
@@ -367,7 +360,7 @@
       "Executive: haramsess"
     ]
   },
-    {
+  {
     "id": "design-005",
     "title": "Tonliz - 마지막으로 (feat.박현진) l Artwork",
     "type": "Design",
@@ -376,7 +369,6 @@
     "thumb": "/assets/images/onelasttime-artwork-01.PNG",
     "images": [
       "/assets/images/onelasttime-artwork-01.PNG"
-
     ],
     "credits": [
       "Artist: Tonliz",
@@ -385,7 +377,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "design-006",
     "title": "LIPNINE - Album Artwork",
     "type": "Design",
@@ -395,7 +387,6 @@
     "images": [
       "/assets/images/f&f-artwork-01.png",
       "/assets/images/f&f-artwork-02.jpg"
-
     ],
     "credits": [
       "Artist: LIPNINE",
@@ -413,7 +404,6 @@
     "thumb": "/assets/images/INCENSE-artwork-01.png",
     "images": [
       "/assets/images/INCENSE-artwork-01.png"
-
     ],
     "credits": [
       "Artist: INCENSE",
@@ -422,7 +412,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "design-008",
     "title": "김현회 - 무의미 (feat.123,Youngcode,LAVEEN) l Artwork",
     "type": "Design",
@@ -431,7 +421,6 @@
     "thumb": "/assets/images/hoi-artwork-01.png",
     "images": [
       "/assets/images/hoi-artwork-01.png"
-
     ],
     "credits": [
       "Artist: 김현회",
@@ -441,66 +430,66 @@
     ]
   },
   {
-  "id": "work-003",
-  "title": "Youngcode - WAKE UP! (INTERLUDE) [Visual Art Film]",
-  "type": "Full Video",
-  "year": "2025",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/D76l-7FI1k4/maxresdefault.jpg",
-  "videoId": "D76l-7FI1k4",
-  "credits": [
-    "Artist: Youngcode",
-    "Director: SA Visual",
-    "Edit: SA Visual",
-    "Executive: SA Visual"
-  ]
-},
-{
-  "id": "work-004",
-  "title": "하이(Hi) - 일기장 (Acoustic ver.) [Live Clip]",
-  "type": "Full Video",
-  "year": "2025",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/d4fQGoyGt68/maxresdefault.jpg",
-  "videoId": "d4fQGoyGt68",
-  "credits": [
-    "Artist: 하이(Hi)",
-    "Director: SA Visual",
-    "Edit: SA Visual",
-    "Executive: SA Visual"
-  ]
-},
+    "id": "work-003",
+    "title": "Youngcode - WAKE UP! (INTERLUDE) [Visual Art Film]",
+    "type": "Full Video",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/D76l-7FI1k4/maxresdefault.jpg",
+    "videoId": "D76l-7FI1k4",
+    "credits": [
+      "Artist: Youngcode",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
   {
-  "id": "work-005",
-  "title": "INCENSE - INCENSE [Visualizer]",
-  "type": "Full Video",
-  "year": "2026",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/FbxYKzJyp-s/maxresdefault.jpg",
-  "videoId": "FbxYKzJyp-s",
-  "credits": [
-    "Artist: INCENSE",
-    "Director: SA Visual",
-    "Edit: SA Visual",
-    "Executive: SA Visual"
-  ]
-},
+    "id": "work-004",
+    "title": "하이(Hi) - 일기장 (Acoustic ver.) [Live Clip]",
+    "type": "Full Video",
+    "year": "2025",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/d4fQGoyGt68/maxresdefault.jpg",
+    "videoId": "d4fQGoyGt68",
+    "credits": [
+      "Artist: 하이(Hi)",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
   {
-  "id": "work-006",
-  "title": "NNING - YOU VS ME [Live Clip]",
-  "type": "Full Video",
-  "year": "2026",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/ZVTdR3FShIU/maxresdefault.jpg",
-  "videoId": "ZVTdR3FShIU",
-  "credits": [
-    "Artist: NNING",
-    "Director: RASCAF",
-    "Edit: RASCAF",
-    "Executive: SA Visual"
-  ]
-},
-    {
+    "id": "work-005",
+    "title": "INCENSE - INCENSE [Visualizer]",
+    "type": "Full Video",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/FbxYKzJyp-s/maxresdefault.jpg",
+    "videoId": "FbxYKzJyp-s",
+    "credits": [
+      "Artist: INCENSE",
+      "Director: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "work-006",
+    "title": "NNING - YOU VS ME [Live Clip]",
+    "type": "Full Video",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/ZVTdR3FShIU/maxresdefault.jpg",
+    "videoId": "ZVTdR3FShIU",
+    "credits": [
+      "Artist: NNING",
+      "Director: RASCAF",
+      "Edit: RASCAF",
+      "Executive: SA Visual"
+    ]
+  },
+  {
     "id": "shorts-002",
     "title": "RAS - 2Nite",
     "type": "Shorts",
@@ -560,7 +549,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-006",
     "title": "Trolly - face2face",
     "type": "Shorts",
@@ -575,7 +564,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-007",
     "title": "OTWO(오투) - 같이 누웠던 모텔",
     "type": "Shorts",
@@ -591,7 +580,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-008",
     "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 2]",
     "type": "Shorts",
@@ -607,7 +596,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-009",
     "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 3]",
     "type": "Shorts",
@@ -623,7 +612,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-010",
     "title": "OTWO(오투) - 같이 누웠던 모텔 [Part 4]",
     "type": "Shorts",
@@ -639,7 +628,7 @@
       "Executive: SA Visual"
     ]
   },
-     {
+  {
     "id": "shorts-011",
     "title": "OTWO(오투) - Cigarette",
     "type": "Shorts",
@@ -655,7 +644,7 @@
       "Executive: SA Visual"
     ]
   },
-     {
+  {
     "id": "shorts-012",
     "title": "Hi(하이) - 일기장 Acoustic ver.",
     "type": "Shorts",
@@ -703,7 +692,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-015",
     "title": "REDA & Youngcode - BAD NEWS (COVER) Rock ver.",
     "type": "Shorts",
@@ -719,7 +708,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-016",
     "title": "REDA & Movin - RICH MAN (COVER) Rock ver.",
     "type": "Shorts",
@@ -735,7 +724,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-017",
     "title": "aftrdry - Fracture; 균열, (갈라진) 금",
     "type": "Shorts",
@@ -751,7 +740,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-018",
     "title": "aftrdry - Fracture; 균열, (갈라진) 금 [BTS_Making Film]",
     "type": "Shorts",
@@ -767,23 +756,23 @@
       "Executive: SA Visual"
     ]
   },
-{
-  "id": "work-007",
-  "title": "SEIJI JUNE - LOVE IN THE BACKSEAT (Feat.Youngcode) [Performance Video]",
-  "type": "Teaser",
-  "year": "2026",
-  "client": "SA Visual",
-  "thumb": "https://img.youtube.com/vi/OD7nBnY22cQ/hqdefault.jpg",
-  "videoId": "OD7nBnY22cQ",
-  "credits": [
-    "Artist: SEIJI JUNE",
-    "Director: SA Visual",
-    "Film: SA Visual",
-    "Edit: SA Visual",
-    "Executive: SA Visual"
-  ]
-},
-   {
+  {
+    "id": "work-007",
+    "title": "SEIJI JUNE - LOVE IN THE BACKSEAT (Feat.Youngcode) [Performance Video]",
+    "type": "Teaser",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "https://img.youtube.com/vi/OD7nBnY22cQ/hqdefault.jpg",
+    "videoId": "OD7nBnY22cQ",
+    "credits": [
+      "Artist: SEIJI JUNE",
+      "Director: SA Visual",
+      "Film: SA Visual",
+      "Edit: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
     "id": "shorts-019",
     "title": "Youngcode [STAND ALONE] ALBUM PREVIEW",
     "type": "Shorts",
@@ -814,7 +803,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-021",
     "title": "한지, 주노 - Be With You",
     "type": "Shorts",
@@ -829,7 +818,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-022",
     "title": "Tonliz - 멀어지는 거야 (feat. Hollow Young)",
     "type": "Shorts",
@@ -844,7 +833,7 @@
       "Executive: SA Visual"
     ]
   },
-   {
+  {
     "id": "shorts-023",
     "title": "Tonliz - 멀어지는 거야 (feat. Hollow Young)",
     "type": "Shorts",
@@ -860,7 +849,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-024",
     "title": "Tonliz - 멀어지는 거야 (feat. Hollow Young)",
     "type": "Shorts",
@@ -876,7 +865,7 @@
       "Executive: SA Visual"
     ]
   },
-    {
+  {
     "id": "shorts-025",
     "title": "Tonliz - 멀어지는 거야 (feat. Hollow Young)",
     "type": "Shorts",
@@ -892,21 +881,121 @@
       "Executive: SA Visual"
     ]
   },
-{
-  "id": "design-009",
-  "title": "EXTREME 2026 | 경찰과 도둑 : 익스트림을 털어라!",
-  "type": "Design",
-  "year": "2026",
-  "client": "EXTREME",
-  "thumb": "/assets/images/extreme-poster-01.jpg",
-  "images": [
-    "/assets/images/extreme-poster-01.jpg"
-  ],
-  "credits": [
-    "Brand: EXTREME",
-    "Graphic Design: SA Visual",
-    "Art Direction: SA Visual",
-    "Executive: SA Visual"
-  ]
-}
+  {
+    "id": "design-009",
+    "title": "EXTREME 2026 | 경찰과 도둑 : 익스트림을 털어라!",
+    "type": "Design",
+    "year": "2026",
+    "client": "EXTREME",
+    "thumb": "/assets/images/extreme-poster-01.jpg",
+    "images": [
+      "/assets/images/extreme-poster-01.jpg"
+    ],
+    "credits": [
+      "Brand: EXTREME",
+      "Graphic Design: SA Visual",
+      "Art Direction: SA Visual",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-015",
+    "title": "Youngcode - Concept Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/youngcode-concept2-photo-01.jpg",
+    "images": [
+      "/assets/images/youngcode-concept2-photo-01.jpg",
+      "/assets/images/youngcode-concept2-photo-02.jpg",
+      "/assets/images/youngcode-concept2-photo-03.jpg",
+      "/assets/images/youngcode-concept2-photo-04.jpg"
+    ],
+    "credits": [
+      "Artist: Youngcode",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-016",
+    "title": "Maria - Concept Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/maria-concept-photo-01.jpg",
+    "images": [
+      "/assets/images/maria-concept-photo-01.jpg",
+      "/assets/images/maria-concept-photo-02.jpg",
+      "/assets/images/maria-concept-photo-03.jpg",
+      "/assets/images/maria-concept-photo-04.jpg",
+      "/assets/images/maria-concept-photo-05.jpg"
+    ],
+    "credits": [
+      "Artist: Maria",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-017",
+    "title": "YAKISOBA - Concept Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/yakisoba-concept-photo-01.jpg",
+    "images": [
+      "/assets/images/yakisoba-concept-photo-01.jpg",
+      "/assets/images/yakisoba-concept-photo-02.jpg",
+      "/assets/images/yakisoba-concept-photo-03.jpg",
+      "/assets/images/yakisoba-concept-photo-04.jpg",
+      "/assets/images/yakisoba-concept-photo-05.jpg"
+    ],
+    "credits": [
+      "Artist: YAKISOBA",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-018",
+    "title": "Britt & Zekie - Concept Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/brittzekie-concept-photo-01.jpg",
+    "images": [
+      "/assets/images/brittzekie-concept-photo-01.jpg",
+      "/assets/images/brittzekie-concept-photo-02.jpg",
+      "/assets/images/brittzekie-concept-photo-03.jpg",
+      "/assets/images/brittzekie-concept-photo-04.jpg",
+      "/assets/images/brittzekie-concept-photo-05.jpg",
+      "/assets/images/brittzekie-concept-photo-06.jpg",
+      "/assets/images/brittzekie-concept-photo-07.jpg"
+    ],
+    "credits": [
+      "Artist: Britt & Zekie",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-019",
+    "title": "Trevor - Concept Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/trevor-concept-photo-01.jpg",
+    "images": [
+      "/assets/images/trevor-concept-photo-01.jpg",
+      "/assets/images/trevor-concept-photo-02.jpg",
+      "/assets/images/trevor-concept-photo-03.jpg",
+      "/assets/images/trevor-concept-photo-04.jpg"
+    ],
+    "credits": [
+      "Artist: Trevor",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  }
 ]
