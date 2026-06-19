@@ -200,7 +200,8 @@ function build(){
     const it=document.createElement('div');
     it.className='item';
     it.dataset.i=i;
-    it.innerHTML='<div class="item-inner"><img src="'+thumbOf(w)+'" alt="" loading="lazy"/>'+
+    const onerr = w.videoId ? ' onload="if(this.naturalWidth<=120&&this.dataset.fb!=1){this.dataset.fb=1;this.src=\'https://img.youtube.com/vi/'+w.videoId+'/hqdefault.jpg\'}"' : '';
+    it.innerHTML='<div class="item-inner"><img src="'+thumbOf(w)+'" alt="" loading="lazy"'+onerr+'/>'+
       '<div class="ov"><div class="t">'+w.title.replace(/\[.*?\]/g,'').trim()+'</div><div class="y">'+w.type+' · '+w.year+'</div></div></div>';
     it.addEventListener('click',()=>{ if(Math.abs(angleOf(i))<26) openWork(w); else snapTo(i); });
     bindHover(it);
