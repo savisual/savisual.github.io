@@ -183,5 +183,20 @@ setInterval(()=>{const t=Date.now()-t0,s=Math.floor(t/1000),f=String(Math.floor(
   tc.textContent=`${String(Math.floor(s/3600)).padStart(2,'0')}:${String(Math.floor(s/60)%60).padStart(2,'0')}:${String(s%60).padStart(2,'0')}:${f}`;},40);
 
 </script>
+  <script>
+  /* auto-count: works in archive + artists collaborated (from works.json) */
+  fetch('/data/works.json').then(r=>r.json()).then(d=>{
+    const works=d.length;
+    const set=new Set();
+    d.forEach(w=>(w.credits||[]).forEach(c=>{
+      const m=c.match(/^\s*Artist:\s*(.+)/i);
+      if(m)m[1].split(/\s*[&,]\s*/).forEach(n=>{n=n.trim();if(n)set.add(n.toLowerCase());});
+    }));
+    const artists=set.size;
+    const f5=n=>Math.floor(n/5)*5;
+    const put=(sel,n)=>{const e=document.querySelector(sel+' .n');if(e)e.innerHTML=f5(n)+'<span style="color:var(--dim)">+</span>';};
+    put('#bs1',works); put('#bs2',artists);
+  }).catch(()=>{});
+  </script>
 </body>
 </html>

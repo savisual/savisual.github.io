@@ -17,10 +17,9 @@
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--fg);font-family:var(--body);height:100vh;overflow:hidden;cursor:none;position:relative;}
   ::selection{background:var(--fg);color:var(--bg);}
-  .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:radial-gradient(rgba(240,240,241,0.05) 1px,transparent 1px);background-size:34px 34px;
-    mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000 30%,transparent 100%);
-    -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,#000 30%,transparent 100%);}
+  .line-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
+    mask-image:radial-gradient(ellipse 82% 74% at 50% 48%,#000 26%,transparent 100%);
+    -webkit-mask-image:radial-gradient(ellipse 82% 74% at 50% 48%,#000 26%,transparent 100%);}
 
   .cur-dot,.cur-ring{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
   .cur-dot{width:4px;height:4px;background:var(--fg);}
@@ -35,6 +34,7 @@
   .brand .ver{color:var(--dim);}
   .nav a{color:var(--dim);text-decoration:none;transition:color .3s;}
   .nav a:hover{color:var(--fg);}
+  .nav .sep{color:var(--dim);margin:0 11px;}
 
   /* category title */
   .cat-head{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;text-align:center;pointer-events:none;}
@@ -90,7 +90,13 @@
   .ov-video{position:relative;padding-bottom:56.25%;height:0;}
   .ov-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
   .ov-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
-  .ov-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;}
+  .ov-gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:zoom-in;transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;}
+  .ov-gallery img:hover{transform:scale(1.04);box-shadow:0 14px 50px rgba(0,0,0,.6),0 0 0 1px rgba(240,240,241,.18);position:relative;z-index:2;}
+  .lightbox{position:fixed;inset:0;z-index:300;display:none;align-items:center;justify-content:center;background:rgba(5,5,6,0.94);backdrop-filter:blur(10px);cursor:zoom-out;opacity:0;transition:opacity .3s;padding:30px;}
+  .lightbox.open{display:flex;}
+  .lightbox.show{opacity:1;}
+  .lightbox img{max-width:94vw;max-height:92vh;border-radius:6px;box-shadow:0 30px 90px rgba(0,0,0,.7);transform:scale(.96);transition:transform .35s cubic-bezier(.2,.7,.2,1);}
+  .lightbox.show img{transform:scale(1);}
   .ov-credits{border-top:1px solid var(--line);padding-top:40px;}
   .ov-credits h3{font-family:var(--mono);font-size:12px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-bottom:26px;}
   .credits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 60px;max-width:760px;}
@@ -108,13 +114,13 @@
 </style>
 </head>
 <body>
-  <div class="grid-bg"></div>
+  <canvas class="line-bg" id="lineBg"></canvas>
   <div class="cur-dot"></div>
   <div class="cur-ring"></div>
 
   <div class="topbar">
     <div class="brand"><a href="/portfolio/"><span class="sq"></span> SA VISUAL <span class="ver">/ SHORTS</span></a></div>
-    <div class="nav"><a href="/contact/">CONTACT</a></div>
+    <div class="nav"><a href="/portfolio/">WORK</a><span class="sep">/</span><a href="/contact/">CONTACT</a></div>
   </div>
 
   <div class="cat-head"><h1 id="catTitle">SHORTS</h1></div>
@@ -126,6 +132,8 @@
 
   <div class="counter"><b id="curIdx">01</b> / <span id="total">07</span></div>
   <div class="hint">DRAG OR USE ARROWS</div>
+
+  <div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt=""/></div>
 
   <!-- detail overlay -->
   <div class="overlay" id="overlay">
@@ -202,7 +210,7 @@ function build(){
 
 /* rotation state — measured in CARD UNITS, not degrees */
 let cur=0,target=0;
-const auto=-0.0008; // slow auto drift (cards per frame)
+const auto=-0.001; // auto drift (cards per frame) — 1.25x faster
 function offsetOf(i){ let d=i-cur; d=((d%N)+N)%N; if(d>N/2)d-=N; return d; } // shortest signed distance (loops infinitely)
 function angleOf(i){ return offsetOf(i)*ANGLE; }
 function snapTo(i){ let d=i-cur; d=((d%N)+N)%N; if(d>N/2)d-=N; target=cur+d; }
@@ -230,7 +238,7 @@ requestAnimationFrame(frame);
 /* arrows */
 document.getElementById('next').addEventListener('click',()=>{target+=1;});
 document.getElementById('prev').addEventListener('click',()=>{target-=1;});
-addEventListener('keydown',e=>{if(e.key==='ArrowRight')target+=1;if(e.key==='ArrowLeft')target-=1;if(e.key==='Escape')closeWork();});
+addEventListener('keydown',e=>{if(e.key==='ArrowRight')target+=1;if(e.key==='ArrowLeft')target-=1;if(e.key==='Escape'){if(document.getElementById('lightbox').classList.contains('open'))return;closeWork();}});
 
 /* drag */
 let dragging=false,lastX=0;
@@ -264,8 +272,35 @@ function closeWork(){
 }
 document.getElementById('ovClose').addEventListener('click',closeWork);
 overlay.addEventListener('click',e=>{if(e.target===overlay)closeWork();});
+/* lightbox: click a gallery image to enlarge */
+const lightbox=document.getElementById('lightbox'),lightboxImg=document.getElementById('lightboxImg');
+ovWrap.addEventListener('click',e=>{const t=e.target;if(t.tagName==='IMG'&&t.closest('.ov-gallery')){e.stopPropagation();lightboxImg.src=t.src;lightbox.classList.add('open');requestAnimationFrame(()=>lightbox.classList.add('show'));}});
+function closeLightbox(){lightbox.classList.remove('show');setTimeout(()=>{lightbox.classList.remove('open');lightboxImg.src='';},300);}
+lightbox.addEventListener('click',closeLightbox);
+addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('open'))closeLightbox();});
 
 load();
 </script>
+  <script>
+  (function(){
+    const c=document.getElementById('lineBg'); if(!c) return;
+    const x=c.getContext('2d'); let w,h,pts; const DPR=Math.min(2,window.devicePixelRatio||1);
+    function size(){w=c.width=innerWidth*DPR;h=c.height=innerHeight*DPR;c.style.width=innerWidth+'px';c.style.height=innerHeight+'px';}
+    function init(){size();const n=Math.max(26,Math.min(46,Math.round(innerWidth/36)));pts=[];for(let i=0;i<n;i++)pts.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*0.11*DPR,vy:(Math.random()-.5)*0.11*DPR});}
+    const MAX=190*DPR;
+    function frame(){
+      x.clearRect(0,0,w,h);
+      for(const p of pts){p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;}
+      for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){
+        const a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);
+        if(d<MAX){const o=(1-d/MAX)*0.12;x.strokeStyle='rgba(240,240,241,'+o.toFixed(3)+')';x.lineWidth=DPR*0.55;x.beginPath();x.moveTo(a.x,a.y);x.lineTo(b.x,b.y);x.stroke();}
+      }
+      x.fillStyle='rgba(240,240,241,0.16)';
+      for(const p of pts){x.beginPath();x.arc(p.x,p.y,DPR*0.9,0,7);x.fill();}
+      requestAnimationFrame(frame);
+    }
+    init();frame();let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(init,150);});
+  })();
+  </script>
 </body>
 </html>
