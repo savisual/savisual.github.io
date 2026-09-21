@@ -1121,5 +1121,108 @@
       "Artist: Youngcode",
       "Visual Direction: SA Visual"
     ]
+  },
+  {
+    "id": "photo-020",
+    "title": "HEDONIAC - Profile",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/hedoniac-andrew-photo-01.jpg",
+    "images": [
+      "/assets/images/hedoniac-andrew-photo-01.jpg",
+      "/assets/images/hedoniac-andrew-photo-02.jpg",
+      "/assets/images/hedoniac-andrew-photo-03.jpg",
+      "/assets/images/hedoniac-andrew-photo-04.jpg",
+      "/assets/images/hedoniac-andrew-photo-05.jpg"
+    ],
+    "credits": [
+      "Artist: Andrew",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-021",
+    "title": "HEDONIAC - Profile",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/hedoniac-khy-photo-01.jpg",
+    "images": [
+      "/assets/images/hedoniac-khy-photo-01.jpg",
+      "/assets/images/hedoniac-khy-photo-02.jpg",
+      "/assets/images/hedoniac-khy-photo-03.jpg",
+      "/assets/images/hedoniac-khy-photo-04.jpg"
+    ],
+    "credits": [
+      "Artist: KHY",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-022",
+    "title": "HEDONIAC - Profile",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/hedoniac-minyeong-photo-01.jpg",
+    "images": [
+      "/assets/images/hedoniac-minyeong-photo-01.jpg",
+      "/assets/images/hedoniac-minyeong-photo-02.jpg",
+      "/assets/images/hedoniac-minyeong-photo-03.jpg",
+      "/assets/images/hedoniac-minyeong-photo-04.jpg"
+    ],
+    "credits": [
+      "Artist: minyeong",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-023",
+    "title": "HEDONIAC - Profile",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/hedoniac-group-photo-01.jpg",
+    "images": [
+      "/assets/images/hedoniac-group-photo-01.jpg",
+      "/assets/images/hedoniac-group-photo-02.jpg",
+      "/assets/images/hedoniac-group-photo-03.jpg",
+      "/assets/images/hedoniac-group-photo-04.jpg",
+      "/assets/images/hedoniac-group-photo-05.jpg"
+    ],
+    "credits": [
+      "Artist: HEDONIAC",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
+  },
+  {
+    "id": "photo-024",
+    "title": "MadmansEsprit - Stage Photo",
+    "type": "Photo",
+    "year": "2026",
+    "client": "SA Visual",
+    "thumb": "/assets/images/madmansesprit-stage-photo-01.jpg",
+    "images": [
+      "/assets/images/madmansesprit-stage-photo-01.jpg",
+      "/assets/images/madmansesprit-stage-photo-02.jpg",
+      "/assets/images/madmansesprit-stage-photo-03.jpg",
+      "/assets/images/madmansesprit-stage-photo-04.jpg",
+      "/assets/images/madmansesprit-stage-photo-05.jpg",
+      "/assets/images/madmansesprit-stage-photo-06.jpg",
+      "/assets/images/madmansesprit-stage-photo-07.jpg",
+      "/assets/images/madmansesprit-stage-photo-08.jpg",
+      "/assets/images/madmansesprit-stage-photo-09.jpg",
+      "/assets/images/madmansesprit-stage-photo-10.jpg"
+    ],
+    "credits": [
+      "Artist: MadmansEsprit",
+      "Photographer: haramsess",
+      "Executive: SA Visual"
+    ]
   }
 ]
