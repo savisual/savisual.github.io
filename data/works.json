@@ -997,5 +997,128 @@
       "Photographer: haramsess",
       "Executive: SA Visual"
     ]
-  }
-]
+  },
+{
+  "id": "shorts-026",
+  "title": "JooVine - Need Me",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/e_nvR0dJy4k/maxresdefault.jpg",
+  "videoId": "e_nvR0dJy4k",
+  "credits": [
+    "Artist: JooVine",
+    "Visual Direction: SA Visual",
+    "Film & Edit: SA Visual",
+    "Lighting Director: GUN",
+    "Assistant: HWANG DAEJUN"
+  ]
+},
+{
+  "id": "shorts-027",
+  "title": "JooVine - Need Me",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/F_oBAIxQ5i8/maxresdefault.jpg",
+  "videoId": "F_oBAIxQ5i8",
+  "credits": [
+    "Artist: JooVine",
+    "Visual Direction: SA Visual",
+    "Film & Edit: SA Visual",
+    "Lighting Director: GUN",
+    "Assistant: HWANG DAEJUN"
+  ]
+},
+{
+  "id": "shorts-028",
+  "title": "NA Kimz - Masked up",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/KxXgPLTYLpQ/maxresdefault.jpg",
+  "videoId": "KxXgPLTYLpQ",
+  "credits": [
+    "Artist: NA Kimz",
+    "Visual Direction: SA Visual"
+  ]
+},
+{
+  "id": "shorts-029",
+  "title": "Youngcode - Don't Look Back (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/FUsrl7cptJY/maxresdefault.jpg",
+  "videoId": "FUsrl7cptJY",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual"
+  ]
+},
+{
+  "id": "shorts-030",
+  "title": "Youngcode - AID (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/P4xOPGcajv8/maxresdefault.jpg",
+  "videoId": "P4xOPGcajv8",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual"
+  ]
+},
+{
+  "id": "shorts-031",
+  "title": "Youngcode - MATRIX (Feat. ???) (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/ORxSqERtbys/maxresdefault.jpg",
+  "videoId": "ORxSqERtbys",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual",
+    "Film: haramsess"
+  ]
+},
+{
+  "id": "shorts-032",
+  "title": "Youngcode - Don't Look Back (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/QjdiJNLRB9M/maxresdefault.jpg",
+  "videoId": "QjdiJNLRB9M",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual"
+  ]
+},
+{
+  "id": "shorts-033",
+  "title": "Youngcode - Don't Look Back (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/xS2R7WVp6UY/maxresdefault.jpg",
+  "videoId": "xS2R7WVp6UY",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual"
+  ]
+},
+{
+  "id": "shorts-034",
+  "title": "Youngcode - AID (Demo)",
+  "type": "Shorts",
+  "year": "2026",
+  "client": "SA Visual",
+  "thumb": "https://img.youtube.com/vi/U-JOSHXJFVk/maxresdefault.jpg",
+  "videoId": "U-JOSHXJFVk",
+  "credits": [
+    "Artist: Youngcode",
+    "Visual Direction: SA Visual"
+  ]
+}
